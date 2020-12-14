@@ -6,7 +6,7 @@ $id = $_GET['prof'];
 if(isset($_GET['prof'])){
     if($_FILES['imagem']['name'] == null && $id != "0"){
        $keep = DBRead('ead_prof','*' ,"WHERE id = '{$id}'")[0];
-       $path = $keep['imagem'];
+       $path = $keep['img'];
     }else{
         $upload_folder = 'wa/ead/uploads/';
         $handle = new Upload($_FILES['imagem']);
@@ -35,11 +35,13 @@ if(isset($_GET['prof']) && $id == "0"){
             Redireciona('?erro');
         }
   
-  }else if(isset($_GET['prof']) && $id != "0"){
+  }
+  if(isset($_GET['prof']) && $id != "0"){
+     
     $data = array(
         'nome'            => post('nome'),
         'cargo'           => post('cargo'),
-        'redes'           => post('altura'),
+        'redes'           => $_POST['social'],
         'img'             => $path
       );
       $query =  DBUpdate('ead_prof', $data, "id = '{$id}'");
@@ -49,8 +51,9 @@ if(isset($_GET['prof']) && $id == "0"){
         } else {
             Redireciona('?erro');
         }
-  }else if(isset($_GET['DeletarProf'])){
-    $id     = get('DeletarBackground');
+  }
+  if(isset($_GET['DeletarProf'])){
+    $id     = get('DeletarProf');
     $query  = DBDelete('ead_prof',"id = '{$id}'");
       
         if ($query != 0) {

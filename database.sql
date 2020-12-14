@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS `ead_prof` (
   `nome` varchar(255) DEFAULT NULL,
   `cargo` VARCHAR(255) DEFAULT NULL,
   `redes` varchar(255) DEFAULT NULL,
-  `img` varchar(255) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
