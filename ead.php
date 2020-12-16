@@ -37,12 +37,25 @@
     					<?php } ?>
     				</div>
     			</span>
+    			<span class="dropdown">
+    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+    			        <a class="btn btn-sm btn-primary" href="#" data-toggle="dropdown">Categoria</a>
+    			    <?php } ?>
+    				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
+    					<a class="dropdown-item" href="?routeCate">Categorias</a>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    						<a class="dropdown-item" href="?routeCate=0">Cadastrar Categoria</a>
+    					<?php } ?>
+    				</div>
+    			</span>
     		</div>
                 <?php 		
                     if (isset($_GET['Prof'])) :
         			    require_once('ead/professor/lista.php'); 
         			elseif (isset($_GET['routeProf'])) :
         			    require_once('ead/professor/professor.php');
+        			elseif (isset($_GET['routeCate'])) :
+        			    require_once('ead/categoria/categoria.php');
         			endif;
         		?>
 

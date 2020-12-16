@@ -30,14 +30,14 @@ if(isset($_GET['prof']) && $id == "0"){
       $query = DBCreate('ead_prof', $data, true);
       
         if ($query != 0) {
-            Redireciona('?sucesso');
+            Redireciona('?Prof&sucesso');
         } else {
-            Redireciona('?erro');
+            Redireciona('?Prof&erro');
         }
   
   }
   if(isset($_GET['prof']) && $id != "0"){
-     
+
     $data = array(
         'nome'            => post('nome'),
         'cargo'           => post('cargo'),
@@ -47,9 +47,9 @@ if(isset($_GET['prof']) && $id == "0"){
       $query =  DBUpdate('ead_prof', $data, "id = '{$id}'");
       
         if ($query != 0) {
-            Redireciona('?sucesso');
+            Redireciona('?Prof&sucesso');
         } else {
-            Redireciona('?erro');
+            Redireciona('?Prof&erro');
         }
   }
   if(isset($_GET['DeletarProf'])){
@@ -57,8 +57,8 @@ if(isset($_GET['prof']) && $id == "0"){
     $query  = DBDelete('ead_prof',"id = '{$id}'");
       
         if ($query != 0) {
-            Redireciona('?sucesso');
+            Redireciona('?Prof&sucesso');
         } else {
-            Redireciona('?erro');
+            Redireciona('?Prof&erro');
         }
   }

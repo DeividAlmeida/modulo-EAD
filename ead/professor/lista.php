@@ -10,7 +10,7 @@ $query = json_encode(DBRead('ead_prof','*'));
             </a>
         <?php } ?>
     </div>
-    <div class="card-body p-0" >
+    <div class="card-body p-0" v-if="ctrls">
         <div>
             <div>
                 <table id="DataTable" class="table m-0 table-striped">
@@ -42,8 +42,8 @@ $query = json_encode(DBRead('ead_prof','*'));
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'ite', 'adicionar')) { ?>
+    <div class="card-body" v-else>
+        <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
             <div class="alert alert-info">Nenhum professor adicionado a essa listagem até o momento, <a class="adicionarListagemItem" href="?routeProf=0" >clique aqui</a> para adicionar.</div>
         <?php } ?>
     </div>

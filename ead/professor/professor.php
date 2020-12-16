@@ -1,6 +1,10 @@
     <?php $status = $_GET['routeProf']; 
     if($status==0){ 
-        $parametro = "{}"; 
+        $json = array(    
+            ["link" => null,
+            "icon" => null]);
+        $parametro = json_encode($json);
+        $icons= json_decode($parametro, true);;
     }else{
         $conect = DBRead('ead_prof','*' ,"WHERE id = '{$status}'")[0];
         $parametro = json_encode($conect);
@@ -9,92 +13,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-iconpicker/1.10.0/css/bootstrap-iconpicker.min.css" integrity="sha512-0SX0Pen2FCs00cKFFb4q3GLyh3RNiuuLjKJJD56/Lr1WcsEV8sOtMSUftHsR6yC9xHRV7aS0l8ds7GVg6Xod0A==" crossorigin="anonymous" />
 <link rel="stylesheet" href="ead/professor/style.css">
-<style>
-        .custom-shadow {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.custom-shadow-sm {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
-/* In FontawesomePicker.vue <style scoped lang="scss" /> */
-.icon-preview-fade-enter-active, .icon-preview-fade-leave-active {
-  -webkit-transition: opacity .25s;
-  transition: opacity .25s;
-}
-
-.icon-preview-fade-enter, .icon-preview-fade-leave-to {
-  opacity: 0;
-}
-
-.preview-container {
-  width: 300px;
-  height:150px;
-  position:absolute;
-  z-index:1;
-}
-
-.previewer {
-  width: 100%;
-  min-height: 50px;
-  height: 200px;
-  overflow: auto;
-  background: white;
-  top: 10px;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-          flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.icon-preview {
-  width: 15;
-  padding-top: 20%;
-  position: relative;
-}
-@media (max-width: 800px) {
-  .icon-preview {
-    width: 33%;
-    padding-top: 33%;
-  }
-}
-.icon-preview .icon-wrapper {
-  position: absolute;
-  height: 80%;
-  width: 80%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: center;
-  cursor: pointer;
-  -webkit-transition: ease-in-out all .25s;
-  transition: ease-in-out all .25s;
-}
-.icon-preview .icon-wrapper:hover, .icon-preview .icon-wrapper.selected {
-  background: var(--blue);
-  color: #fbfbfb;
-}
-.icon-preview .icon-wrapper i {
-  font-size: 2vw;
-}
-
-
-</style>
+<?php require_once('ead/src/picker/style_picker.php'); ?>
 <form method="post" action="?prof=<?php echo $status;?>" enctype="multipart/form-data">
     <div class="card">
         <div class="card-header  white" >
@@ -119,15 +38,16 @@
                                 <div class="col-md-12"><button type="button" @click="add" class="btn btn-primary btnAdd" style="margin-bottom: 15px;"><i class="fas fa-plus"></i></button></div>
                             </div>
                             
-                            <div class="row" v-for="field in fields">
-                                <div class="col" v-if="field.status == true">
+                            <div class="row" v-for="field, index in fields" :key="field.id">
+                                <div class="col" >
                                     <fontawesome-picker  v-model="field.icon"></fontawesome-picker>
+                                    <input type="hidden" name="icon_social[]" v-model="field.icon">
                                 </div>        
-                                <div class="col-md-10" v-if="field.status == true">
+                                <div class="col-md-10" >
                                     <input class="form-control" type="text" name="link[]"  v-model="field.link" placeholder="Texto Conteúdo">
                                 </div>                                
-                                <div class="col-md-1 pull-right" v-if="field.status == true">
-                                    <button type="button" @click="remove" class="btn btn-danger btnRemove"><i class="fas fa-trash"></i></button>
+                                <div class="col-md-1 pull-right" >
+                                    <button type="button" @click="remove(index)" class="btn btn-danger btnRemove"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +68,7 @@
                 </div>
             </div>
             <div class="card-footer white">
-                <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="submit">Salvar</button>
+                <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="submit"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>
             </div>
         </div>
     </div>                
@@ -157,21 +77,27 @@
 
 
 <script type="text/javascript">
-<?php require_once('ead/src/icon_picker.php'); ?>
+<?php require_once('ead/src/picker/icon_picker.php'); ?>
 new Vue({
     el: ".card",
       components: { 'fontawesome-picker': FontawesomePicker },
       
+      
     data: {
-         fields: [{"icon":"fab fa-500px","status":true},{"icon":"fab fa-500px","status":false}],
+        
+        fields: [<?php foreach($icons as $icon){echo '{ "link":"'.$icon['link'].'", "icon":"'.$icon['icon_social'].'" },';} ?>],
         ctrls: [<?php echo $parametro ?>]
     },
     methods: {
         add: function(a){
-            this.fields.push({"link":"", "icon":"","status":true})
+            this.fields.push({
+                "link":"", 
+                "icon":""
+            }),
+            this.index++;
         },
-        remove: function(){
-            this.fields.status == false;
+        remove: function(index){
+            this.fields.splice(index, 1);
         }
     }
 })

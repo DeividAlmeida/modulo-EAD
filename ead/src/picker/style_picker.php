@@ -1,4 +1,5 @@
-    .custom-shadow {
+<style>
+        .custom-shadow {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -17,14 +18,16 @@
 }
 
 .preview-container {
-  width: 40%;
-  
+  width: 300px;
+  height:150px;
+  position:absolute;
+  z-index:1;
 }
 
 .previewer {
   width: 100%;
   min-height: 50px;
-  max-height: 500px;
+  height: 200px;
   overflow: auto;
   background: white;
   top: 10px;
@@ -42,7 +45,7 @@
 }
 
 .icon-preview {
-  width: 20%;
+  width: 15;
   padding-top: 20%;
   position: relative;
 }
@@ -76,6 +79,8 @@
   color: #fbfbfb;
 }
 .icon-preview .icon-wrapper i {
-  font-size: 4vw;
+  font-size: 2vw;
 }
 
+
+</style>
