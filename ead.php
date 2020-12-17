@@ -28,10 +28,10 @@
     			<a class="btn btn-sm btn-primary" href="?">Inicio</a>
     			<span class="dropdown">
     			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
-    			        <a class="btn btn-sm btn-primary" href="#" data-toggle="dropdown">Professor</a>
+    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Professor</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
-    					<a class="dropdown-item" href="?Prof">Professores</a>
+    					<a class="dropdown-item " href="?Prof">Professores</a>
     					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeProf=0">Cadastrar Professor</a>
     					<?php } ?>
@@ -39,12 +39,34 @@
     			</span>
     			<span class="dropdown">
     			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
-    			        <a class="btn btn-sm btn-primary" href="#" data-toggle="dropdown">Categoria</a>
+    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Categoria</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item" href="?routeCate">Categorias</a>
     					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeCate=0">Cadastrar Categoria</a>
+    					<?php } ?>
+    				</div>
+    			</span>
+    			<span class="dropdown">
+    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Usuário</a>
+    			    <?php } ?>
+    				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
+    					<a class="dropdown-item" href="?routeUsua">Usuários</a>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    						<a class="dropdown-item" href="?routeUsua=0">Cadastrar Usuário</a>
+    					<?php } ?>
+    				</div>
+    			</span>
+    			<span class="dropdown">
+    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Curso</a>
+    			    <?php } ?>
+    				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
+    					<a class="dropdown-item" href="?routeCurs">Cursos</a>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    						<a class="dropdown-item" href="?routeCurs=0">Cadastrar Curos</a>
     					<?php } ?>
     				</div>
     			</span>
@@ -56,6 +78,10 @@
         			    require_once('ead/professor/professor.php');
         			elseif (isset($_GET['routeCate'])) :
         			    require_once('ead/categoria/categoria.php');
+        		    elseif (isset($_GET['routeUsua'])) :
+        			    require_once('ead/usuario/usuario.php');
+        			elseif (isset($_GET['routeCurs'])) :
+        			    require_once('ead/curso/curso.php');
         			endif;
         		?>
 

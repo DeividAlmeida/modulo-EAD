@@ -26,3 +26,26 @@ CREATE TABLE IF NOT EXISTS `ead_categoria` (
   `descricao` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- USUARIO
+CREATE TABLE IF NOT EXISTS `ead_usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nome` varchar(255) DEFAULT NULL,
+  `cpf` int(11) DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
+  `data`  date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- CURSO
+CREATE TABLE IF NOT EXISTS `ead_curso` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `nome` varchar(255) DEFAULT NULL,
+  `descricao_curta` int(11) DEFAULT NULL,
+  `descricao_longa` text DEFAULT NULL,
+  `vender` varchar(255) DEFAULT NULL,
+  `categoria` text DEFAULT NULL,
+  `valor` decimal(10,2) DEFAULT NULL,
+  `tempo` varchar(255) DEFAULT NULL,
+  `exibi_professor` varchar(255) DEFAULT NULL,
+  `professor` text DEFAULT NULL,
+  `capa` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

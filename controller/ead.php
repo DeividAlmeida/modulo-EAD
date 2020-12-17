@@ -14,5 +14,5 @@ if (is_array($queryAction) && empty($queryAction[0]['action'])) {
 require_once('database/upload.class.php');
 require_once('ead/professor.php');
 require_once('ead/categoria.php');
-
-
+require_once('ead/usuario.php');
+require_once('ead/curso.php');

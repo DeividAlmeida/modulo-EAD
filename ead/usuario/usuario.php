@@ -1,18 +1,19 @@
 <?php
-$query = json_encode(DBRead('ead_categoria','*'));
-$status = $_GET['routeCate'];
+$status = $_GET['routeUsua'];
+if($status > 0):$default = json_encode(DBRead("ead_usuario","*","WHERE id = '{$status}'")[0]); else: $default = '{"nome":"","cpf":"","endereco":"", "data":"" }'; endif;
+$query = json_encode(DBRead('ead_usuario','*'));
 ?>
 <div class="card"  >
     <div id="control" v-if="!status">
         <div class="card-header white" >
-            <strong>Adicionar Categoria</strong>
+            <strong>Adicionar Usuário</strong>
             <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
-                <a class="adicionarListagemItem tooltips" data-tooltip="Adicionar" @click="move('0')" >
+                <a class="adicionarListagemItem tooltips" data-tooltip="Adicionar" @click='move("0",{"nome":"","cpf":"","endereco":"", "data":"" })' >
                     <i class="icon-plus blue lighten-2 avatar"></i> 
                 </a>
             <?php } ?>
         </div>
-        <div class="card-body p-0" v-if="ctrls != false">
+        <div class="card-body p-0" v-if="ctrls">
             <div>
                 <div>
                     <table id="DataTable" class="table m-0 table-striped">
@@ -31,10 +32,10 @@ $status = $_GET['routeCate'];
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end">
                                         <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'deletar')) { ?>
-                                            <a class="dropdown-item"  @click="move(ctrl.id, index)" href="#!"><i class="text-primary icon icon-pencil" ></i> Editar</a>
+                                            <a class="dropdown-item"  @click="move(ctrl.id, ctrl)" href="#!"><i class="text-primary icon icon-pencil" ></i> Editar</a>
                                         <?php } ?>
                                         <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'deletar')) { ?>
-                                            <a class="dropdown-item" :data-id="ctrl.id"  onclick="DeletarItem(getAttribute('data-id'), 'DeletarCate');" href="#!"><i class="text-danger icon icon-remove"></i> Excluir </a>
+                                            <a class="dropdown-item" :data-id="ctrl.id"  onclick="DeletarItem(getAttribute('data-id'), 'DeletarUsua');" href="#!"><i class="text-danger icon icon-remove"></i> Excluir </a>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -46,33 +47,39 @@ $status = $_GET['routeCate'];
         </div>
         <div class="card-body" v-else>
             <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
-                <div class="alert alert-info">Nenhuma categoria adicionada a essa listagem até o momento, <a class="adicionarListagemItem" href="?routeCate=0" >clique aqui</a> para adicionar.</div>
+                <div class="alert alert-info">Nenhum usuário adicionado a essa listagem até o momento, <a class="adicionarListagemItem" href="?routeUsua=0" >clique aqui</a> para adicionar.</div>
             <?php } ?>
         </div>
     </div>
     <div class="card-body" v-else>
-        <form method="post" :action="'?cate='+status" >
-            <div class="row" v-if="status !=0">
+        <form method="post" :action="'?usua='+status" >
+            <div class="row" >
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Nome: </label>
-                        <input class="form-control" v-model="ctrls[idx].nome" name="nome" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Descrição: </label>
-                        <textarea class="form-control" v-model="ctrls[idx].descricao" name="descricao" required>{{ctrls[idx].descricao}}</textarea>
+                        <input class="form-control" v-model="idx.nome" name="nome" required>
                     </div>
                 </div>
             </div>
-            <div class="row" v-if="status == 0">
+            <div class="row" >
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>CPF: </label>
+                        <input class="form-control" v-model="idx.cpf" min="0" type="number" name="cpf" required>
+                    </div>
+                </div>
+                <div class="col-md-6">    
+                    <div class="form-group">
+                        <label>Data de Nascimento: </label>
+                        <input class="form-control" v-model="idx.data" type="date" name="data" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row" >
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>Nome: </label>
-                        <input class="form-control"  name="nome" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Descrição: </label>
-                        <textarea class="form-control"  name="descricao" required></textarea>
+                        <label>Endereço: </label>
+                        <input class="form-control" v-model="idx.endereco"  name="endereco" required>
                     </div>
                 </div>
             </div>
@@ -86,7 +93,7 @@ $status = $_GET['routeCate'];
     new Vue({
         el:".card",
         data: {
-            idx:"",
+            idx: <?php echo $default ?>,
             status:"<?php echo $status ?>",
             ctrls:<?php echo $query ?>
         },
