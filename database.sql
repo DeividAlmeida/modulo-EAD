@@ -49,3 +49,11 @@ CREATE TABLE IF NOT EXISTS `ead_curso` (
   `professor` text DEFAULT NULL,
   `capa` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- MODULO
+CREATE TABLE IF NOT EXISTS `ead_usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nome` varchar(255) DEFAULT NULL,
+  `descricao` text DEFAULT NULL,
+  `ordem` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

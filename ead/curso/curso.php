@@ -2,7 +2,14 @@
 $status = $_GET['routeCurs'];
 if($status > 0):$default = json_encode(DBRead("ead_curso","*","WHERE id = '{$status}'")[0]); else: $default = '{"id":"0","nome":"","descricao_curta":"","descricao_longa":"","vender":"","categoria":"","valor":"","tempo":"","exibi_professor":"","professor":"","capa":""}'; endif;
 $query = json_encode(DBRead('ead_curso','*'));
+$categorias = DBRead('ead_categoria','*');
+$professores = DBRead('ead_prof','*');
 ?>
+<script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+<style>
+    .multiselect__tag, .multiselect__option--highlight, .multiselect__tag-icon, .multiselect__tag-icon:after{ background: #86939e !important}
+</style>
 <div class="card"  >
     <div id="control" v-if="!status">
         <div class="card-header white" >
@@ -20,11 +27,19 @@ $query = json_encode(DBRead('ead_curso','*'));
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
+                            <th>Módulos</th>
                             <th width="53px">Ações</th>
                         </tr>
                         <tr v-for="ctrl, index in ctrls">
                             <td>{{index+1}}</td>
                             <td>{{ctrl.nome}}</td>
+                            <td>                    
+                                <a class="tooltips" data-tooltip="Adicionar" :href="'?roteModu='">
+                                    <i class="icon-plus blue lighten-2 avatar"></i>
+                                </a>
+                                    <a class="tooltips" data-tooltip="Visualizar" :href="'?roteModu='+ctrl.id"><i class="icon-eye blue lighten-2 avatar"></i>
+                                </a>
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <a class="" href="#" data-toggle="dropdown">
@@ -70,7 +85,6 @@ $query = json_encode(DBRead('ead_curso','*'));
             <div class="row" >
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>Descrição Longa do Curso: </label>
                         <textarea class="form-control" v-model="idx.descricao_longa"  name="descricao_longa" required>{{idx.descricao_longa}}</textarea>
                     </div>
                 </div>
@@ -78,8 +92,11 @@ $query = json_encode(DBRead('ead_curso','*'));
             <div class="row" >
                 <div class="col-md-6">    
                     <div class="form-group">
-                        <label>Categoria do Curso: </label>
-                        <input class="form-control" v-model="idx.categoria"  name="categoria" required>
+                        <div>
+                            <label>Categorias do Curso: </label>
+                            <multiselect  :show-labels="false"  :hide-selected="true" v-model="categoria"  placeholder=""   :options="categorias"   :multiple="true" :taggable="true"  ></multiselect>
+                            <input type="hidden" name="categoria[]" v-for="cat of categoria" :value="cat">
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">    
@@ -106,14 +123,18 @@ $query = json_encode(DBRead('ead_curso','*'));
             <div class="row" >
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Exibir Professores: </label>
-                        <input class="form-control" v-model="idx.exibi_professor"  name="exibi_professo" required>
+                          <label>Exibir Professores: </label>
+                        <multiselect   :show-labels="false"   v-model="idx.exibi_professor"  placeholder=""   :options="exibe"  :taggable="true"  ></multiselect>
+                        <input type="hidden" name="exibi_professor" :value="idx.exibi_professor">
+
+                        
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" v-if="idx.exibi_professor == 'Sim'">
                     <div class="form-group">
                         <label>Professores: </label>
-                        <input class="form-control" v-model="idx.professor"  name="professor" required>
+                        <multiselect  required  :show-labels="false"   v-model="professor"  placeholder=""   :options="professores"  :taggable="true"  :multiple="true" ></multiselect>
+                        <input type="hidden" name="professor[]" v-for="pro of professor" :value="pro">
                     </div>
                 </div>
             </div> 
@@ -125,7 +146,7 @@ $query = json_encode(DBRead('ead_curso','*'));
                             <i class="icon icon-cloud-upload" aria-hidden="true"></i>Upload Foto de Capa
                         </lable>
                     </div>
-                    <img v-if="idx.capa" :src="idx.capa"  />
+                    <img  :src="[idx.capa ? folder+idx.capa : preview]"  />
                 </div>
             </div>
             <div class="card-footer white">
@@ -135,9 +156,19 @@ $query = json_encode(DBRead('ead_curso','*'));
     </div>
 </div>
 <script>
+
     new Vue({
         el:".card",
+        components: { Multiselect: window.VueMultiselect.default },
+
         data: {
+            categoria:[],
+            categorias: [<?php foreach($categorias as $nome){ echo '"'.$nome['nome'].'",';} ?>],
+            exibe: ["Sim", "Não"],
+            professor:[],
+            professores:[<?php foreach($professores as $nome){ echo '"'.$nome['nome'].'",';} ?>],
+            preview:  [],
+            folder: "<?php echo ConfigPainel('base_url')."wa/ead/uploads/"; ?>",
             idx:<?php echo $default ?>,
             status:"<?php echo $status ?>",
             ctrls:<?php echo $query ?>
@@ -146,15 +177,21 @@ $query = json_encode(DBRead('ead_curso','*'));
             move: function(a, b){
                 this.status = a;
                 this.idx = b;
+                this.categoria =JSON.parse(this.idx.categoria);
+                this.professor =JSON.parse(this.idx.professor);
             },
             capa: function(a){
                 var input = event.target;
                 var reader = new FileReader();
                     reader.onload = (e) => {
-                        this.idx.capa = e.target.result;
+                        this.preview = e.target.result;
+                        this.idx.capa = "";
                     }
                 reader.readAsDataURL(input.files[0]);
-            } 
+            },
+            prof: function(a){
+                this.idx.exibi_professor = a;
+            }
         }
     })
 </script>

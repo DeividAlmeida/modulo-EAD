@@ -12,9 +12,10 @@ if(isset($_GET['curs'])){
         $handle = new Upload($_FILES['capa']);
         $handle->file_new_name_body = md5(uniqid(rand(), true));
         $handle->Process($upload_folder);
-        $path = ConfigPainel('base_url')."wa/ead/uploads/".$handle->file_dst_name;
+        $path = $handle->file_dst_name;
     }
-
+    $professor = json_encode($_POST['professor']);
+    $categoria = json_encode($_POST['categoria']);
 }
 if(isset($_GET['curs']) && $id == "0"){   
       $data = array(
@@ -22,15 +23,11 @@ if(isset($_GET['curs']) && $id == "0"){
         'descricao_curta'       => post('descricao_curta'),
         'descricao_longa'       => post('descricao_longa'),
         'vender'                => post('vender'),
-        'categoria'             => post('categoria'),
         'valor'                 => post('valor'),
         'tempo'                 => post('tempo'),
         'exibi_professor'       => post('exibi_professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
+        'professor'             => $professor,
+        'categoria'             => $categoria,
         'capa'                  => $path
       );
       $query = DBCreate('ead_curso', $data, true);
@@ -42,32 +39,29 @@ if(isset($_GET['curs']) && $id == "0"){
         }
   
   }
-  if(isset($_GET['curs']) && $id != "0"){
+if(isset($_GET['curs']) && $id != "0"){
 
-    $data = array(
-        'nome'                  => post('nome'),
-        'descricao_curta'       => post('descricao_curta'),
-        'descricao_longa'       => post('descricao_longa'),
-        'vender'                => post('vender'),
-        'categoria'             => post('categoria'),
-        'valor'                 => post('valor'),
-        'tempo'                 => post('tempo'),
-        'exibi_professor'       => post('exibi_professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
-        'professor'             => post('professor'),
-        'capa'                  => $path
-      );
-      $query =  DBUpdate('ead_curso', $data, "id = '{$id}'");
-      
-        if ($query != 0) {
-            Redireciona('?routeCurs&sucesso');
-        } else {
-            Redireciona('?routeCurs&erro');
-        }
-  }
+$data = array(
+    'nome'                  => post('nome'),
+    'descricao_curta'       => post('descricao_curta'),
+    'descricao_longa'       => post('descricao_longa'),
+    'vender'                => post('vender'),
+    'valor'                 => post('valor'),
+    'tempo'                 => post('tempo'),
+    'exibi_professor'       => post('exibi_professor'),
+    'professor'             => $professor,
+    'categoria'             => $categoria,
+    'capa'                  => $path
+  );
+
+  $query =  DBUpdate('ead_curso', $data, "id = '{$id}'");
+  
+    if ($query != 0) {
+        Redireciona('?routeCurs&sucesso');
+    } else {
+        Redireciona('?routeCurs&erro');
+    }
+}
   if(isset($_GET['DeletarCurs'])){
     $id     = get('DeletarCurs');
     $query  = DBDelete('ead_curso',"id = '{$id}'");
