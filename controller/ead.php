@@ -17,3 +17,4 @@ require_once('ead/categoria.php');
 require_once('ead/usuario.php');
 require_once('ead/curso.php');
 require_once('ead/modulo.php');
+require_once('ead/aula.php');

@@ -84,6 +84,8 @@
         			    require_once('ead/curso/curso.php');
         			elseif (isset($_GET['routeModu'])) :
         			    require_once('ead/curso/modulo/modulo.php');
+        		    elseif (isset($_GET['routeAula'])) :
+        			    require_once('ead/curso/modulo/aula/aula.php');
         			endif;
         		?>
 

@@ -1,5 +1,4 @@
 <?php
-require_once('database/upload.class.php');
 
 $id = $_GET['prof'];
 

@@ -34,10 +34,10 @@ $professores = DBRead('ead_prof','*');
                             <td>{{index+1}}</td>
                             <td>{{ctrl.nome}}</td>
                             <td>                    
-                                <a class="tooltips" data-tooltip="Adicionar" :href="'?roteModu='">
+                                <a class="tooltips" data-tooltip="Adicionar" :href="'?routeModu=0&curso='+ctrl.id">
                                     <i class="icon-plus blue lighten-2 avatar"></i>
                                 </a>
-                                    <a class="tooltips" data-tooltip="Visualizar" :href="'?roteModu='+ctrl.id"><i class="icon-eye blue lighten-2 avatar"></i>
+                                    <a class="tooltips" data-tooltip="Visualizar" :href="'?routeModu&curso='+ctrl.id"><i class="icon-eye blue lighten-2 avatar"></i>
                                 </a>
                             </td>
                             <td>
@@ -71,7 +71,7 @@ $professores = DBRead('ead_prof','*');
             <div class="row" >
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Nome do Curos: </label>
+                        <label>Nome do Curso: </label>
                         <input class="form-control" v-model="idx.nome" name="nome" required>
                     </div>
                 </div>
