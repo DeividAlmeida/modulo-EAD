@@ -41,7 +41,7 @@ $query = json_encode(DBRead("ead_modulo","*","WHERE curso = '{$curso}'"));
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end">
                                         <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'deletar')) { ?>
-                                            <a class="dropdown-item"  @click="move(ctrl.id, ctrl)" href="#!"><i class="text-primary icon icon-pencil" ></i> Editar</a>
+                                            <a class="dropdown-item"  @click="move(ctrl.id, ctrl, index)" href="#!"><i class="text-primary icon icon-pencil" ></i> Editar</a>
                                         <?php } ?>
                                         <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'deletar')) { ?>
                                             <a class="dropdown-item" :data-id="ctrl.id"  onclick="DeletarItem(getAttribute('data-id'), 'DeletarModu');" href="#!"><i class="text-danger icon icon-remove"></i> Excluir </a>
