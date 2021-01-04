@@ -13,6 +13,7 @@
 <?php }?>
 <div class="has-sidebar-left">
     <header class="blue accent-3 relative nav-sticky">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     	<div class="container-fluid text-white">
     		<div class="row p-t-b-10 ">
     			<div class="col">
@@ -26,6 +27,7 @@
             <div class="pb-3">
 
     			<a class="btn btn-sm btn-primary" href="?">Inicio</a>
+    			<a class="btn btn-sm btn-primary" href="?Clientes">Clientes</a>
     			<span class="dropdown">
     			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Professor</a>
@@ -72,7 +74,9 @@
     			</span>
     		</div>
                 <?php 		
-                    if (isset($_GET['Prof'])) :
+        		    if (isset($_GET['Clientes'])) :
+        			    require_once('ead/clientes/clientes.php');
+                    elseif (isset($_GET['Prof'])) :
         			    require_once('ead/professor/lista.php'); 
         			elseif (isset($_GET['routeProf'])) :
         			    require_once('ead/professor/professor.php');
