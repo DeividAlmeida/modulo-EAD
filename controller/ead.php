@@ -18,3 +18,6 @@ require_once('ead/usuario.php');
 require_once('ead/curso.php');
 require_once('ead/modulo.php');
 require_once('ead/aula.php');
+require_once('ead/email.php');
+require_once('ead/pagseguro.php');
+require_once('ead/deposito.php');

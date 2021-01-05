@@ -76,3 +76,39 @@ CREATE TABLE IF NOT EXISTS `ead_aula` (
   `alternativas` text DEFAULT NULL,
   `gabarito` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- CONFIGURAR EMAIL
+CREATE TABLE IF NOT EXISTS `ead_config_email` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nome` varchar(255) NOT NULL,
+  `email_usuario` varchar(255) DEFAULT NULL,
+  `email_senha` varchar(255) DEFAULT NULL,
+  `email_porta` varchar(255) DEFAULT NULL,
+  `email_servidor` varchar(255) DEFAULT NULL,
+  `email_protocolo_seguranca` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `ead_config_email` (`id`, `nome`, `remetente`, `email_usuario`, `email_senha`, `email_porta`, `email_servidor`, `email_protocolo_seguranca` ) VALUES
+(1, '','','','','','','');
+
+-- CONFIGURAR PAGSEGURO
+CREATE TABLE  IF NOT EXISTS `ead_config_pagseguro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `email` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `ead_config_pagseguro` (`id`, `email`, `token`, `status`) VALUES
+(1, '', '', '');
+
+
+-- CONFIGURAR DEPOSITO EM CONTA
+CREATE TABLE IF NOT EXISTS `ead_config_deposito` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `titulo` varchar(255) DEFAULT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
+  `instucoes` varchar(255) DEFAULT NULL,
+  `detalhes` text,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `ead_config_deposito` (`id`, `titulo`, `descricao`, `instucoes`, `detalhes`, `status`) VALUES
+(1, '', '', '', '', '');

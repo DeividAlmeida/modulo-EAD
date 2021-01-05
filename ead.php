@@ -72,6 +72,16 @@
     					<?php } ?>
     				</div>
     			</span>
+    			<span class="dropdown">
+				<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+					<a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Configuração</a>
+					<div class="dropdown-menu dropdown-menu-left" x-placement="bottom">
+						<a class="dropdown-item" href="?configGeral">Configurações Gerais</a>
+						<a class="dropdown-item" href="?configPagamento">Configurações de Pagamento</a>
+						<a class="dropdown-item" href="?configEmail">Configurações de Email</a>
+					</div>					
+				<?php } ?>
+			</span>
     		</div>
                 <?php 		
         		    if (isset($_GET['Clientes'])) :
@@ -90,6 +100,12 @@
         			    require_once('ead/curso/modulo/modulo.php');
         		    elseif (isset($_GET['routeAula'])) :
         			    require_once('ead/curso/modulo/aula/aula.php');
+        			elseif (isset($_GET['configGeral'])) :
+        			    require_once('ead/configuracao/geral.php');
+        			elseif (isset($_GET['configPagamento'])) :
+        			    require_once('ead/configuracao/pagamento.php'); 
+        			elseif (isset($_GET['configEmail'])) :
+        			    require_once('ead/configuracao/email.php'); 
         			endif;
         		?>
 
