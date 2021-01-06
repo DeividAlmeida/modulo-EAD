@@ -7,9 +7,9 @@ if(isset($_GET['pagseguro'])){
   $query  = DBUpdate('ead_config_pagseguro', $data, "id = '1'");
   
     if ($query != 0) {
-        Redireciona('?sucesso');
+        Redireciona('?configPagamento&sucesso');
     } else {
-        Redireciona('?erro');
+        Redireciona('?configPagamento&erro');
     }
 }
 

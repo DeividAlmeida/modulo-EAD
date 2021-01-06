@@ -4,7 +4,7 @@ if(isset($_GET['deposito'])){
   $resources = array_combine(array_keys($_POST['nome']), array_map(function ($nome, $conta, $banco, $agencia) {
     return compact('nome', 'conta', 'banco', 'agencia');
     },$_POST['nome'], $_POST['conta'], $_POST['banco'], $_POST['agencia']));
-    $_POST['dtl'] = json_encode($resources, JSON_FORCE_OBJECT);
+    $_POST['dtl'] = json_encode($resources);
 
   $data = array(
     'titulo'       => post('titulo'),
@@ -16,9 +16,9 @@ if(isset($_GET['deposito'])){
   $query  = DBUpdate('ead_config_deposito', $data, "id = '1'");
   
     if ($query != 0) {
-        Redireciona('?sucesso');
+        Redireciona('?configPagamento&sucesso');
     } else {
-        Redireciona('?erro');
+        Redireciona('?configPagamento&erro');
     }
 }
 

@@ -103,7 +103,7 @@
         			elseif (isset($_GET['configGeral'])) :
         			    require_once('ead/configuracao/geral.php');
         			elseif (isset($_GET['configPagamento'])) :
-        			    require_once('ead/configuracao/pagamento.php'); 
+        			    require_once('ead/configuracao/pagamentos.php'); 
         			elseif (isset($_GET['configEmail'])) :
         			    require_once('ead/configuracao/email.php'); 
         			endif;
