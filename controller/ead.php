@@ -21,3 +21,4 @@ require_once('ead/aula.php');
 require_once('ead/email.php');
 require_once('ead/pagseguro.php');
 require_once('ead/deposito.php');
+require_once('ead/geral.php');
