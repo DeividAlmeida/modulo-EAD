@@ -8,8 +8,14 @@ SELECT "EAD", "ead.php", "icon-shopping-bag", 1, 0, "ead", "ead/ead.js", "2019-0
 -- CONFIGURAÇÃO
 CREATE TABLE IF NOT EXISTS `ead` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `dev` text DEFAULT NULL,
+    `prod` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+INSERT INTO `ead` (`id`, `dev`, `prod`) VALUES (
+    1, 
+    '<script src=\"https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js\"></script>', 
+    '<script src=\"https://cdn.jsdelivr.net/npm/vue@2\"></script>'
+    );
 -- PROFESSOR
 CREATE TABLE IF NOT EXISTS `ead_prof` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
