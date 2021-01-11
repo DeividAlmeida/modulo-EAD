@@ -5,12 +5,8 @@
 	require_once('controller/ead.php');
 	$TitlePage = 'EAD';
 	$UrlPage   = 'ead.php';
-    $modo = "dev";#produção
-    if($modo == "dev"){ ?>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <?php }else{ ?>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<?php }?>
+	echo DBRead('ead','*',"WHERE id = '1'")[0]['modo'];
+?>
 <div class="has-sidebar-left">
     <header class="blue accent-3 relative nav-sticky">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

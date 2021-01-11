@@ -1073,10 +1073,14 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
   border-radius: 8px;
   flex-direction: column;
 }
-.jss22 .forgot-password {
+.jss22  {
   color: rgba(0,0,0, .60);
   text-align: right;
   margin-bottom: 16px;
+}
+ .forgot-password a{
+    cursor:pointer;
+    margin-bottom: 16px;
 }
 .jss22 .keep-connected {
   color: rgba(0,0,0, .60);
@@ -1092,6 +1096,10 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
+  text-decoration:none !important;
+}
+a .sing-up{
+  text-decoration:none !important;
 }
 .jss22 .btn-login-container {
   display: flex;

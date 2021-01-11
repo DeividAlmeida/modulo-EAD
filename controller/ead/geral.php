@@ -38,3 +38,24 @@ if(isset($_GET['editaGeral'])){
         Redireciona('?erro');
       }
 }
+
+if(isset($_GET['modo'])){
+
+    $modo = $_GET['modo'];
+    
+    if($modo == 'dev'){
+        $vue= '<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>';
+    }else{
+        $vue= '<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>';
+    }
+          
+    $query  = DBUpdate('ead', array('modo' => $vue), "id = '1'");
+    
+    if ($query != 0) {
+        Redireciona('?sucesso');
+      } else {
+        Redireciona('?erro');
+      }
+      
+}
+

@@ -8,12 +8,10 @@ SELECT "EAD", "ead.php", "icon-shopping-bag", 1, 0, "ead", "ead/ead.js", "2019-0
 -- CONFIGURAÇÃO
 CREATE TABLE IF NOT EXISTS `ead` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `dev` text DEFAULT NULL,
-    `prod` text DEFAULT NULL
+    `modo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-INSERT INTO `ead` (`id`, `dev`, `prod`) VALUES (
+INSERT INTO `ead` (`id`, `modo`) VALUES (
     1, 
-    '<script src=\"https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js\"></script>', 
     '<script src=\"https://cdn.jsdelivr.net/npm/vue@2\"></script>'
     );
 -- PROFESSOR
@@ -168,10 +166,17 @@ CREATE TABLE IF NOT EXISTS `ead_config_geral` (
     `busca_cor_btn_texto` varchar(255) DEFAULT NULL,
 
         #LINK DO RESULTADO DA BUSCA
-    `link_busca` varchar(255) DEFAULT NULL,
+    `link_busca` text DEFAULT NULL,
+
+        #LINK DO _LOGIN
+    `link_login` text DEFAULT NULL,
+
+        #LINK DO CADASTRO
+    `link_cadastro` text DEFAULT NULL,
 
         #LINK CHECKOUT
-    `link_checkout` varchar(255) DEFAULT NULL
+    `link_checkout` text DEFAULT NULL
+    
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
     INSERT INTO `ead_config_geral` (
         `id`, 
@@ -201,5 +206,6 @@ CREATE TABLE IF NOT EXISTS `ead_config_geral` (
         
             #LINK CHECKOUT
         `link_checkout`
+
     ) VALUES
     (1,'','','','','','','','','','','','','','','','');
