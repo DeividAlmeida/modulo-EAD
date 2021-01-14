@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/menu/src/style/main.css">
+<div class="MuiBox-root jss27 jss26 app-toolbar">
+    <button class="MuiButtonBase-root MuiIconButton-root icon-toolbar menu" onclick="abrir()" tabindex="0" type="button">
+        <span class="MuiIconButton-label">
+            <span class="material-icons MuiIcon-root" aria-hidden="true">menu</span>
+        </span>
+        <span class="MuiTouchRipple-root"></span>
+    </button>
+    <a class="logo-toolbar" href="/">
+        <img  src="https://llbr.blob.core.windows.net/machine-user-images/Logotipo-Curso-de-Web-Acappella-vermelho.png"  alt="">
+    </a>
+    <button class="MuiButtonBase-root MuiIconButton-root icon-toolbar MuiIconButton-sizeSmall" tabindex="0" type="button">
+        <span class="MuiIconButton-label">
+            <span class="material-icons MuiIcon-root"  aria-hidden="true">help_outline</span>
+        </span>
+        <span class="MuiTouchRipple-root"></span>
+    </button>
+    <button class="MuiButtonBase-root MuiIconButton-root jss32" tabindex="0" type="button"  aria-controls="profile" aria-haspopup="true" onclick="perfil()">
+        <span class="MuiIconButton-label">
+            <div class="MuiBox-root jss37 undefined jss35 jss36" avatar="" name="Vinícius Von Dentz">
+                <span  class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
+            </div>
+        </span>
+        <span class="MuiTouchRipple-root"></span>
+    </button>
+</div>
+<div role="presentation" class="MuiPopover-root jss33" id="profile-menu" onclick="perfil_menu()" aria-hidden="true" style="position: fixed; z-index: 1300; inset: 0px; visibility: hidden;">
+    <div tabindex="0" data-test="sentinelStart"></div>
+    <div class="MuiPaper-root MuiPopover-paper MuiPaper-elevation8 MuiPaper-rounded" id="profile" tabindex="-1" style="opacity: 1; transform: none; transition: opacity 287ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 191ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; top: 46px; left: 75%; transform-origin: 260px 6px; visibility: hidden;">
+        
+        <div class="MuiBox-root jss38 profile-infos">
+            <div class="MuiBox-root jss40 profile-infos-avatar jss35 jss39" avatar="" name="Vinícius Von Dentz">
+                <span class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
+            </div>
+            <p class="MuiTypography-root profile-infos-name MuiTypography-body2">
+                <b>Vinícius Von Dentz</b>
+            </p>
+            <span  class="MuiTypography-root profile-infos-email MuiTypography-caption">viniciusvondentz@gmail.com</span>
+        </div>
+        
+        <hr class="MuiDivider-root">
+        <a class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss34 profile-menu-item MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"  tabindex="-1" role="menuitem" aria-disabled="false" href="/profile">
+            <span  class="material-icons MuiIcon-root profile-menu-item-icon" aria-hidden="true">assignment_ind</span>
+            <p class="MuiTypography-root MuiTypography-body2">Minha Conta</p>
+            <span  class="MuiTouchRipple-root"></span>
+        </a>
+        <li class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss34 profile-menu-item MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"   tabindex="-1" role="menuitem" aria-disabled="false">
+            <span class="material-icons MuiIcon-root profile-menu-item-icon" aria-hidden="true">exit_to_app</span>
+            <p class="MuiTypography-root MuiTypography-body2">Sair</p>
+            <span class="MuiTouchRipple-root"></span>
+        </li>
+    </div>
+    <div tabindex="0" data-test="sentinelEnd"></div>
+</div>

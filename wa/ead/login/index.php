@@ -16,7 +16,7 @@ $db = json_encode(DBRead('ead_config_geral','*'));
         <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
     </head>
 
-    <body>
+    <body >
         <div id="root">
             <div class="MuiBox-root jss21 jss20">
                 <div class="MuiBox-root jss23 jss22">
@@ -51,7 +51,7 @@ $db = json_encode(DBRead('ead_config_geral','*'));
                             </div>
                             <div class=" forgot-password " @click="ver('reset')" style="margin-bottom:16px"><a type="button" >Esqueci minha senha</a></div>
                             <div class="MuiBox-root jss31 btn-login-container">
-                                <button class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge" tabindex="0" type="submit">
+                                <button onclick="valida()" class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge" tabindex="0" type="button">
                                     <span class="MuiButton-label">Entrar</span>
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
@@ -107,10 +107,9 @@ $db = json_encode(DBRead('ead_config_geral','*'));
                 el:"#root",
                 data: {
                     status: "login",
-                    idx:<?php echo $db ?>
+                    idx:<?php echo $db ?> 
                 }
             });
-           val.ver = (a) =>{ val.status = a}
         </script>
         <script src="src/script/main.js"></script>                          
     </body>

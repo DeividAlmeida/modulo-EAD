@@ -1,3 +1,4 @@
+val.ver = (a) =>{ val.status = a};
 visivel = (a) =>{
     const icon = document.getElementById('olho');
     const campo = document.getElementById('login-password');
@@ -16,4 +17,16 @@ box = (a) => {
     }else{
         view.innerHTML = ''
     }
+}
+valida = () =>{
+   var form = new FormData();
+   form.append("email", document.getElementById('login-email').value);
+   form.append("senha", document.getElementById('login-password').value);
+    fetch ('https://www.templateswebacappella.com.br/wacontrol-aula/wa/ead/apis/autentica.php',{method: "POST", body: form}).then(x => x.text()).then(data =>{
+        if(data == 1){
+            window.location.href = 'https://www.templateswebacappella.com.br/wacontrol-aula/wa/ead/dashboard/inicio/'
+        }else{
+            alert(data)
+        }
+    });
 }
