@@ -7,6 +7,8 @@ require_once('../../../../database/config.php');
 $id = $_SESSION['Wacontrol'][0];
 $senha = $_SESSION['Wacontrol'][1];
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
+$config = json_encode(DBRead('ead_config_geral','*'));
+$curso = json_encode(DBRead('ead_curso','*'));
 ?>
 <html lang="pt-br">
 
@@ -18,6 +20,7 @@ $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' "
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/curso/src/style/main.css">
+    <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
     <title>AULA 2 - TRABALHANDO COM AS BOXES - Curso de Web Acappella Grid</title>
 </head>
 
@@ -61,7 +64,7 @@ $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' "
                             <span class="MuiTouchRipple-root"></span>
                         </button>
                     </div>
-                    <div class="MuiDrawer-root MuiDrawer-docked jss77 open">
+                    <div :class="'MuiDrawer-root MuiDrawer-docked jss77 '+nav[0]">
                         <div class="MuiPaper-root MuiDrawer-paper jss78 MuiDrawer-paperAnchorRight MuiDrawer-paperAnchorDockedRight MuiPaper-elevation0">
                             <div class="MuiBox-root jss164 header-bar">
                                 <div class="MuiBox-root jss167 jss165 ">
@@ -79,8 +82,8 @@ $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' "
                                         <span  class="MuiTouchRipple-root"></span>
                                     </button>
                                 </div>
-                                <button class="MuiButtonBase-root toggle-side-menu" tabindex="0"   type="button">
-                                    <span  class="MuiTypography-root toggle-side-menu-text MuiTypography-caption MuiTypography-noWrap">Esconder  navegação</span>
+                                <button class="MuiButtonBase-root toggle-side-menu" tabindex="0" onclick="navegar()"  type="button">
+                                    <span  class="MuiTypography-root toggle-side-menu-text MuiTypography-caption MuiTypography-noWrap">Esconder navegação</span>
                                     <span class="material-icons MuiIcon-root toggle-side-menu-icon opened"  aria-hidden="true">menu_open</span>
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
@@ -390,8 +393,25 @@ $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' "
                 </div>
             </div>
         </div>
-    </div>
       <?php require_once('../menu/vertical.php'); ?>
+    </div>
 </body>
+<script>
+    const origin = '<?php echo ConfigPainel('base_url'); ?>';
+    const val = new Vue({
+        el:"#root",
+        data: {
+            nav:['open', 'without-sidemenu'],
+            config:<?php echo $config ?>,
+            cursos:<?php echo  $curso ?>
+        }
+    });
+    let nav = true;
+    navegar = () =>{
+        nav == true ?  nav = false : nav = true
+        nav == true ?  val.nav='open' : val.nav='close'
+    }
+    
+</script>
 <script src="../menu/src/script/main.js"></script>
 </html>

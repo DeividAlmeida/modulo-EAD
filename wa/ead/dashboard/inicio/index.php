@@ -8,7 +8,8 @@ $id = $_SESSION['Wacontrol'][0];
 $senha = $_SESSION['Wacontrol'][1];
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
  if(!empty($valida)){
-$db = json_encode(DBRead('ead_config_geral','*'));
+$config = json_encode(DBRead('ead_config_geral','*'));
+$curso = json_encode(DBRead('ead_curso','*'));
 ?>
 <html lang="pt-br">
 <head>
@@ -57,22 +58,23 @@ $db = json_encode(DBRead('ead_config_geral','*'));
                         </div>
                     </div>
                 </div>
-                <div class="MuiBox-root jss50 jss41">
-                    <div :class="'MuiBox-root content '+lista">
-                        
-                        <div :class="'MuiBox-root jss92 jss87  jss64 jss59 curso '+lista">
-                            <a  class="MuiTypography-root MuiLink-root MuiLink-underlineNone img MuiTypography-colorInherit" id="59383" href="/course/59383/">
+                <div class="MuiBox-root jss50 jss41" >
+                    <div :class="'MuiBox-root content '+lista" >
+                        <div :class="'MuiBox-root jss92 jss87  jss64 jss59 curso '+lista"  @click="acessar(curso.id)" v-for="curso, index of cursos">
+                            <a  class="MuiTypography-root MuiLink-root MuiLink-underlineNone img MuiTypography-colorInherit" id="59383" >
                                 <img src="https://blob.contato.io/machines-bonus-images/bonus-20191104164653.jpg" alt="">
                             </a>
-                                <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone progress MuiTypography-colorInherit" id="59383" href="/course/59383/">
+                                <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone progress MuiTypography-colorInherit" id="59383">
                                 <div class="MuiBox-root jss65 progress-bar">
                                     <div class="MuiBox-root jss66 progress-bar-fill"></div>
                                 </div>
                             </a>
-                            <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone content MuiTypography-colorInherit"  id="59383" href="/course/59383/">
-                                <p class="MuiTypography-root title MuiTypography-body2">Curso de Web Acappella Grid</p>
+                            <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone content MuiTypography-colorInherit"  id="59383" >
+                                <p class="MuiTypography-root title MuiTypography-body2">{{curso.nome}}</p>
                                 <span class="MuiTypography-root instructor MuiTypography-caption">
-                                    <i>Vinícius Von  Dentz</i>
+                                    <span v-for="prof of curso.professor">
+                                        <i>{{prof}}</i><br>
+                                    </span>
                                 </span>
                             </a>
                         </div>
@@ -82,7 +84,7 @@ $db = json_encode(DBRead('ead_config_geral','*'));
             </div>
             <div v-if="status == 'geral'">
                 <div class="MuiBox-root jss85 jss83">
-                    <div class="MuiBox-root jss87 jss86 section progress-container"><span class="MuiTypography-root section-title MuiTypography-overline">Progresso</span>
+                    <div class="MuiBox-root jss97 jss86 section progress-container"><span class="MuiTypography-root section-title MuiTypography-overline">Progresso</span>
                         <div class="MuiBox-root jss88 progress-content">
                             <div class="MuiPaper-root MuiAccordion-root jss89 Mui-expanded jss91 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
                                 <div class="MuiButtonBase-root MuiAccordionSummary-root course-header Mui-expanded" tabindex="0" role="button" aria-disabled="false" aria-expanded="true">
@@ -97,7 +99,7 @@ $db = json_encode(DBRead('ead_config_geral','*'));
                                             </div>
                                             <div class="MuiBox-root jss126 course-header-text-container">
                                                 <h6 class="MuiTypography-root course-header-text-title  MuiTypography-subtitle2">Curso de Web Acappella Grid</h6>
-                                                    <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">Vinícius Von Dentz</i>
+                                                <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">Vinícius Von Dentz</i>
                                             </div>
                                             <span class="material-icons MuiIcon-root course-header-icon-expand" aria-hidden="true">expand_less</span>
                                             <span class="MuiTouchRipple-root"></span>
@@ -182,18 +184,25 @@ $db = json_encode(DBRead('ead_config_geral','*'));
             </div>
             <div tabindex="0" data-test="sentinelEnd"></div>
         </div>
+        <?php require_once('../menu/vertical.php'); ?>
     </div>
-    <?php require_once('../menu/vertical.php'); ?>
     <script>
+        const origin = '<?php echo ConfigPainel('base_url'); ?>';
         const val = new Vue({
             el:"#root",
             data: {
-                status: "curso",
-                lista: "grid",
-                idx:<?php echo $db ?>
+                status: '<?php echo $_GET['status']?>',
+                lista: 'grid',
+                config:<?php echo $config ?>,
+                cursos:<?php echo  $curso ?>
+            },
+            methods:{
+                acessar: function (a) {
+                    window.location.href=origin+'wa/ead/dashboard/curso/?posicao=voltar&id='+a
+                }
             }
         });
-
+        
     </script>
     <script src="src/script/main.js"></script>
     <script src="../menu/src/script/main.js"></script>

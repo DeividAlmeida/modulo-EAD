@@ -770,28 +770,6 @@ body::backdrop {
     margin-top: 24px;
 }
 
- .header-container {
-    height: 64px;
-    display: flex;
-    padding: 0px 8px;
-    align-items: center;
-}
-
- .header-close {
-    margin: 0px 16px 0px 8px;
-    padding: 8px;
-}
-
- .header-logo-container {
-    display: flex;
-    align-items: center;
-}
-
- .header-logo-img {
-    max-width: 70%;
-    max-height: 56px;
-    object-fit: contain;
-}
 
 
 
@@ -1426,44 +1404,6 @@ body::backdrop {
     flex-direction: column;
 }
 
- .list-courses-item-text {
-color: rgba(0,0,0, .38);
-}
- .list-courses-item-icon,  .list-courses-item-lock {
-color: rgba(0,0,0, .26);
-}
-.list-courses-item-link {
-width: 100%;
-display: flex;
-align-items: center;
-}
-.list-courses-item-icon {
-color: rgba(0,0,0, .38);
-width: 32px;
-height: 32px;
-margin: 0px 8px;
-display: flex;
-overflow: hidden;
-min-width: 32px;
-background: rgba(0,0,0, .06);
-min-height: 32px;
-align-items: center;
-border-radius: 50%;
-justify-content: center;
-}
-.list-courses-item-text {
-color: rgba(0,0,0, .60);
-margin: 0px 8px;
-flex-grow: 1;
-}
-.list-courses-item-lock {
-color: rgba(0,0,0, .38);
-}
-.list-courses-item-icon img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
 .jss122, .jss122:hover {
 background-color: rgba(250, 156, 0, 0.12) !important;
 }
@@ -1475,63 +1415,7 @@ color: rgba(0, 0, 0, 0.87) !important;
 background-color: #fa9c00 !important;
 }
 
-.list-title {
-color: rgba(0,0,0, .38);
-display: flex;
-padding: 0px 24px;
-margin-top: 24px;
-}
-.header-container {
-height: 64px;
-display: flex;
-padding: 0px 8px;
-align-items: center;
-}
-.header-close {
-margin: 0px 16px 0px 8px;
-padding: 8px;
-}
-.header-logo-container {
-display: flex;
-align-items: center;
-}
-.header-logo-img {
-max-width: 70%;
-max-height: 56px;
-object-fit: contain;
-}        
-.MuiList-root {
-margin: 0;
-padding: 0;
-position: relative;
-list-style: none;
-}
-.MuiList-padding {
-padding-top: 8px;
-padding-bottom: 8px;
-}
-.MuiList-subheader {
-padding-top: 0;
-}
 
-.list-channels-item-link {
-color: rgba(0,0,0, .87);
-width: 100%;
-display: flex;
-align-items: center;
-}
-.list-channels-item-text {
-color: inherit;
-flex-grow: 1;
-}
-.list-channels-item-icon {
-color: inherit;
-margin: 0px 16px 0px 8px;
-min-width: 32px;
-}
-.list-channels-item-icon-after {
-margin: 0px 0px 0px 16px;
-}
         
 
                                                                                             /* VISÃO GERAL*/

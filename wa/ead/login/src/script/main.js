@@ -22,9 +22,9 @@ valida = () =>{
    var form = new FormData();
    form.append("email", document.getElementById('login-email').value);
    form.append("senha", document.getElementById('login-password').value);
-    fetch ('https://www.templateswebacappella.com.br/wacontrol-aula/wa/ead/apis/autentica.php',{method: "POST", body: form}).then(x => x.text()).then(data =>{
+    fetch (origin+'wa/ead/apis/autentica.php',{method: "POST", body: form}).then(x => x.text()).then(data =>{
         if(data == 1){
-            window.location.href = 'https://www.templateswebacappella.com.br/wacontrol-aula/wa/ead/dashboard/inicio/'
+            window.location.href = origin+'wa/ead/dashboard/inicio/?status=curso&posicao=avancar'
         }else{
             alert(data)
         }

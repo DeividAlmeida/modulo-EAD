@@ -1,7 +1,11 @@
 window.onload = () => {
     var tamanho = parseInt(document.getElementsByClassName('curso').length*325)
     document.body.style.height= tamanho+'px';
+    for(let i = 0 ; i < val.cursos.length; i++){
+        val.cursos[i].professor = JSON.parse(val.cursos[i].professor);
+    }
 }
+
 view = (a) =>{ 
     let icone = document.getElementById('iview');
     if(a == 'view_module'){

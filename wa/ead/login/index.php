@@ -103,10 +103,11 @@ $db = json_encode(DBRead('ead_config_geral','*'));
             </div>
         </div>
         <script>
+            const origin = '<?php echo ConfigPainel('base_url'); ?>';
             const val = new Vue({
-                el:"#root",
+                el:'#root',
                 data: {
-                    status: "login",
+                    status: 'login',
                     idx:<?php echo $db ?> 
                 }
             });

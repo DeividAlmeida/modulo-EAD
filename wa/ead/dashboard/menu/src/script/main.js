@@ -2,19 +2,23 @@ const back = document.getElementById('back');
 const menu = document.getElementById('menu');
 const profile = document.getElementById('profile');
 const profile_menu = document.getElementById('profile-menu');
-curso = () => {
-    val.status = 'curso';
-    val.curso = 'Mui-selected';
-    val.geral ='';
-    back.style.width = '0';
-    menu.style.display = 'none'
+curso = (a) => {
+    if(a == 'avancar'){
+        val.status = 'curso';
+        back.style.width = '0';
+        menu.style.display = 'none'
+    }else{
+         window.location.href=origin+'/wa/ead/dashboard/inicio/?posicao=voltar&status=curso'
+    }
 }
-geral = () => {
-    val.status = 'geral';
-    val.curso = '';
-    val.geral = 'Mui-selected';
-    back.style.width = '0';
-    menu.style.display = 'none'
+geral = (a) => {
+    if(a == 'avancar'){
+        val.status = 'geral';
+        back.style.width = '0';
+        menu.style.display = 'none'
+    }else{
+        window.location.href=origin+'/wa/ead/dashboard/inicio/?posicao=voltar&status=geral'
+    }
 }
 abrir = () =>{
     back.style.width = '325px';
