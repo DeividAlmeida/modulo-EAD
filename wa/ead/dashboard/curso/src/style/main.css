@@ -400,6 +400,7 @@ body::backdrop {
 
 .MuiDrawer-docked {
     flex: 0 0 auto;
+    z-index:10000;
 }
 
 .MuiDrawer-paper {
@@ -408,7 +409,7 @@ body::backdrop {
     height: 100%;
     display: flex;
     outline: 0;
-    z-index: 1200;
+    z-index: 12000;
     position: fixed;
     overflow-y: auto;
     flex-direction: column;
@@ -2570,7 +2571,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     }
 
     .jss77.close {
-        width: auto;
+        width: 180px;
         height: 64px;
         overflow: hidden;
         border-bottom: solid 1px rgba(0, 0, 0, 0.12);
@@ -2596,7 +2597,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     right: 0;
     bottom: 0;
     height: 64px;
-    display: flex;
+    display: none;
     padding: 0px 16px;
     position: absolute;
     border-top: solid 1px rgba(0, 0, 0, 0.12);
@@ -2626,6 +2627,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 .jss77 .modules-container {
     overflow: auto;
     max-height: 100%;
+    display:none;
 }
 
 .jss77 .header-bar .toggle-side-menu {
@@ -2654,7 +2656,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 
 @media (max-width:959.95px) {
     .jss78 {
-        width: calc(100vw - 48px);
         max-width: 320px;
     }
 }
@@ -3201,4 +3202,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     flex-grow: 1;
     background: #F2F2F2;
     flex-direction: column;
+}
+#jss78{
+    height:63px;
 }

@@ -295,7 +295,7 @@ body::backdrop {
     height: 100%;
     display: flex;
     outline: 0;
-    z-index: 1200;
+    z-index: 12000;
     position: fixed;
     overflow-y: auto;
     flex-direction: column;
