@@ -2021,9 +2021,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     background-color: rgba(0, 0, 0, 0.12);
 }
 
-.MuiAccordion-root.Mui-expanded {
-    margin: 16px 0;
-}
+
 
 .MuiAccordion-root.Mui-disabled {
     background-color: rgba(0, 0, 0, 0.12);
@@ -3205,4 +3203,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 }
 #jss78{
     height:63px;
+}
+
+.marker-line{
+    top: 0px !important;
+    bottom: 0px !important;
 }

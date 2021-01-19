@@ -6,15 +6,16 @@ require_once('../../../../database/config.database.php');
 require_once('../../../../database/config.php');
 $id = $_SESSION['Wacontrol'][0];
 $senha = $_SESSION['Wacontrol'][1];
-$id_curos = $_GET['id'];
+$id_curos = 6; #$_GET['id'];
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
 $config = json_encode(DBRead('ead_config_geral','*'));
 $curso = json_encode(DBRead('ead_curso','*'));
 $mdls = DBRead('ead_modulo','*',"WHERE curso = '{$id_curos}'");
 if(is_array($mdls)){
-    foreach($mdls as $key => $vls){
+    foreach($mdls as $ky => $vls){
        $aula[$vls['id']] =  DBRead('ead_aula','*',"WHERE modulo = '{$vls['id']}'");
     }
+    $key = count($aula);
     $aulas = json_encode($aula);
 }
 $modulos = json_encode($mdls);
@@ -53,14 +54,14 @@ $modulos = json_encode($mdls);
                             <h6 class="MuiTypography-root text-title-title MuiTypography-subtitle1 MuiTypography-noWrap">AULA 2 - TRABALHANDO COM AS BOXES</h6>
                         </div>
                         <div class="MuiBox-root jss163 pagination">
-                            <a  class="MuiButtonBase-root MuiIconButton-root pagination-back" tabindex="0" role="button" aria-disabled="false" href="/course/59383/555780">
+                            <a onclick="anterior()" class="MuiButtonBase-root MuiIconButton-root pagination-back" tabindex="0" role="button" aria-disabled="false">
                                 <span class="MuiIconButton-label">
                                     <span class="material-icons MuiIcon-root" aria-hidden="true">chevron_left</span>
                                 </span>
                                 <span class="MuiTouchRipple-root"></span>
                             </a>
-                            <span  class="MuiTypography-root pagination-text MuiTypography-caption">2/24</span>
-                            <a  class="MuiButtonBase-root MuiIconButton-root pagination-next" tabindex="0" role="button" aria-disabled="false" href="/course/59383/555783">
+                            <span  class="MuiTypography-root pagination-text MuiTypography-caption">{{id_aula}}/<?php echo $key+1 ?></span>
+                            <a onclick="proximo(<?php echo $key+1 ?>)" class="MuiButtonBase-root MuiIconButton-root pagination-next" tabindex="0" role="button" aria-disabled="false">
                                 <span class="MuiIconButton-label">
                                     <span class="material-icons MuiIcon-root" aria-hidden="true">chevron_right</span>
                                 </span>
@@ -74,7 +75,7 @@ $modulos = json_encode($mdls);
                         </button>
                     </div>
                     <div  :class="'MuiDrawer-root MuiDrawer-docked jss77 '+nav">
-                        <div class="MuiPaper-root MuiDrawer-paper jss78 MuiDrawer-paperAnchorRight MuiDrawer-paperAnchorDockedRight MuiPaper-elevation0" id="jss78">
+                        <div class="MuiPaper-root MuiDrawer-paper jss78 MuiDrawer-paperAnchorRight MuiDrawer-paperAnchorDockedRight MuiPaper-elevation0" id="jss78" style="transition: all 0.4s ease 0s;">
                             <div class="MuiBox-root jss164 header-bar">
                                 <button class="MuiButtonBase-root toggle-side-menu" tabindex="0" onclick="navegar()"  type="button">
                                     <span  class="MuiTypography-root toggle-side-menu-text MuiTypography-caption MuiTypography-noWrap">{{texto}}</span>
@@ -83,11 +84,11 @@ $modulos = json_encode($mdls);
                                 </button>
                             </div>
                             <div  class="MuiBox-root jss169 modules-container" id="container">
-                                <div v-for="modulo, id of modulos" class="MuiPaper-root MuiAccordion-root jss170 Mui-expanded jss171 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
+                                <div @click="navaula(id, modulo.id)" v-for="modulo, id of modulos" class="MuiPaper-root MuiAccordion-root jss170 Mui-expanded jss171 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
                                     <div  class="MuiButtonBase-root MuiAccordionSummary-root content Mui-expanded jss171" tabindex="0" role="button" aria-disabled="false" aria-expanded="true">
                                         <div class="MuiAccordionSummary-content jss172 Mui-expanded jss171">
                                             <div class="MuiBox-root jss173 progress">
-                                                <div class="MuiBox-root jss176 jss174 jss175 undefined" size="32">
+                                                <div class="MuiBox-root jss176 jss174 jss175 undefined" size="32" style="width:32px; height:32">
                                                     <svg  viewBox="0 0 36 36" class="chart-circle">
                                                         <path class="chart-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                                                         <path class="chart-circle-fill is-active false" stroke-dasharray="14.285714285714285 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"> </path>
@@ -97,128 +98,32 @@ $modulos = json_encode($mdls);
                                             </div>
                                             <div class="MuiBox-root jss177 text-wrapper">
                                                 <p class="MuiTypography-root title  MuiTypography-body2">MÓDULO {{id+1}} - {{modulo.nome}}</p>
-                                                <span class="MuiTypography-root amount MuiTypography-overline">7 aulas</span>
+                                                <span class="MuiTypography-root amount MuiTypography-overline">{{aulas[modulo.id].length}} aulas</span>
                                             </div>
-                                            <span class="material-icons MuiIcon-root icon" aria-hidden="true">keyboard_arrow_up</span>
+                                            <span :id="'arrow'+id" class="material-icons MuiIcon-root icon" aria-hidden="true">keyboard_arrow_down</span>
                                         </div>
                                     </div>
-                                    <div class="MuiCollapse-container MuiCollapse-entered" style="min-height: 0px; height: auto; transition-duration: 331ms;">
+                                    <div :id="'child'+id" class="MuiCollapse-container MuiCollapse-entered" style="transition: height 0.3s ease 0s; min-height: 0px; height: 0px; visibility:hidden ">
                                         <div class="MuiCollapse-wrapper">
                                             <div class="MuiCollapse-wrapperInner">
                                                 <div role="region">
-                                                    <div class="MuiAccordionDetails-root content-children">
-                                                        <a v-for="licao, ident of aulas[modulo.id]" class="MuiButtonBase-root jss205 jss206 completed " tabindex="0" role="button" aria-disabled="false">
-                                                            <div class="MuiBox-root jss207 marker">
-                                                                <div class="MuiBox-root jss208 marker-circle"></div>
-                                                                <div class="MuiBox-root jss209 marker-line"></div>
-                                                            </div>
-                                                            <div class="MuiBox-root jss210 title">
-                                                                <span class="MuiTypography-root title-text MuiTypography-caption">AULA {{ident+1}} - {{licao.nome}}</span>
-                                                            </div>
-                                                            <div class="MuiBox-root jss211 icon">
-                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall" aria-hidden="true">checked</span>
-                                                            </div>
-                                                            <span class="MuiTouchRipple-root"></span>
-                                                        </a>
-                                                        <a class="MuiButtonBase-root jss205 jss212 resting active" tabindex="0" role="button" aria-disabled="false">
-                                                            <div class="MuiBox-root jss213 marker">
-                                                                <div class="MuiBox-root jss214 marker-circle"></div>
-                                                                <div class="MuiBox-root jss215 marker-line"></div>
-                                                            </div>
-                                                            <div class="MuiBox-root jss216 title">
-                                                                <span class="MuiTypography-root title-text MuiTypography-caption">AULA 2 - TRABALHANDO COM AS BOXES</span>
-                                                            </div>
-                                                            <div class="MuiBox-root jss217 icon">
-                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"  aria-hidden="true"></span>
-                                                            </div>
-                                                            <span class="MuiTouchRipple-root"></span>
-                                                        </a>
-                                                        <a class="MuiButtonBase-root jss205 jss218 resting " tabindex="0" role="button" aria-disabled="false">
+                                                    <div class="MuiAccordionDetails-root content-children" >
+                                                        <a @click="pular(licao.tag)" v-for="licao, ident of aulas[modulo.id]" class="MuiButtonBase-root jss205 jss218 resting " tabindex="0" role="button" aria-disabled="false">
                                                             <div class="MuiBox-root jss219 marker">
                                                                 <div class="MuiBox-root jss220 marker-circle"></div>
-                                                                <div class="MuiBox-root jss221 marker-line"></div>
+                                                                <div class="MuiBox-root jss221 marker-line" ></div>
                                                             </div>
                                                             <div class="MuiBox-root jss222 title">
-                                                                <span class="MuiTypography-root title-text MuiTypography-caption">AULA 3 - SUB PAGES</span>
+                                                                <span class="MuiTypography-root title-text MuiTypography-caption">AULA {{ident+1}} - {{licao.nome}}</span>
                                                             </div>
                                                             <div class="MuiBox-root jss223 icon">
                                                                 <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"  aria-hidden="true"></span>
                                                             </div>
                                                             <span class="MuiTouchRipple-root"></span>
                                                         </a>
-                                                        <a class="MuiButtonBase-root jss205 jss224 resting " tabindex="0" role="button" aria-disabled="false" href="/course/59383/555784">
-                                                            <div class="MuiBox-root jss225 marker">
-                                                                <div class="MuiBox-root jss226 marker-circle"></div>
-                                                                <div class="MuiBox-root jss227 marker-line"></div>
-                                                            </div>
-                                                            <div class="MuiBox-root jss228 title">
-                                                                <span  class="MuiTypography-root title-text MuiTypography-caption">AULA  4 - ÂNCORA EM PÁGINA ÚNICA</span>
-                                                            </div>
-                                                            <div class="MuiBox-root jss229 icon">
-                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"  aria-hidden="true"></span>
-                                                            </div>
-                                                            <span class="MuiTouchRipple-root"></span>
-                                                        </a>
-                                                        <a class="MuiButtonBase-root jss205 jss230 resting " tabindex="0" role="button" aria-disabled="false"  href="/course/59383/555785">
-                                                            <div class="MuiBox-root jss231 marker">
-                                                                <div class="MuiBox-root jss232 marker-circle"></div>
-                                                                <div class="MuiBox-root jss233 marker-line"></div>
-                                                            </div>
-                                                            <div class="MuiBox-root jss234 title"><span class="MuiTypography-root title-text MuiTypography-caption">AULA 5 - FERRAMENTA DE TEXTO, COR E IMAGEM</span></div>
-                                                            <div class="MuiBox-root jss235 icon">
-                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall" aria-hidden="true"></span>
-                                                            </div>
-                                                            <span class="MuiTouchRipple-root"></span>
-                                                        </a>
-                                                        <a class="MuiButtonBase-root jss205 jss236 resting " tabindex="0" role="button" aria-disabled="false" href="/course/59383/555787">
-                                                            <div class="MuiBox-root jss237 marker">
-                                                                <div class="MuiBox-root jss238 marker-circle"></div>
-                                                                <div class="MuiBox-root jss239 marker-line"></div>
-                                                            </div>
-                                                            <div class="MuiBox-root jss240 title">
-                                                                <span class="MuiTypography-root title-text MuiTypography-caption">AULA 6 - GALERIA E CAROUSEL</span>
-                                                            </div>
-                                                            <div class="MuiBox-root jss241 icon">
-                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall" aria-hidden="true"></span>
-                                                            </div>
-                                                            <span class="MuiTouchRipple-root"></span>
-                                                        </a>
-                                                        <a class="MuiButtonBase-root jss205 jss242 resting " tabindex="0" role="button" aria-disabled="false"  href="/course/59383/555789">
-                                                            <div class="MuiBox-root jss243 marker">
-                                                                <div class="MuiBox-root jss244 marker-circle"></div>
-                                                                <div class="MuiBox-root jss245 marker-line"></div>
-                                                            </div>
-                                                            <div class="MuiBox-root jss246 title">
-                                                                <span class="MuiTypography-root title-text MuiTypography-caption">AULA 7 - BOTÃO, MENU E FORMULÁRIO</span>
-                                                            </div>
-                                                            <div class="MuiBox-root jss247 icon">
-                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall" aria-hidden="true"></span>
-                                                            </div>
-                                                            <span class="MuiTouchRipple-root"></span>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div  class="MuiPaper-root MuiAccordion-root jss170 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
-                                    <div class="MuiButtonBase-root MuiAccordionSummary-root content" tabindex="0" role="button" aria-disabled="false" aria-expanded="false">
-                                        <div class="MuiAccordionSummary-content jss172">
-                                            <div class="MuiBox-root jss178 progress">
-                                                <div class="MuiBox-root jss180 jss174 jss179 undefined" size="32">
-                                                    <svg viewBox="0 0 36 36" class="chart-circle">
-                                                        <path class="chart-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                                        <path class="chart-circle-fill false false" stroke-dasharray="0 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                                    </svg>
-                                                    <span class="chart-text false">0</span>
-                                                </div>
-                                            </div>
-                                            <div class="MuiBox-root jss181 text-wrapper">
-                                                <p class="MuiTypography-root title  MuiTypography-body2">MÓDULO 2 - PRIMEIRA CRIAÇÃO</p>
-                                                <span class="MuiTypography-root amount MuiTypography-overline">5 aulas</span>
-                                            </div>
-                                            <span class="material-icons MuiIcon-root icon" aria-hidden="true">keyboard_arrow_down</span>
                                         </div>
                                     </div>
                                 </div>
@@ -278,6 +183,7 @@ $modulos = json_encode($mdls);
     const val = new Vue({
         el:"#root",
         data: {
+            id_aula: 1,
             nav: 'close', 
             main_width:'without-sidemenu',
             icon: '',
@@ -286,9 +192,42 @@ $modulos = json_encode($mdls);
             cursos:<?php echo  $curso ?>,
             modulos:<?php echo  $modulos ?>, 
             aulas:<?php echo  $aulas ?>
+        }, 
+        methods:{
+            navaula: function(a,b){
+                let filho = document.getElementById('child'+a);
+                let flecha = document.getElementById('arrow'+a);
+                let altura = this.aulas[b].length*48;
+                if(filho.style.height == '0px'){ 
+                    filho.style.height = altura+'px';
+                    filho.style.visibility= 'visible';
+                    flecha.innerHTML = 'keyboard_arrow_up';
+                }else{ 
+                    filho.style.height = '0px';
+                    filho.style.visibility= 'hidden';
+                    flecha.innerHTML = 'keyboard_arrow_down';
+                }
+            },
+            pular: function(a){
+                this.id_aula = a
+            }
+            
         }
     });
-    
+    window.onload = () => {
+        let count = 0;
+        for(let i= 0; i < val.modulos.length; i++){
+            val.aulas[val.modulos[i].id].forEach((a, b)=>{
+                val.aulas[val.modulos[i].id][b].tag = count +=1;
+            })
+        }
+    }
+    anterior = () => {
+       val.id_aula > 1 ? val.id_aula = val.id_aula - 1: val.id_aula = val.id_aula ;
+    }; 
+    proximo = (a) => {
+       val.id_aula < a ? val.id_aula = val.id_aula + 1: val.id_aula = val.id_aula ;
+    }
 </script>
 <script src="../menu/src/script/main.js"></script>
 <script src="src/script/main.js"></script>
