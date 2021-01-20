@@ -62,7 +62,7 @@ $curso = json_encode(DBRead('ead_curso','*'));
                     <div :class="'MuiBox-root content '+lista" >
                         <div :class="'MuiBox-root jss92 jss87  jss64 jss59 curso '+lista"  @click="acessar(curso.id)" v-for="curso, index of cursos">
                             <a  class="MuiTypography-root MuiLink-root MuiLink-underlineNone img MuiTypography-colorInherit" id="59383" >
-                                <img src="https://blob.contato.io/machines-bonus-images/bonus-20191104164653.jpg" alt="">
+                                <img :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+curso.capa" alt="">
                             </a>
                                 <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone progress MuiTypography-colorInherit" id="59383">
                                 <div class="MuiBox-root jss65 progress-bar">

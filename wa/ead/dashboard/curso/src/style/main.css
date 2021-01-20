@@ -2624,7 +2624,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 
 .jss77 .modules-container {
     overflow: auto;
-    max-height: 100%;
+    height: 100%;
     display:none;
 }
 
@@ -3208,4 +3208,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 .marker-line{
     top: 0px !important;
     bottom: 0px !important;
+}
+#destaque{
+        background-color: rgba(0, 0, 0, .04) !important;
 }

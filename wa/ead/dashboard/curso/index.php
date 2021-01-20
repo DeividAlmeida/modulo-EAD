@@ -9,6 +9,7 @@ $senha = $_SESSION['Wacontrol'][1];
 $id_curos = 6; #$_GET['id'];
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
 $config = json_encode(DBRead('ead_config_geral','*'));
+$curso_at = DBRead('ead_curso','*',"WHERE id = '{$id_curos}'")[0];
 $curso = json_encode(DBRead('ead_curso','*'));
 $mdls = DBRead('ead_modulo','*',"WHERE curso = '{$id_curos}'");
 if(is_array($mdls)){
@@ -18,6 +19,7 @@ if(is_array($mdls)){
     $key = count($aula);
     $aulas = json_encode($aula);
 }
+
 $modulos = json_encode($mdls);
 ?>
 <html lang="pt-br">
@@ -42,7 +44,7 @@ $modulos = json_encode($mdls);
                 <div :class="'MuiBox-root jss70 content false '+main_width">
                     <div class="MuiBox-root jss160 jss71 undefined">
                         <div class="MuiBox-root jss161 btn-icon-right-wrapper">
-                            <a  class="MuiButtonBase-root MuiIconButton-root" tabindex="0" role="button"   aria-disabled="false" href="/">
+                            <a  class="MuiButtonBase-root MuiIconButton-root" tabindex="0" role="button"   aria-disabled="false" onclick="curso('voltar')">
                                 <span class="MuiIconButton-label">
                                     <span class="material-icons MuiIcon-root" aria-hidden="true">arrow_back</span>
                                 </span>
@@ -50,8 +52,8 @@ $modulos = json_encode($mdls);
                             </a>
                         </div>
                         <div class="MuiBox-root jss162 text-title-container">
-                            <span class="MuiTypography-root text-title-course MuiTypography-caption MuiTypography-noWrap">Curso de Web Acappella Grid</span>
-                            <h6 class="MuiTypography-root text-title-title MuiTypography-subtitle1 MuiTypography-noWrap">AULA 2 - TRABALHANDO COM AS BOXES</h6>
+                            <span class="MuiTypography-root text-title-course MuiTypography-caption MuiTypography-noWrap">Curso <?php echo $curso_at['nome'] ?></span>
+                            <h6 class="MuiTypography-root text-title-title MuiTypography-subtitle1 MuiTypography-noWrap">AULA {{idx.tag}} - {{idx.nome}}</h6>
                         </div>
                         <div class="MuiBox-root jss163 pagination">
                             <a onclick="anterior()" class="MuiButtonBase-root MuiIconButton-root pagination-back" tabindex="0" role="button" aria-disabled="false">
@@ -84,8 +86,8 @@ $modulos = json_encode($mdls);
                                 </button>
                             </div>
                             <div  class="MuiBox-root jss169 modules-container" id="container">
-                                <div @click="navaula(id, modulo.id)" v-for="modulo, id of modulos" class="MuiPaper-root MuiAccordion-root jss170 Mui-expanded jss171 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
-                                    <div  class="MuiButtonBase-root MuiAccordionSummary-root content Mui-expanded jss171" tabindex="0" role="button" aria-disabled="false" aria-expanded="true">
+                                <div  v-for="modulo, id of modulos" class="MuiPaper-root MuiAccordion-root jss170 Mui-expanded jss171 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
+                                    <div  @click="navaula(id, modulo.id)" class="MuiButtonBase-root MuiAccordionSummary-root content Mui-expanded jss171" tabindex="0" role="button" aria-disabled="false" aria-expanded="true">
                                         <div class="MuiAccordionSummary-content jss172 Mui-expanded jss171">
                                             <div class="MuiBox-root jss173 progress">
                                                 <div class="MuiBox-root jss176 jss174 jss175 undefined" size="32" style="width:32px; height:32">
@@ -103,12 +105,12 @@ $modulos = json_encode($mdls);
                                             <span :id="'arrow'+id" class="material-icons MuiIcon-root icon" aria-hidden="true">keyboard_arrow_down</span>
                                         </div>
                                     </div>
-                                    <div :id="'child'+id" class="MuiCollapse-container MuiCollapse-entered" style="transition: height 0.3s ease 0s; min-height: 0px; height: 0px; visibility:hidden ">
+                                    <div :id="'child'+id"  class="MuiCollapse-container MuiCollapse-entered" style="transition: height 0.3s ease 0s; min-height: 0px; height: 0px; visibility:hidden ">
                                         <div class="MuiCollapse-wrapper">
                                             <div class="MuiCollapse-wrapperInner">
                                                 <div role="region">
                                                     <div class="MuiAccordionDetails-root content-children" >
-                                                        <a @click="pular(licao.tag)" v-for="licao, ident of aulas[modulo.id]" class="MuiButtonBase-root jss205 jss218 resting " tabindex="0" role="button" aria-disabled="false">
+                                                        <a @click="pular(licao.tag)" v-for="licao, ident of aulas[modulo.id]" class="MuiButtonBase-root jss205 jss218 resting" :id="+id_aula == licao.tag? 'destaque':'' " tabindex="0" role="button" aria-disabled="false">
                                                             <div class="MuiBox-root jss219 marker">
                                                                 <div class="MuiBox-root jss220 marker-circle"></div>
                                                                 <div class="MuiBox-root jss221 marker-line" ></div>
@@ -140,9 +142,13 @@ $modulos = json_encode($mdls);
                         <div class="MuiBox-root jss80 content-scrollable ">
                             <div class="MuiBox-root jss83 jss82 container-section" id="content">
                                 <div class="MuiBox-root jss159 jss81 light">
-                                    <div>Aprenda a trabalhar com as box e organize melhor onde irá posicionar seus  objetos.
-                                        <iframe allowfullscreen="" frameborder="0" height="" src="https://player.vimeo.com/video/369704725?autoplay=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;hd=1" width="">
-                                        </iframe>
+                                    <div>{{idx.descricao}}
+                                        <video v-if="idx.tipo == 'local'" :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+idx.video" controls>  
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div  v-html="idx.video" v-else>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -184,6 +190,7 @@ $modulos = json_encode($mdls);
         el:"#root",
         data: {
             id_aula: 1,
+            idx: <?php echo json_encode($aula[$mdls[0]['id']][0]) ?>,
             nav: 'close', 
             main_width:'without-sidemenu',
             icon: '',
@@ -192,7 +199,7 @@ $modulos = json_encode($mdls);
             cursos:<?php echo  $curso ?>,
             modulos:<?php echo  $modulos ?>, 
             aulas:<?php echo  $aulas ?>
-        }, 
+        },
         methods:{
             navaula: function(a,b){
                 let filho = document.getElementById('child'+a);
@@ -209,7 +216,15 @@ $modulos = json_encode($mdls);
                 }
             },
             pular: function(a){
-                this.id_aula = a
+                this.id_aula = a;
+                for(let i= 0; i < val.modulos.length; i++){
+                    val.aulas[val.modulos[i].id].forEach((a, b)=>{
+                         if(val.aulas[val.modulos[i].id][b].tag == this.id_aula){
+                            return val.idx = val.aulas[val.modulos[i].id][b];
+                        }
+                    })
+                }
+                
             }
             
         }
@@ -224,9 +239,23 @@ $modulos = json_encode($mdls);
     }
     anterior = () => {
        val.id_aula > 1 ? val.id_aula = val.id_aula - 1: val.id_aula = val.id_aula ;
+        for(let i= 0; i < val.modulos.length; i++){
+            val.aulas[val.modulos[i].id].forEach((a, b)=>{
+                 if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
+                    return val.idx = val.aulas[val.modulos[i].id][b];
+                }
+            })
+        }
     }; 
     proximo = (a) => {
        val.id_aula < a ? val.id_aula = val.id_aula + 1: val.id_aula = val.id_aula ;
+        for(let i= 0; i < val.modulos.length; i++){
+            val.aulas[val.modulos[i].id].forEach((a, b)=>{
+                 if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
+                    return val.idx = val.aulas[val.modulos[i].id][b];
+                }
+            })
+        }
     }
 </script>
 <script src="../menu/src/script/main.js"></script>

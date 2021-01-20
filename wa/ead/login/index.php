@@ -4,6 +4,11 @@ require_once('../../../includes/funcoes.php');
 require_once('../../../database/config.database.php');
 require_once('../../../database/config.php');
 $db = json_encode(DBRead('ead_config_geral','*'));
+session_start();
+$id = $_SESSION['Wacontrol'][0];
+$senha = $_SESSION['Wacontrol'][1];
+$valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
+if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboard/inicio/index.php?status=curso&posicao=avancar');}
 ?>
 <html lang="pt-br">
     <head>

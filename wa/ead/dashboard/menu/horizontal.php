@@ -33,9 +33,9 @@
                 <span class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
             </div>
             <p class="MuiTypography-root profile-infos-name MuiTypography-body2">
-                <b>Vinícius Von Dentz</b>
+                <b><?php echo $valida['nome'] ?></b>
             </p>
-            <span  class="MuiTypography-root profile-infos-email MuiTypography-caption">viniciusvondentz@gmail.com</span>
+            <span  class="MuiTypography-root profile-infos-email MuiTypography-caption"><?php echo $valida['email'] ?></span>
         </div>
         
         <hr class="MuiDivider-root">
@@ -44,10 +44,10 @@
             <p class="MuiTypography-root MuiTypography-body2">Minha Conta</p>
             <span  class="MuiTouchRipple-root"></span>
         </a>
-        <li class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss34 profile-menu-item MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"   tabindex="-1" role="menuitem" aria-disabled="false">
-            <span class="material-icons MuiIcon-root profile-menu-item-icon" aria-hidden="true">exit_to_app</span>
-            <p class="MuiTypography-root MuiTypography-body2">Sair</p>
-            <span class="MuiTouchRipple-root"></span>
+        <li onclick="window.location.href ='<?php echo ConfigPainel('base_url') ?>wa/ead/apis/logout.php?token=<?php echo md5(session_id()) ?>'" class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss34 profile-menu-item MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"   tabindex="-1" role="menuitem" aria-disabled="false">
+                <span class="material-icons MuiIcon-root profile-menu-item-icon" aria-hidden="true">exit_to_app</span>
+                <p class="MuiTypography-root MuiTypography-body2">Sair</p>
+                <span class="MuiTouchRipple-root"></span>
         </li>
     </div>
     <div tabindex="0" data-test="sentinelEnd"></div>

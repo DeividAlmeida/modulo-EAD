@@ -16,7 +16,7 @@
                 </div>
             </div>
             <ul class="MuiList-root list-channels-container MuiList-padding">
-                <li class="MuiListItem-root jss146 MuiListItem-gutters" onclick="geral('<?php echo $_GET['posicao'] ?>')">
+                <li id="sel"  class=" jss205 MuiListItem-root jss146 MuiListItem-gutters" onclick="geral('<?php echo $_GET['posicao'] ?>')">
                     <a  class="MuiTypography-root MuiLink-root MuiLink-underlineNone list-channels-item-link undefined MuiTypography-colorPrimary" >
                         <div class="MuiListItemIcon-root list-channels-item-icon">
                             <span  class="material-icons MuiIcon-root" aria-hidden="true">dashboard</span>
@@ -24,7 +24,7 @@
                         <p class="MuiTypography-root list-channels-item-text MuiTypography-body2">Visão geral</p>
                     </a>
                 </li>
-                <li class="MuiListItem-root jss146 MuiListItem-gutters jss148" onclick="curso('<?php echo $_GET['posicao'] ?>')">
+                <li id="sel"  class=" jss205 MuiListItem-root jss146 MuiListItem-gutters jss148" onclick="curso('<?php echo $_GET['posicao'] ?>')">
                     <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone list-channels-item-link undefined MuiTypography-colorPrimary" >
                         <div class="MuiListItemIcon-root list-channels-item-icon">
                             <span  class="material-icons MuiIcon-root" aria-hidden="true">dvr</span>
@@ -35,10 +35,10 @@
             </ul>
             <span class="MuiTypography-root list-title MuiTypography-overline">Meus treinamentos</span>
             <ul class="MuiList-root list-courses-container MuiList-padding">
-                <li class="MuiListItem-root jss149  MuiListItem-gutters" :data-href="curso.id" onclick="window.location.href ='<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/curso/?posicao=voltar&id='+this.getAttribute('data-href')" v-for="curso, index of cursos">
+                <li id="sel" class="MuiListItem-root jss149  MuiListItem-gutters jss205" :data-href="curso.id" onclick="window.location.href ='<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/curso/?posicao=voltar&id='+this.getAttribute('data-href')" v-for="curso, index of cursos">
                     <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone list-courses-item-link MuiTypography-colorPrimary" >
                         <div class="MuiListItemIcon-root list-courses-item-icon">
-                            <img src="https://blob.contato.io/machines-bonus-images/bonus-20191104164653.jpg" alt="Curso de Web Acappella Grid">
+                            <img :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+curso.capa" alt="Curso de Web Acappella Grid">
                         </div>
                         <span  class="MuiTypography-root list-courses-item-text MuiTypography-caption">{{curso.nome}}</span>
                     </a>
