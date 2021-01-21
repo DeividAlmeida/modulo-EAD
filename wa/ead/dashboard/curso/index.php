@@ -1,13 +1,21 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-session_start();
 require_once('../../../../includes/funcoes.php');
 require_once('../../../../database/config.database.php');
 require_once('../../../../database/config.php');
-$id = $_SESSION['Wacontrol'][0];
-$senha = $_SESSION['Wacontrol'][1];
-$id_curos = 6; #$_GET['id'];
+session_start();
+if(isset($_SESSION['Wacontrol'])){
+    $id = $_SESSION['Wacontrol'][0];
+    $senha = $_SESSION['Wacontrol'][1];
+}
+else if(isset($_COOKIE['Wacontroltoken'])){
+    $id =  $_COOKIE['Wacontrolid'];
+    $senha =  $_COOKIE['Wacontroltoken'];
+}
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
+ if($valida['senha'] == $senha){
+
+$id_curos = $_GET['id'];
 $config = json_encode(DBRead('ead_config_geral','*'));
 $curso_at = DBRead('ead_curso','*',"WHERE id = '{$id_curos}'")[0];
 $curso = json_encode(DBRead('ead_curso','*'));
@@ -261,3 +269,4 @@ $modulos = json_encode($mdls);
 <script src="../menu/src/script/main.js"></script>
 <script src="src/script/main.js"></script>
 </html>
+<?php } ?>

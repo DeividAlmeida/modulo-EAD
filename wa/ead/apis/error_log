@@ -1,4 +1,0 @@
-[20-Jan-2021 19:58:42 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/templatesweb/public_html/wacontrol-aula/wa/ead/apis/logout.php on line 3
-[20-Jan-2021 19:59:20 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/templatesweb/public_html/wacontrol-aula/wa/ead/apis/logout.php on line 3
-[20-Jan-2021 19:59:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/templatesweb/public_html/wacontrol-aula/wa/ead/apis/logout.php:1) in /home2/templatesweb/public_html/wacontrol-aula/wa/ead/apis/logout.php on line 5
-[20-Jan-2021 19:59:57 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/templatesweb/public_html/wacontrol-aula/wa/ead/apis/logout.php on line 3

@@ -1,3 +1,4 @@
+
 val.ver = (a) =>{ val.status = a};
 visivel = (a) =>{
     const icon = document.getElementById('olho');
@@ -22,6 +23,7 @@ valida = () =>{
    var form = new FormData();
    form.append("email", document.getElementById('login-email').value);
    form.append("senha", document.getElementById('login-password').value);
+    form.append("manter", document.getElementById('manter').checked);
     fetch (origin+'wa/ead/apis/autentica.php',{method: "POST", body: form}).then(x => x.text()).then(data =>{
         if(data == 1){
             window.location.href = origin+'wa/ead/dashboard/inicio/?status=curso&posicao=avancar'

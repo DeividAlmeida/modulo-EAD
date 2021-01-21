@@ -5,10 +5,18 @@ require_once('../../../database/config.database.php');
 require_once('../../../database/config.php');
 $db = json_encode(DBRead('ead_config_geral','*'));
 session_start();
-$id = $_SESSION['Wacontrol'][0];
-$senha = $_SESSION['Wacontrol'][1];
+if(isset($_SESSION['Wacontrol'])){
+    $id = $_SESSION['Wacontrol'][0];
+    $senha = $_SESSION['Wacontrol'][1];
+}
+else if(isset($_COOKIE['Wacontroltoken'])){
+    $id =  $_COOKIE['Wacontrolid'];
+    $senha =  $_COOKIE['Wacontroltoken'];
+}
+
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
 if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboard/inicio/index.php?status=curso&posicao=avancar');}
+
 ?>
 <html lang="pt-br">
     <head>
@@ -21,7 +29,7 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
         <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
     </head>
 
-    <body >
+    <body style="height:400px !important">
         <div id="root">
             <div class="MuiBox-root jss21 jss20">
                 <div class="MuiBox-root jss23 jss22">

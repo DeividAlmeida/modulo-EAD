@@ -1,13 +1,19 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-session_start();
 require_once('../../../../includes/funcoes.php');
 require_once('../../../../database/config.database.php');
 require_once('../../../../database/config.php');
-$id = $_SESSION['Wacontrol'][0];
-$senha = $_SESSION['Wacontrol'][1];
+session_start();
+if(isset($_SESSION['Wacontrol'])){
+    $id = $_SESSION['Wacontrol'][0];
+    $senha = $_SESSION['Wacontrol'][1];
+}
+else if(isset($_COOKIE['Wacontroltoken'])){
+    $id =  $_COOKIE['Wacontrolid'];
+    $senha =  $_COOKIE['Wacontroltoken'];
+}
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
- if(!empty($valida)){
+ if($valida['senha'] == $senha){
 $config = json_encode(DBRead('ead_config_geral','*'));
 $curso = json_encode(DBRead('ead_curso','*'));
 ?>
@@ -39,23 +45,6 @@ $curso = json_encode(DBRead('ead_curso','*'));
                             </span>
                             <span class="MuiTouchRipple-root"> </span>
                         </button>
-                        <div class="MuiBox-root jss48 jss46 ">
-                            <button class="MuiButtonBase-root MuiIconButton-root jss47" tabindex="0" type="button" title="Pesquisar">
-                                <span class="MuiIconButton-label">
-                                    <span   class="material-icons MuiIcon-root" aria-hidden="true">search</span>
-                                </span>
-                                <span class="MuiTouchRipple-root">   </span>
-                            </button>
-                            <div class="MuiBox-root jss49 input-container">
-                                <input class="input" type="text" name="search">
-                            </div>
-                            <button class="MuiButtonBase-root MuiIconButton-root jss47 btn-close" tabindex="0" type="button">
-                                <span class="MuiIconButton-label">
-                                    <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"  aria-hidden="true">close</span>
-                                </span>
-                                <span class="MuiTouchRipple-root"></span>
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="MuiBox-root jss50 jss41" >
@@ -84,37 +73,40 @@ $curso = json_encode(DBRead('ead_curso','*'));
             </div>
             <div v-if="status == 'geral'">
                 <div class="MuiBox-root jss85 jss83">
-                    <div class="MuiBox-root jss97 jss86 section progress-container"><span class="MuiTypography-root section-title MuiTypography-overline">Progresso</span>
-                        <div class="MuiBox-root jss88 progress-content">
+                    <div class="MuiBox-root jss97 jss86 section progress-container">
+                        <span class="MuiTypography-root section-title MuiTypography-overline">Progresso</span>
+                        <div v-for="curso, index of cursos"  class="MuiBox-root jss88 ">
                             <div class="MuiPaper-root MuiAccordion-root jss89 Mui-expanded jss91 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
-                                <div class="MuiButtonBase-root MuiAccordionSummary-root course-header Mui-expanded" tabindex="0" role="button" aria-disabled="false" aria-expanded="true">
-                                    <div class="MuiAccordionSummary-content jss92 Mui-expanded">
+                                <div class="MuiButtonBase-root MuiAccordionSummary-root course-header Mui-expanded" @click="progresso(index)" tabindex="0" role="button" aria-disabled="false" aria-expanded="true">
+                                    <div  class="MuiAccordionSummary-content jss92 Mui-expanded">
                                         <div class="MuiButtonBase-root course-header-button" tabindex="0" role="button" aria-disabled="false">
-                                            <div class="MuiBox-root jss125 jss123 jss124 course-header-chart" size="48">
-                                                <svg viewBox="0 0 36 36" class="chart-circle">
+                                            <div class="MuiBox-root jss125 jss123 jss124 course-header-chart" size="48" style="width: 48px;  min-width: 48px;  height: 48px;">
+                                                <svg viewBox="0 0 36 36" class="chart-circle"> 
                                                     <path class="chart-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                                                     <path class="chart-circle-fill is-active false" stroke-dasharray="4 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831">   </path>
                                                 </svg>
                                                 <span class="chart-text false">4%</span>
                                             </div>
                                             <div class="MuiBox-root jss126 course-header-text-container">
-                                                <h6 class="MuiTypography-root course-header-text-title  MuiTypography-subtitle2">Curso de Web Acappella Grid</h6>
-                                                <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">Vinícius Von Dentz</i>
+                                                <h6 class="MuiTypography-root course-header-text-title  MuiTypography-subtitle2">{{curso.nome}}</h6>
+                                                <span v-for="prof of curso.professor">
+                                                    <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">{{prof}}</i><br>
+                                                </span>
                                             </div>
-                                            <span class="material-icons MuiIcon-root course-header-icon-expand" aria-hidden="true">expand_less</span>
+                                            <span :id="'arrow'+index" class="material-icons MuiIcon-root course-header-icon-expand" aria-hidden="true">expand_more</span>
                                             <span class="MuiTouchRipple-root"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="MuiCollapse-container MuiCollapse-entered" style="min-height: 0px;">
-                                    <div class="MuiCollapse-wrapper">
+                                <div  class="MuiCollapse-container MuiCollapse-entered" style="min-height: 0px;">
+                                    <div  class="MuiCollapse-wrapper" >
                                         <div class="MuiCollapse-wrapperInner">
-                                            <div role="region">
-                                                <div class="MuiAccordionDetails-root course-body">
+                                            <div role="region" >
+                                                <div class="MuiAccordionDetails-root course-body" :id="'prog'+index" style="transition: height 0.3s ease 0s; min-height: 0px; height: 0px;">
                                                     <div class="MuiBox-root jss127 course-body-content">
                                                         <label class="MuiTypography-root course-body-list-title MuiTypography-overline">Próxima  aula:</label>
                                                         <div class="MuiBox-root jss133 course-body-list-content next">
-                                                            <a class="jss129 next" href="/course/59383/555781">
+                                                            <a class="jss129 next">
                                                                 <div class="MuiBox-root jss134 lesson-content">
                                                                     <span class="material-icons MuiIcon-root lesson-icon MuiIcon-fontSizeSmall" aria-hidden="true">radio_button_unchecked</span>
                                                                     <div class="MuiBox-root jss135 lesson-text-container">
@@ -188,6 +180,7 @@ $curso = json_encode(DBRead('ead_curso','*'));
     </div>
     <script>
         const origin = '<?php echo ConfigPainel('base_url'); ?>';
+        let inter = true;
         const val = new Vue({
             el:"#root",
             data: {
@@ -199,10 +192,22 @@ $curso = json_encode(DBRead('ead_curso','*'));
             methods:{
                 acessar: function (a) {
                     window.location.href=origin+'wa/ead/dashboard/curso/?posicao=voltar&id='+a
+                }, 
+                progresso: function(a){
+                    let arrow = document.getElementById('arrow'+a);
+                    let prog = document.getElementById('prog'+a);
+                    if(inter == true){
+                        arrow.innerHTML = 'expand_more';
+                        inter = false;
+                        prog.style.height = '100px';
+                    }else{ 
+                        arrow.innerHTML = 'expand_less';
+                        inter = true;
+                        prog.style.height = '0px';
+                    }
                 }
             }
         });
-        
     </script>
     <script src="src/script/main.js"></script>
     <script src="../menu/src/script/main.js"></script>

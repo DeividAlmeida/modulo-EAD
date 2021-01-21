@@ -2491,6 +2491,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
         font-weight: 500;
         line-height: 1.66;
         letter-spacing: 0.03333em;
+        margin-left: 50px !important;
     }
 }
 
@@ -3211,4 +3212,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 }
 #destaque{
         background-color: rgba(0, 0, 0, .04) !important;
+}
+.jss69{
+    z-index:1 !important;
 }
