@@ -1,5 +1,9 @@
 window.onload = () => {
-    var tamanho = parseInt(document.getElementsByClassName('curso').length*325)
+    if(screen.width > 1300){
+        var tamanho = parseInt(document.getElementsByClassName('curso').length/3)*325
+    }else{
+        var tamanho = parseInt(document.getElementsByClassName('curso').length*325)
+    }
     document.body.style.height= tamanho+'px';
     for(let i = 0 ; i < val.cursos.length; i++){
         val.cursos[i].professor = JSON.parse(val.cursos[i].professor);

@@ -161,13 +161,13 @@ $modulos = json_encode($mdls);
                                 </div>
                             </div>
                             <div class="MuiBox-root jss103 jss82 container-section" id="notes">
-                                <span class="MuiTypography-root section-title MuiTypography-overline">Anotações</span>                                
+                                <span class="MuiTypography-root section-title MuiTypography-overline">Anotações {{nota}}</span>                                
                                 <div class="MuiBox-root jss248 jss100">
                                     <div class="MuiBox-root jss252 jss249 ">
                                         <div class="MuiFormControl-root MuiTextField-root notes-new-input">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss250 MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;"></textarea>
-                                                <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;"></textarea>
+                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;">{{nota}}</textarea>
+                                                <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;">{{nota}}</textarea>
                                                 <fieldset aria-hidden="true" class="jss253 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;">
                                                     <legend class="jss254" style="width: 0.01px;">
                                                         <span>&#8203;</span>
@@ -176,7 +176,7 @@ $modulos = json_encode($mdls);
                                             </div>
                                         </div>
                                         <div class="MuiBox-root jss257 notes-new-actions">
-                                            <button class="MuiButtonBase-root MuiButton-root jss251 MuiButton-text MuiButton-textPrimary"  tabindex="0" type="button">
+                                            <button class="MuiButtonBase-root MuiButton-root jss251 MuiButton-text MuiButton-textPrimary" id="salvar"  tabindex="0" type="button">
                                                 <span class="MuiButton-label">Salvar</span>
                                                 <span  class="MuiTouchRipple-root"></span>
                                             </button>
@@ -197,7 +197,10 @@ $modulos = json_encode($mdls);
     const val = new Vue({
         el:"#root",
         data: {
+            nota:'',
+            notas:null,
             id_aula: 1,
+            idx_nota:"",
             idx: <?php echo json_encode($aula[$mdls[0]['id']][0]) ?>,
             nav: 'close', 
             main_width:'without-sidemenu',
@@ -237,34 +240,18 @@ $modulos = json_encode($mdls);
             
         }
     });
-    window.onload = () => {
-        let count = 0;
-        for(let i= 0; i < val.modulos.length; i++){
-            val.aulas[val.modulos[i].id].forEach((a, b)=>{
-                val.aulas[val.modulos[i].id][b].tag = count +=1;
-            })
-        }
-    }
-    anterior = () => {
-       val.id_aula > 1 ? val.id_aula = val.id_aula - 1: val.id_aula = val.id_aula ;
-        for(let i= 0; i < val.modulos.length; i++){
-            val.aulas[val.modulos[i].id].forEach((a, b)=>{
-                 if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
-                    return val.idx = val.aulas[val.modulos[i].id][b];
-                }
-            })
-        }
-    }; 
-    proximo = (a) => {
-       val.id_aula < a ? val.id_aula = val.id_aula + 1: val.id_aula = val.id_aula ;
-        for(let i= 0; i < val.modulos.length; i++){
-            val.aulas[val.modulos[i].id].forEach((a, b)=>{
-                 if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
-                    return val.idx = val.aulas[val.modulos[i].id][b];
-                }
-            })
-        }
-    }
+    val.notas = JSON.parse(<?php if(empty($valida['notas'])){echo "'[]'";}else{ echo $valida['notas'];} ?>);
+    val.nota = val.notas['<?php echo $curso_at['id']; ?>'+val.id_aula];
+    document.getElementById('salvar').addEventListener('click', ()=>{ 
+        let valor = document.getElementById('notes-new-input').value;
+        val.notas['<?php echo $curso_at['id']; ?>'+val.id_aula] = valor;
+        val.nota = valor;
+        let save = new FormData;
+        save.append('0', JSON.stringify(val.notas))
+        let post = new XMLHttpRequest;
+        post.open('POST',origin+'wa/ead/dashboard/curso/teste.php?salvarnotas&id=<?php echo $id ?>');
+        post.send(save)
+    })
 </script>
 <script src="../menu/src/script/main.js"></script>
 <script src="src/script/main.js"></script>

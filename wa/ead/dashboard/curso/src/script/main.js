@@ -2,6 +2,35 @@ let jss78 = document.getElementById('jss78');
 let container = document.getElementById('container');
 let progresso = document.getElementById('progresso');
 let nav = false;
+window.onload = () => {
+    document.body.style.height= '800px';
+        let count = 0;
+        for(let i= 0; i < val.modulos.length; i++){
+            val.aulas[val.modulos[i].id].forEach((a, b)=>{
+                val.aulas[val.modulos[i].id][b].tag = count +=1;
+            })
+        }
+}
+anterior = () => {
+   val.id_aula > 1 ? val.id_aula = val.id_aula - 1: val.id_aula = val.id_aula ;
+    for(let i= 0; i < val.modulos.length; i++){
+        val.aulas[val.modulos[i].id].forEach((a, b)=>{
+             if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
+                return val.idx = val.aulas[val.modulos[i].id][b];
+            }
+        })
+    }
+}; 
+proximo = (a) => {
+   val.id_aula < a ? val.id_aula = val.id_aula + 1: val.id_aula = val.id_aula ;
+    for(let i= 0; i < val.modulos.length; i++){
+        val.aulas[val.modulos[i].id].forEach((a, b)=>{
+             if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
+                return val.idx = val.aulas[val.modulos[i].id][b];
+            }
+        })
+    }
+}
 navegar = () =>{
     nav ?  nav = false : nav = true
     if(nav){  

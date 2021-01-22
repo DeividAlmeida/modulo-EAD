@@ -36,6 +36,9 @@ CREATE TABLE IF NOT EXISTS `ead_usuario` (
     `nome` varchar(255) DEFAULT NULL,
     `cpf` int(11) DEFAULT NULL,
     `endereco` varchar(255) DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
+    `senha` text DEFAULT NULL,
+    `notas` text DEFAULT NULL,
     `data`  date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
