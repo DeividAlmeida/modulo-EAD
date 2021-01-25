@@ -23,7 +23,6 @@
             <div class="pb-3">
 
     			<a class="btn btn-sm btn-primary" href="?">Inicio</a>
-    			<a class="btn btn-sm btn-primary" href="?Clientes">Clientes</a>
     			<span class="dropdown">
     			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Professor</a>
@@ -37,18 +36,7 @@
     			</span>
     			<span class="dropdown">
     			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
-    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Categoria</a>
-    			    <?php } ?>
-    				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
-    					<a class="dropdown-item" href="?routeCate">Categorias</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
-    						<a class="dropdown-item" href="?routeCate=0">Cadastrar Categoria</a>
-    					<?php } ?>
-    				</div>
-    			</span>
-    			<span class="dropdown">
-    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
-    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Usuário</a>
+    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Usuários</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item" href="?routeUsua">Usuários</a>
@@ -59,12 +47,16 @@
     			</span>
     			<span class="dropdown">
     			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
-    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Curso</a>
+    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Cursos</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
+    					<a class="dropdown-item" href="?routeCate">Categorias</a>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    						<a class="dropdown-item" href="?routeCate=0">Cadastrar Categoria</a>
+    					<?php } ?>
     					<a class="dropdown-item" href="?routeCurs">Cursos</a>
     					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
-    						<a class="dropdown-item" href="?routeCurs=0">Cadastrar Curos</a>
+    						<a class="dropdown-item" href="?routeCurs=0">Cadastrar Curso</a>
     					<?php } ?>
     				</div>
     			</span>
@@ -80,9 +72,7 @@
 			</span>
     		</div>
                 <?php 		
-        		    if (isset($_GET['Clientes'])) :
-        			    require_once('ead/clientes/clientes.php');
-                    elseif (isset($_GET['Prof'])) :
+                    if (isset($_GET['Prof'])) :
         			    require_once('ead/professor/lista.php'); 
         			elseif (isset($_GET['routeProf'])) :
         			    require_once('ead/professor/professor.php');

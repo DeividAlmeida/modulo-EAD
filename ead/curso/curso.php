@@ -6,6 +6,7 @@ $categorias = DBRead('ead_categoria','*');
 $professores = DBRead('ead_prof','*');
 ?>
 <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-vue@4.0.0/lib/cjs/main/ts/index.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 <style>
     .multiselect__tag, .multiselect__option--highlight, .multiselect__tag-icon, .multiselect__tag-icon:after{ background: #86939e !important}
@@ -75,21 +76,6 @@ $professores = DBRead('ead_prof','*');
                         <input class="form-control" v-model="idx.nome" name="nome" required>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Descrição Curta do Curso: </label>
-                        <input class="form-control" v-model="idx.descricao_curta" name="descricao_curta" required>
-                    </div>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <textarea class="form-control" v-model="idx.descricao_longa"  name="descricao_longa" required>{{idx.descricao_longa}}</textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="row" >
                 <div class="col-md-6">    
                     <div class="form-group">
                         <div>
@@ -99,54 +85,55 @@ $professores = DBRead('ead_prof','*');
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">    
-                    <div class="form-group">
-                        <label>Tempo do curso: </label>
-                        <input class="form-control" v-model="idx.tempo"  name="tempo" required>
-                    </div>
-                </div>
             </div>
             <div class="row" >
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Vender Curso: </label>
-                        <input class="form-control" v-model="idx.vender"  name="vender" required>
+                        <label>Descrição Longa do Curso: </label>
+                        <textarea class="form-control tinymce" v-model="idx.descricao_longa"  name="descricao_longa" required>{{idx.descricao_longa}}</textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Descrição Curta do Curso: </label>
+                        <input class="form-control" v-model="idx.descricao_curta" name="descricao_curta" >
+                    </div>
+                    <div class="form-group">
+                        <label>Vender Curso: </label>
+                        <multiselect   :show-labels="false"   v-model="idx.vender"  placeholder=""   :options="exibe"  :taggable="true"  ></multiselect>
+                        <input class="form-control" type="hidden" v-model="idx.vender"  name="vender" required>
+                    </div>
                     <div class="form-group">
                         <label>Valor do Curso: </label>
                         <input class="form-control" v-model="idx.valor"  name="valor" required>
                     </div>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tempo do curso: </label>
+                        <input class="form-control" v-model="idx.tempo"  name="tempo" required>
+                    </div>
                     <div class="form-group">
                           <label>Exibir Professores: </label>
                         <multiselect   :show-labels="false"   v-model="idx.exibi_professor"  placeholder=""   :options="exibe"  :taggable="true"  ></multiselect>
                         <input type="hidden" name="exibi_professor" :value="idx.exibi_professor">
-
-                        
                     </div>
-                </div>
-                <div class="col-md-6" v-if="idx.exibi_professor == 'Sim'">
-                    <div class="form-group">
-                        <label>Professores: </label>
-                        <multiselect  required  :show-labels="false"   v-model="professor"  placeholder=""   :options="professores"  :taggable="true"  :multiple="true" ></multiselect>
-                        <input type="hidden" name="professor[]" v-for="pro of professor" :value="pro">
+                    <div v-if="idx.exibi_professor == 'Sim'">
+                        <div class="form-group">
+                            <label>Professores: </label>
+                            <multiselect  required  :show-labels="false"   v-model="professor"  placeholder=""   :options="professores"  :taggable="true"  :multiple="true" ></multiselect>
+                            <input type="hidden" name="professor[]" v-for="pro of professor" :value="pro">
+                        </div>
                     </div>
-                </div>
-            </div> 
-            <div class="row justify-content-md-center" >
-                <div class="form-group offset-sm-0 text-center">
-                    <div>
-                        <input  @change="capa(this);"  style="width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; z-index: -1;" type="file" multiple accept='image/*' name="capa" id="capa">
-                        <label multiple accept='image/*' class="btn btn-primary" for="capa">
-                            <i class="icon icon-cloud-upload" aria-hidden="true"></i>Upload Foto de Capa
-                        </lable>
+                    <div class="row justify-content-md-center" >
+                        <div class="form-group offset-sm-0 text-center">
+                            <div>
+                                <input  @change="capa(this);"  style="width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; z-index: -1;" type="file" multiple accept='image/*' name="capa" id="capa">
+                                <label multiple accept='image/*' class="btn btn-primary" for="capa">
+                                    <i class="icon icon-cloud-upload" aria-hidden="true"></i>Upload Foto de Capa
+                                </lable>
+                            </div>
+                            <img  :src="[idx.capa ? folder+idx.capa : preview]"  />
+                        </div>
                     </div>
-                    <img  :src="[idx.capa ? folder+idx.capa : preview]"  />
                 </div>
             </div>
             <div class="card-footer white">

@@ -1,8 +1,15 @@
 <?php
 $status = $_GET['routeUsua'];
-if($status > 0):$default = json_encode(DBRead("ead_usuario","*","WHERE id = '{$status}'")[0]); else: $default = '{"nome":"","cpf":"","endereco":"", "data":"" }'; endif;
+if($status > 0):$default = json_encode(DBRead("ead_usuario","*","WHERE id = '{$status}'")[0]); else: $default = '{"nome":"","cpf":"","endereco":"", "data":"","email":"","senha":"","cursos":""  }'; endif;
 $query = json_encode(DBRead('ead_usuario','*'));
+$cursos = DBRead('ead_curso','*');
 ?>
+<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+<style>
+    .multiselect__tag, .multiselect__option--highlight, .multiselect__tag-icon, .multiselect__tag-icon:after{ background: #86939e !important}
+</style>
+<script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+<script src="ead/src/mask.js"></script>
 <div class="card"  >
     <div id="control" v-if="!status">
         <div class="card-header white" >
@@ -65,7 +72,7 @@ $query = json_encode(DBRead('ead_usuario','*'));
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>CPF: </label>
-                        <input class="form-control" v-model="idx.cpf" min="0" type="number" name="cpf" required>
+                        <input-mask v-model="idx.cpf" mask="###.###.###-##" masked class="form-control" name="cpf" required></input-mask>
                     </div>
                 </div>
                 <div class="col-md-6">    
@@ -83,6 +90,30 @@ $query = json_encode(DBRead('ead_usuario','*'));
                     </div>
                 </div>
             </div>
+            <div class="row" >
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email: </label>
+                        <input class="form-control" v-model="idx.email" min="0" type="email" name="email" required>
+                    </div>
+                </div>
+                <div class="col-md-6">    
+                    <div class="form-group">
+                        <label>Senha: </label>
+                        <input class="form-control" v-model="idx.senha" type="text" name="senha" required>
+                        <small> <i class="icon icon-lock" aria-hidden="true"></i> Senha criptografada</small> 
+                    </div>
+                </div>
+            </div>
+            <div  class="row justify-content-md-center" >
+                <div class="col-md-8" >
+                    <div class="form-group">
+                        <label>Cursos: </label>
+                        <multiselect  required  :show-labels="false"   v-model="idx.cursos"  placeholder=""   :options="cursos"  :taggable="true"  :multiple="true" ></multiselect>
+                        <input type="hidden" name="cursos[]" v-for="curso of idx.cursos" :value="curso">
+                    </div>
+                </div>
+            </div>
             <div class="card-footer white">
                 <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="submit"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>
             </div>
@@ -92,15 +123,18 @@ $query = json_encode(DBRead('ead_usuario','*'));
 <script>
     new Vue({
         el:".card",
+        components: { Multiselect: window.VueMultiselect.default },
         data: {
             idx: <?php echo $default ?>,
             status:"<?php echo $status ?>",
-            ctrls:<?php echo $query ?>
+            ctrls:<?php echo $query ?>,
+            cursos: [<?php foreach($cursos as $nome){ echo '"'.$nome['nome'].'",';} ?>]
         },
         methods:{
             move: function(a, b){
                 this.status = a;
                 this.idx = b;
+                this.idx.cursos =JSON.parse(this.idx.cursos);
             }
         }
     })

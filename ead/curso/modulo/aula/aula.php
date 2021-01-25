@@ -7,7 +7,6 @@ $b = DBRead("ead_modulo","*","WHERE id = '{$modulo}'")[0];
 $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
 ?>
 <div class="card" >
-    
     <div id="control" v-if="!status">
         <div class="card-header white" >
             <strong>Adicionar Aula</strong>   

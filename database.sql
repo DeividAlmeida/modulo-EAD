@@ -34,11 +34,12 @@ CREATE TABLE IF NOT EXISTS `ead_categoria` (
 CREATE TABLE IF NOT EXISTS `ead_usuario` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `nome` varchar(255) DEFAULT NULL,
-    `cpf` int(11) DEFAULT NULL,
+    `cpf` text DEFAULT NULL,
     `endereco` varchar(255) DEFAULT NULL,
     `email` varchar(255) DEFAULT NULL,
     `senha` text DEFAULT NULL,
     `notas` text DEFAULT NULL,
+    `cursos` text DEFAULT NULL,
     `data`  date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
