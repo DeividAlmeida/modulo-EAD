@@ -78,8 +78,8 @@ $query = json_encode(DBRead("ead_modulo","*","WHERE curso = '{$curso}'"));
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-md-center" >
-                <div class="form-group offset-sm-0 text-center">
+            <div class="row" >
+                <div class="form-group col-md-12">
                     <label>Ordem: </label>
                     <input class="form-control" v-model="idx.ordem" type="number" min="0" name="ordem" required>
                 </div>

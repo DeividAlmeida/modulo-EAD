@@ -59,13 +59,13 @@ $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
             <div class="row" >
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Campos: </label>
+                        <label>Campos  aula: </label>
                         <input class="form-control" v-model="idx.campos" name="campos" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Tema: </label>
+                        <label>Nome aula: </label>
                         <input class="form-control" v-model="idx.nome" name="nome" required>
                     </div>
                 </div>

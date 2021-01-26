@@ -1,15 +1,17 @@
 <?php
 $status = $_GET['routeCurs'];
-if($status > 0):$default = json_encode(DBRead("ead_curso","*","WHERE id = '{$status}'")[0]); else: $default = '{"id":"0","nome":"","descricao_curta":"","descricao_longa":"","vender":"","categoria":"","valor":"","tempo":"","exibi_professor":"","professor":"","capa":""}'; endif;
+if($status > 0):$default = json_encode(DBRead("ead_curso","*","WHERE id = '{$status}'")[0]); else: $default = '{"id":"0","nome":"","descricao_curta":"","descricao_longa":"","vender":"","categoria":"","valor":"","tempo":"","exibi_professor":"","professor":"","capa":"", "palavras_chave":""}'; endif;
 $query = json_encode(DBRead('ead_curso','*'));
 $categorias = DBRead('ead_categoria','*');
 $professores = DBRead('ead_prof','*');
 ?>
 <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-vue@4.0.0/lib/cjs/main/ts/index.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+  <script src='https://cdn.jsdelivr.net/npm/vue-mce@1.5.2/dist/vue-mce.web.js'></script>
+  <script src='ead/src/tinymce/tinymce.min.js'></script>
 <style>
     .multiselect__tag, .multiselect__option--highlight, .multiselect__tag-icon, .multiselect__tag-icon:after{ background: #86939e !important}
+    .mce-notification {display: none !important;}
 </style>
 <div class="card"  >
     <div id="control" v-if="!status">
@@ -90,7 +92,7 @@ $professores = DBRead('ead_prof','*');
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Descrição Longa do Curso: </label>
-                        <textarea class="form-control tinymce" v-model="idx.descricao_longa"  name="descricao_longa" required>{{idx.descricao_longa}}</textarea>
+                        <vue-mce :config="config" v-model="idx.descricao_longa"  name="descricao_longa"/>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -109,7 +111,8 @@ $professores = DBRead('ead_prof','*');
                     </div>
                     <div class="form-group">
                         <label>Tempo do curso: </label>
-                        <input class="form-control" v-model="idx.tempo"  name="tempo" required>
+                        <multiselect   :show-labels="false"   v-model="idx.tempo"  placeholder=""   :options="tempo"  :taggable="true"  ></multiselect>
+                        <input type="hidden" class="form-control" v-model="idx.tempo"  name="tempo" required>
                     </div>
                     <div class="form-group">
                           <label>Exibir Professores: </label>
@@ -136,6 +139,14 @@ $professores = DBRead('ead_prof','*');
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Palavras Chave: </label>
+                        <textarea class="form-control" v-model="idx.palavras_chave" name="palavras_chave">{{idx.palavras_chave}}</textarea>
+                    </div>
+                </div>
+            </div>
             <div class="card-footer white">
                 <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="submit"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>
             </div>
@@ -143,12 +154,26 @@ $professores = DBRead('ead_prof','*');
     </div>
 </div>
 <script>
-
+    const config = {
+        height: 500,
+        inline: false,
+        theme: 'modern',
+        language:'pt_BR',
+        fontsize_formats: "8px 10px 12px 14px 16px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 48px 54px 60px",
+        plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help emoticons',
+        toolbar1: 'formatselect fontsizeselect | bold italic strikethrough forecolor backcolor link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | emoticons | image | video | preview | toc | charmap | codesample | pagebreak | media | searchreplace | directionality | fullscreen | imagetools ',
+        image_advtab: true,
+        templates: [
+        { title: 'Test template 1', content: 'Test 1' },
+        { title: 'Test template 2', content: 'Test 2' }],
+    };
     new Vue({
         el:".card",
         components: { Multiselect: window.VueMultiselect.default },
 
         data: {
+            tempo: ['1 mês', '2 meses', '3 meses', '4 meses', '5 meses', '6 meses', '1 ano', '2 anos', 'Vitalício'],
+            config,
             categoria:[],
             categorias: [<?php foreach($categorias as $nome){ echo '"'.$nome['nome'].'",';} ?>],
             exibe: ["Sim", "Não"],
@@ -164,8 +189,10 @@ $professores = DBRead('ead_prof','*');
             move: function(a, b){
                 this.status = a;
                 this.idx = b;
-                this.categoria =JSON.parse(this.idx.categoria);
-                this.professor =JSON.parse(this.idx.professor);
+                if(this.status != '0'){
+                    this.categoria =JSON.parse(this.idx.categoria);
+                    this.professor =JSON.parse(this.idx.professor);
+                }
             },
             capa: function(a){
                 var input = event.target;
@@ -181,4 +208,8 @@ $professores = DBRead('ead_prof','*');
             }
         }
     })
+    tinymce.init({
+        selector:'textarea',
+        language: 'pt_BR',
+    });
 </script>

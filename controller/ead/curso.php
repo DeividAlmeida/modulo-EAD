@@ -26,6 +26,7 @@ if(isset($_GET['curs']) && $id == "0"){
         'valor'                 => post('valor'),
         'tempo'                 => post('tempo'),
         'exibi_professor'       => post('exibi_professor'),
+        'palavras_chave'        => post('palavras_chave'),
         'professor'             => $professor,
         'categoria'             => $categoria,
         'capa'                  => $path
@@ -49,6 +50,7 @@ $data = array(
     'valor'                 => post('valor'),
     'tempo'                 => post('tempo'),
     'exibi_professor'       => post('exibi_professor'),
+    'palavras_chave'        => post('palavras_chave'),
     'professor'             => $professor,
     'categoria'             => $categoria,
     'capa'                  => $path
