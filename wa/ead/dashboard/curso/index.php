@@ -161,13 +161,13 @@ $modulos = json_encode($mdls);
                                 </div>
                             </div>
                             <div class="MuiBox-root jss103 jss82 container-section" id="notes">
-                                <span class="MuiTypography-root section-title MuiTypography-overline">Anotações {{nota}}</span>                                
+                                <span class="MuiTypography-root section-title MuiTypography-overline">Anotações</span>                                
                                 <div class="MuiBox-root jss248 jss100">
                                     <div class="MuiBox-root jss252 jss249 ">
                                         <div class="MuiFormControl-root MuiTextField-root notes-new-input">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss250 MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;">{{nota}}</textarea>
-                                                <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;">{{nota}}</textarea>
+                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;"></textarea>
+                                                <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;"></textarea>
                                                 <fieldset aria-hidden="true" class="jss253 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;">
                                                     <legend class="jss254" style="width: 0.01px;">
                                                         <span>&#8203;</span>

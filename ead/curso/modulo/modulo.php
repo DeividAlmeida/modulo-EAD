@@ -56,7 +56,7 @@ $query = json_encode(DBRead("ead_modulo","*","WHERE curso = '{$curso}'"));
         </div>
         <div class="card-body" v-else>
             <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
-               <?php echo $curso ?> <div class="alert alert-info">Nenhum módulo adicionado a essa listagem até o momento, <a class="adicionarListagemItem" href="#" @click='move("0",<?php echo $default ?>)' >clique aqui</a> para adicionar.</div>
+               <div class="alert alert-info">Nenhum módulo adicionado a essa listagem até o momento, <a class="adicionarListagemItem" href="#" @click='move("0",<?php echo $default ?>)' >clique aqui</a> para adicionar.</div>
             <?php } ?>
         </div>
     </div>

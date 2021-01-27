@@ -38,7 +38,6 @@ if(isset($_GET['aula']) && $id == "0"){
     
       $data = array(
         'modulo'            => post('modulo'),
-        'campos'            => post('campos'),
         'nome'              => post('nome'),
         'descricao'         => post('descricao'),
         'tipo'              => post('tipo'),
@@ -64,7 +63,6 @@ if(isset($_GET['aula']) && $id == "0"){
 
     $data = array(
         'modulo'            => post('modulo'),
-        'campos'            => post('campos'),
         'nome'              => post('nome'),
         'descricao'         => post('descricao'),
         'tipo'              => post('tipo'),

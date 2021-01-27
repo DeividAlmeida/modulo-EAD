@@ -1,7 +1,7 @@
 <?php
 $status = $_GET['routeModu'];
 $modulo =  $_GET['modulo']; 
-$default = '{"nome":"","descricao":"","campos":"","tipo":"","video":"","arquivo":"", "professor":"","tipo_prova":"", "questoes":"[]","gabarito":"[]","qtd_alternativas":"0","alternativas":"[]", "modulo":"'.$modulo.'" }';
+$default = '{"nome":"","descricao":"","tipo":"","video":"","arquivo":"", "professor":"","tipo_prova":"", "questoes":"[]","gabarito":"[]","qtd_alternativas":"0","alternativas":"[]", "modulo":"'.$modulo.'" }';
 $query = json_encode(DBRead("ead_aula","*","WHERE modulo = '{$modulo}'"));
 $b = DBRead("ead_modulo","*","WHERE id = '{$modulo}'")[0];
 $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
@@ -59,19 +59,11 @@ $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
             <div class="row" >
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Campos  aula: </label>
-                        <input class="form-control" v-model="idx.campos" name="campos" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
                         <label>Nome aula: </label>
                         <input class="form-control" v-model="idx.nome" name="nome" required>
                     </div>
                 </div>
-            </div>
-            <div class="row" >
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label>Descrição: </label>
                         <textarea class="form-control" v-model="idx.descricao"  name="descricao" required>{{idx.descricao}}</textarea>
