@@ -18,7 +18,14 @@ $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' "
 $id_curos = $_GET['id'];
 $config = json_encode(DBRead('ead_config_geral','*'));
 $curso_at = DBRead('ead_curso','*',"WHERE id = '{$id_curos}'")[0];
-$curso = json_encode(DBRead('ead_curso','*'));
+$cursos = json_decode($valida['cursos'], true);
+if(is_array($cursos)){
+    foreach($cursos as $chave => $valor){
+      $curso_valida[$chave] =  DBRead('ead_curso','*',"WHERE nome = '{$valor}'");
+    }
+    $curso = json_encode($curso_valida);
+}else{$curso = 'null';}
+
 $mdls = DBRead('ead_modulo','*',"WHERE curso = '{$id_curos}'");
 if(is_array($mdls)){
     foreach($mdls as $ky => $vls){
@@ -207,7 +214,7 @@ $modulos = json_encode($mdls);
             icon: '',
             texto: "Mostrar navegação",
             config:<?php echo $config ?>,
-            cursos:<?php echo  $curso ?>,
+            cursos:<?php echo  $curso; ?>,
             modulos:<?php echo  $modulos ?>, 
             aulas:<?php echo  $aulas ?>
         },

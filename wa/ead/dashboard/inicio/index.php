@@ -13,9 +13,17 @@ else if(isset($_COOKIE['Wacontroltoken'])){
     $senha =  $_COOKIE['Wacontroltoken'];
 }
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
- if($valida['senha'] == $senha){
+ if($senha!= null && $valida['senha'] == $senha){
 $config = json_encode(DBRead('ead_config_geral','*'));
-$curso = json_encode(DBRead('ead_curso','*'));
+
+$cursos = json_decode($valida['cursos'], true);
+
+if(is_array($cursos)){
+    foreach($cursos as $chave => $valor){
+      $curso_valida[$chave] =  DBRead('ead_curso','*',"WHERE nome = '{$valor}'");
+    }
+    $curso = json_encode($curso_valida);
+}else{$curso = 'null';}
 ?>
 <html lang="pt-br">
 <head>
@@ -49,9 +57,9 @@ $curso = json_encode(DBRead('ead_curso','*'));
                 </div>
                 <div class="MuiBox-root jss50 jss41" >
                     <div :class="'MuiBox-root content '+lista" >
-                        <div :class="'MuiBox-root jss92 jss87  jss64 jss59 curso '+lista"  @click="acessar(curso.id)" v-for="curso, index of cursos">
+                        <div :class="'MuiBox-root jss92 jss87  jss64 jss59 curso '+lista"  @click="acessar(curso[0].id)" v-for="curso, index of cursos">
                             <a  class="MuiTypography-root MuiLink-root MuiLink-underlineNone img MuiTypography-colorInherit" id="59383" >
-                                <img :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+curso.capa" alt="">
+                                <img :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+curso[0].capa" alt="">
                             </a>
                                 <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone progress MuiTypography-colorInherit" id="59383">
                                 <div class="MuiBox-root jss65 progress-bar">
@@ -59,9 +67,9 @@ $curso = json_encode(DBRead('ead_curso','*'));
                                 </div>
                             </a>
                             <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone content MuiTypography-colorInherit"  id="59383" >
-                                <p class="MuiTypography-root title MuiTypography-body2">{{curso.nome}}</p>
+                                <p class="MuiTypography-root title MuiTypography-body2">{{curso[0].nome}}</p>
                                 <span class="MuiTypography-root instructor MuiTypography-caption">
-                                    <span v-for="prof of curso.professor">
+                                    <span v-for="prof of curso[0].professor">
                                         <i>{{prof}}</i><br>
                                     </span>
                                 </span>
@@ -71,9 +79,9 @@ $curso = json_encode(DBRead('ead_curso','*'));
                     </div>
                 </div>
             </div>
-            <div v-if="status == 'geral'">
+            <div v-if="status == 'geral' && cursos != null">
                 <div class="MuiBox-root jss85 jss83">
-                    <div class="MuiBox-root jss97 jss86 section progress-container">
+                    <div  class="MuiBox-root jss97 jss86 section progress-container">
                         <span class="MuiTypography-root section-title MuiTypography-overline">Progresso</span>
                         <div v-for="curso, index of cursos"  class="MuiBox-root jss88 ">
                             <div class="MuiPaper-root MuiAccordion-root jss89 Mui-expanded jss91 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded">
@@ -88,8 +96,8 @@ $curso = json_encode(DBRead('ead_curso','*'));
                                                 <span class="chart-text false">4%</span>
                                             </div>
                                             <div class="MuiBox-root jss126 course-header-text-container">
-                                                <h6 class="MuiTypography-root course-header-text-title  MuiTypography-subtitle2">{{curso.nome}}</h6>
-                                                <span v-for="prof of curso.professor">
+                                                <h6 class="MuiTypography-root course-header-text-title  MuiTypography-subtitle2">{{curso[0].nome}}</h6>
+                                                <span v-for="prof of curso[0].professor">
                                                     <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">{{prof}}</i><br>
                                                 </span>
                                             </div>

@@ -6,7 +6,7 @@ window.onload = () => {
     }
     document.body.style.height= tamanho+'px';
     for(let i = 0 ; i < val.cursos.length; i++){
-        val.cursos[i].professor = JSON.parse(val.cursos[i].professor);
+        val.cursos[i][0].professor = JSON.parse(val.cursos[i][0].professor);
     }
 }
 

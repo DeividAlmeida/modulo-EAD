@@ -62,7 +62,7 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
                                     </div>
                                 </div>
                             </div>
-                            <div class=" forgot-password " @click="ver('reset')" style="margin-bottom:16px"><a type="button" >Esqueci minha senha</a></div>
+                            <br>
                             <div class="MuiBox-root jss31 btn-login-container">
                                 <button onclick="valida()" class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge" tabindex="0" type="button">
                                     <span class="MuiButton-label">Entrar</span>
@@ -106,8 +106,7 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
                     <div class="MuiBox-root jss36 sign-up-container" >
                         <span class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeLarge MuiButton-sizeLarge" tabindex="0" aria-disabled="false"  >
                             <span class="MuiButton-label">
-                                <a v-if="status == 'login'" :href="idx[0].link_cadastro" class="sign-up" style="text-decoration:none ">Ainda não é aluno?</a>
-                                <p v-if="status == 'reset'" @click="ver('login')" class="sign-up">VOLTAR</p>
+                                <a class="sign-up" style="text-decoration:none ">Ainda não é aluno?</a>
                             </span>
                             <span class="MuiTouchRipple-root"></span>
                         </span>

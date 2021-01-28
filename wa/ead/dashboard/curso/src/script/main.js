@@ -49,6 +49,6 @@ navegar = () =>{
         val.texto = 'Mostrar navegação';
         progresso.style.display = 'none';
         container.style.display = 'none';
-        jss78.style.height = '63px';
+        jss78.style.height = '75px';
     }
 }

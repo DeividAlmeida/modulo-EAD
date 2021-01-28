@@ -17,8 +17,12 @@
     </button>
     <button class="MuiButtonBase-root MuiIconButton-root jss32" tabindex="0" type="button"  aria-controls="profile" aria-haspopup="true" onclick="perfil()">
         <span class="MuiIconButton-label">
-            <div class="MuiBox-root jss37 undefined jss35 jss36" avatar="" name="Vinícius Von Dentz">
-                <span  class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
+            <div class="MuiBox-root jss37 undefined jss35 jss36" avatar="" >
+                <?php if(empty($valida['imagem'])){?>
+                    <span  class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
+                <?php  }else{?>
+                    <img src="<?php echo ConfigPainel('base_url').'wa/ead/uploads/'.$valida['imagem'];?>">
+                <?php } ?>
             </div>
         </span>
         <span class="MuiTouchRipple-root"></span>
@@ -29,8 +33,12 @@
     <div class="MuiPaper-root MuiPopover-paper MuiPaper-elevation8 MuiPaper-rounded" id="profile" tabindex="-1" style="opacity: 1; transform: none; transition: opacity 287ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 191ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; top: 46px; right: 3%; transform-origin: 260px 6px; visibility: hidden;">
         
         <div class="MuiBox-root jss38 profile-infos">
-            <div class="MuiBox-root jss40 profile-infos-avatar jss35 jss39" avatar="" name="Vinícius Von Dentz">
-                <span class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
+            <div class="MuiBox-root jss40 profile-infos-avatar jss35 jss39" avatar="" >
+                <?php if(empty($valida['imagem'])){?>
+                    <span  class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
+                <?php  }else{?>
+                    <img src="<?php echo ConfigPainel('base_url').'wa/ead/uploads/'.$valida['imagem'];?>">
+                <?php } ?>
             </div>
             <p class="MuiTypography-root profile-infos-name MuiTypography-body2">
                 <b><?php echo $valida['nome'] ?></b>

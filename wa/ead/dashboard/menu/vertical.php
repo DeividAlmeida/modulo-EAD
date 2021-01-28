@@ -34,13 +34,13 @@
                 </li>
             </ul>
             <span class="MuiTypography-root list-title MuiTypography-overline">Meus treinamentos</span>
-            <ul class="MuiList-root list-courses-container MuiList-padding">
-                <li id="sel" class="MuiListItem-root jss149  MuiListItem-gutters jss205" :data-href="curso.id" onclick="window.location.href ='<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/curso/?posicao=voltar&id='+this.getAttribute('data-href')" v-for="curso, index of cursos">
+            <ul v-if="cursos != null " class="MuiList-root list-courses-container MuiList-padding">
+                <li id="sel" class="MuiListItem-root jss149  MuiListItem-gutters jss205" :data-href="curso[0].id" onclick="window.location.href ='<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/curso/?posicao=voltar&id='+this.getAttribute('data-href')" v-for="curso, index of cursos">
                     <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone list-courses-item-link MuiTypography-colorPrimary" >
                         <div class="MuiListItemIcon-root list-courses-item-icon">
-                            <img :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+curso.capa" alt="Curso de Web Acappella Grid">
+                            <img :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+curso[0].capa" alt="Curso de Web Acappella Grid">
                         </div>
-                        <span  class="MuiTypography-root list-courses-item-text MuiTypography-caption">{{curso.nome}}</span>
+                        <span  class="MuiTypography-root list-courses-item-text MuiTypography-caption">{{curso[0].nome}}</span>
                     </a>
                 </li>
             </ul>

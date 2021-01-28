@@ -1,5 +1,7 @@
-
 val.ver = (a) =>{ val.status = a};
+document.getElementsByClassName('sign-up')[0].addEventListener('click', ()=>{
+window.location.href = origin+'wa/ead/cadastro'
+})
 visivel = (a) =>{
     const icon = document.getElementById('olho');
     const campo = document.getElementById('login-password');
