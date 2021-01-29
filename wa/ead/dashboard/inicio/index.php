@@ -36,7 +36,6 @@ if(is_array($cursos)){
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
 
-    <link rel="icon" href="https://app.leadlovers.com/content/images/icon.png" data-react-helmet="true">
 </head>
 
 <body >
@@ -222,4 +221,4 @@ if(is_array($cursos)){
 </body>
 
 </html>
-<?php } ?>
+<?php }else{ header('location:'.ConfigPainel('base_url').'wa/ead/login/index.php'); } ?>

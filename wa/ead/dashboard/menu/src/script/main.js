@@ -36,3 +36,6 @@ esconder = () =>{
     back.style.width = '0';
     menu.style.display = 'none'
 }
+document.getElementsByClassName('MuiListItem-button')[0].addEventListener('click', ()=>{
+    window.location.href = origin+'wa/ead/dashboard/perfil'
+})

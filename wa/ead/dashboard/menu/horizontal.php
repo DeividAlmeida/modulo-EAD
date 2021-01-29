@@ -47,7 +47,7 @@
         </div>
         
         <hr class="MuiDivider-root">
-        <a class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss34 profile-menu-item MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"  tabindex="-1" role="menuitem" aria-disabled="false" href="/profile">
+        <a class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss34 profile-menu-item MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"  tabindex="-1" role="menuitem" aria-disabled="false" >
             <span  class="material-icons MuiIcon-root profile-menu-item-icon" aria-hidden="true">assignment_ind</span>
             <p class="MuiTypography-root MuiTypography-body2">Minha Conta</p>
             <span  class="MuiTouchRipple-root"></span>
