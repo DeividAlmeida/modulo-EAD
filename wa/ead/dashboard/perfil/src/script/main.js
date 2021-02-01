@@ -1,4 +1,3 @@
-
 let farol = true;
 visivel = (a) =>{
     const icon = document.getElementById('eye'+a);
@@ -13,7 +12,6 @@ visivel = (a) =>{
         farol= true;
     }
 }
-
 readURL = (a) =>{
     let url = new FileReader()
     url.onload = (e) => { 
@@ -38,4 +36,26 @@ document.getElementsByClassName('MuiButtonBase-root')[5].addEventListener('click
             alert(data)
         }
     })
+})
+document.getElementsByClassName('MuiButton-textPrimary')[1].addEventListener('click', ()=>{
+        let senha = document.getElementsByClassName('MuiOutlinedInput-inputAdornedEnd');
+        let form = new FormData();
+    if(senha[1].value != senha[2].value || senha[2].value == ''){
+        val.erro = '*senha inválida'
+    }else{
+        val.erro = ''
+            for(let i = 0; i < 2; i++){
+                form.append(senha[i].name, senha[i].value)
+            }
+            fetch(origin+'wa/ead/apis/senha.php',{
+            method: 'POST',
+            body: form
+        }).then(dt => dt.text()).then(data =>{
+            if(data != 1){
+                alert(data)
+            }else{
+                document.location.reload(true);
+            }
+        })
+    }
 })

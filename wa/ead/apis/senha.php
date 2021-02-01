@@ -4,7 +4,6 @@ require_once('../../../includes/funcoes.php');
 require_once('../../../database/config.database.php');
 require_once('../../../database/config.php');
 require_once('../../../database/upload.class.php');
-$senha = md5($_POST['senha']);
 session_start();
 if(isset($_SESSION['Wacontrol'])){
     $id = $_SESSION['Wacontrol'][0];
@@ -14,32 +13,26 @@ else if(isset($_COOKIE['Wacontroltoken'])){
     $id =  $_COOKIE['Wacontrolid'];
     $senha =  $_COOKIE['Wacontroltoken'];
 }
-if($_FILES['imagem']['name'] == null){
-       $keep = DBRead('ead_usuario','*' ,"WHERE id = '{$id}'")[0];
-       $path = $keep['imagem'];
-    }else{
-    $upload_folder = '../../../wa/ead/uploads/';
-    $handle = new Upload($_FILES['imagem']);
-    $handle->file_new_name_body = md5(uniqid(rand(), true));
-    $handle->Process($upload_folder);
-    $path = $handle->file_dst_name;
-}
+$valida = DBRead('ead_usuario','*' ,"WHERE id = '{$id}'")[0];
+
+if(!isset($_POST['senha_atual']) || md5($_POST['senha_atual']) != $valida['senha'] ){ echo 'Senha atual inválida'; exit;}
+
 foreach($_POST as $chave => $vazio){
     $erro ="campo ".$chave." está vazio";
     if(empty($vazio)){$empty = 1; echo $erro; exit;}else{$empty = 0;}
 }
-if($empty == 0){
-$data = array(
-    'nome'          => post('nome'),
-    'cpf'           => post('cpf'),
-    'endereco'      => post('endereco'),
-    'email'         =>post('email'),
-    'imagem'        =>$path,
-    'data'          =>post('data')
-);
-$query = DBUpdate('ead_usuario',$data," id = '{$id}'");
 
+if($empty == 0){
+    $senha = md5(post('nova_senha'));
+    $query = DBUpdate('ead_usuario',['senha'=> $senha]," id = '{$id}'");
     if ($query != 0) {
+        if(isset($_SESSION['Wacontrol'])){
+            $_SESSION['Wacontrol'] = [$id, $senha];
+        }
+        else if(isset($_COOKIE['Wacontroltoken'])){
+            setcookie('Wacontrolid', $id, time() + (86400 * 30), "/");
+            setcookie('Wacontroltoken', $senha, time() + (86400 * 30), "/");
+        }
         echo 1;
     } else {
         echo "Erro no Banco de Dados";

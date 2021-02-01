@@ -152,20 +152,20 @@ if(empty($valida['imagem'])){
                             <div class="MuiBox-root jss104 account-password-current-container">
                                 <div class="MuiBox-root jss105 input-container current-password">
                                     <div class="MuiFormControl-root MuiTextField-root input password">
-                                        <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined" data-shrink="false" for="password" id="password-label">Senha atual</label>
+                                        <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled" data-shrink="true" for="password" id="password-label">Senha atual</label>
                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
-                                            <input aria-invalid="false" id="password" type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
+                                            <input id="campo1" aria-invalid="false" name="senha_atual" type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
                                             <div class="MuiInputAdornment-root MuiInputAdornment-positionEnd">
-                                                <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd" tabindex="0" type="button" aria-label="toggle password visibility">
+                                                <button onclick="visivel('1')" class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd" tabindex="0" type="button" aria-label="toggle password visibility">
                                                     <span class="MuiIconButton-label">
-                                                        <span class="material-icons MuiIcon-root" aria-hidden="true">visibility</span>
+                                                        <span id="eye1" class="material-icons MuiIcon-root" aria-hidden="true">visibility</span>
                                                     </span>
                                                     <span class="MuiTouchRipple-root"></span>
                                                 </button>
                                             </div>
                                             
                                             <fieldset aria-hidden="true" class="jss96 MuiOutlinedInput-notchedOutline">
-                                                <legend class="jss98">
+                                                <legend class="jss98 jss99">
                                                     <span>Senha atual</span>
                                                 </legend>
                                             </fieldset>
@@ -176,19 +176,19 @@ if(empty($valida['imagem'])){
                             <div class="MuiBox-root jss106 account-password-new-container">
                                 <div class="MuiBox-root jss107 input-container new-password">
                                     <div class="MuiFormControl-root MuiTextField-root input">
-                                        <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined" data-shrink="false" for="newPassword" id="newPassword-label">Nova senha</label>
+                                        <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled" data-shrink="false" for="newPassword" id="newPassword-label">Nova senha</label>
                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
-                                            <input aria-invalid="false" id="newPassword" type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
+                                            <input id="campo2" aria-invalid="false" name="nova_senha" type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
                                             <div class="MuiInputAdornment-root MuiInputAdornment-positionEnd">
-                                                <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd" tabindex="0" type="button" aria-label="toggle password visibility">
+                                                <button onclick="visivel('2')" class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd" tabindex="0" type="button" aria-label="toggle password visibility">
                                                     <span class="MuiIconButton-label" >
-                                                        <span  class="material-icons MuiIcon-root" aria-hidden="true">visibility</span>
+                                                        <span id="eye2"  class="material-icons MuiIcon-root" aria-hidden="true">visibility</span>
                                                     </span>
                                                     <span class="MuiTouchRipple-root"></span>
                                                 </button>
                                             </div>
                                             <fieldset aria-hidden="true" class="jss96 MuiOutlinedInput-notchedOutline">
-                                                <legend class="jss98">
+                                                <legend class="jss98 jss99">
                                                     <span>Nova senha</span>
                                                 </legend>
                                             </fieldset>
@@ -197,24 +197,25 @@ if(empty($valida['imagem'])){
                                 </div>
                                 <div class="MuiBox-root jss108 input-container new-password-confirm">
                                     <div class="MuiFormControl-root MuiTextField-root input">
-                                        <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined" data-shrink="false" for="confirmNewPassword"  id="confirmNewPassword-label">Confirme a nova senha</label>
+                                        <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled" data-shrink="false" for="confirmNewPassword"  id="confirmNewPassword-label">Confirme a nova senha</label>
                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
-                                            <input aria-invalid="false" id="confirmNewPassword" type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
+                                            <input  id="campo3" aria-invalid="false"  type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
                                             <div class="MuiInputAdornment-root MuiInputAdornment-positionEnd">
-                                                <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd" tabindex="0" type="button" aria-label="toggle password visibility">
+                                                <button onclick="visivel('3')" class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd" tabindex="0" type="button" aria-label="toggle password visibility">
                                                     <span class="MuiIconButton-label">
-                                                        <span class="material-icons MuiIcon-root" aria-hidden="true">visibility</span>
+                                                        <span class="material-icons MuiIcon-root" id="eye3" aria-hidden="true">visibility</span>
                                                     </span>
                                                     <span class="MuiTouchRipple-root"></span>
                                                 </button>
                                             </div>
                                             <fieldset aria-hidden="true" class="jss96 MuiOutlinedInput-notchedOutline">
-                                                <legend class="jss98">
+                                                <legend class="jss98 jss99">
                                                     <span>Confirme a nova senha</span>
                                                 </legend>
                                             </fieldset>
                                         </div>
                                     </div>
+                                    <small class="MuiTypography-root section-title MuiTypography-overline" style="color:red">{{erro}}</small>
                                 </div>
                             </div>
                         </div>
@@ -236,6 +237,7 @@ if(empty($valida['imagem'])){
             el:'#root',
             data: {
                 avatar:'<?php echo $avatar ?>',
+                erro: '',
                 cursos:<?php echo  $curso ?>
             }
         });

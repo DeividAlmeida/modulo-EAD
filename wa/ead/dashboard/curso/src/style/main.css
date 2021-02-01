@@ -2684,6 +2684,8 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     min-height: 64px;
     text-align: left;
     flex-direction: row;
+    background-color: #fff !important;
+    z-index:2;
 }
 
 .jss170 .text-wrapper {
@@ -2715,7 +2717,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 }
 
 .jss170 .content:hover {
-    background-color: rgba(0, 0, 0, .04);
+    background-color: rgb(241 241 241) !important;
 }
 
 .jss170 .content-children {
@@ -2743,6 +2745,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     min-height: 48px;
     text-align: left;
     align-items: center;
+    background-color:#fff;
 }
 
 .jss205 .marker {
@@ -2758,7 +2761,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 }
 
 .jss205:hover {
-    background-color: rgba(0, 0, 0, .04);
+    background-color: rgb(241 241 241) !important;;
 }
 
 .jss205.resting {

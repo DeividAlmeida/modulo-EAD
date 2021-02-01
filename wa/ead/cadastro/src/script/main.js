@@ -4,7 +4,7 @@ document.getElementsByClassName('jss101')[0].addEventListener('click', ()=>{
     let confirma = document.getElementById('campo1')
     let inputs = document.querySelectorAll('input')
     let form = new FormData()
-    if(senha.value !=''&& senha.value == confirma.value){
+    if(senha.value !='' && senha.value == confirma.value){
         for(let i = 1; i < 7; i++){
             form.append(inputs[i].name,inputs[i].value)
         }
