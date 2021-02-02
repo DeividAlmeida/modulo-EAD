@@ -15,9 +15,9 @@ else if(isset($_COOKIE['Wacontroltoken'])){
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
  if($valida['senha'] == $senha){
 
-$id_curos = $_GET['id'];
+$id_curso = $_GET['id'];
 $config = json_encode(DBRead('ead_config_geral','*'));
-$curso_at = DBRead('ead_curso','*',"WHERE id = '{$id_curos}'")[0];
+$curso_at = DBRead('ead_curso','*',"WHERE id = '{$id_curso}'")[0];
 $cursos = json_decode($valida['cursos'], true);
 if(is_array($cursos)){
     foreach($cursos as $chave => $valor){
@@ -26,10 +26,10 @@ if(is_array($cursos)){
     $curso = json_encode($curso_valida);
 }else{$curso = 'null';}
 
-$mdls = DBRead('ead_modulo','*',"WHERE curso = '{$id_curos}'");
+$mdls = DBRead('ead_modulo','*',"WHERE curso = '{$id_curso}'");
 if(is_array($mdls)){
     foreach($mdls as $ky => $vls){
-       $aula[$vls['id']] =  DBRead('ead_aula','*',"WHERE modulo = '{$vls['id']}'");
+       $aula[$vls['id']] =  DBRead('ead_aula','id,modulo,campos,nome,descricao,tipo,video,arquivo,professor,tipo_prova,qtd_alternativas,questoes,alternativas',"WHERE modulo = '{$vls['id']}'");
     }
     $key = count($aula);
     $aulas = json_encode($aula);
@@ -52,7 +52,7 @@ $modulos = json_encode($mdls);
     <title>AULA 2 - TRABALHANDO COM AS BOXES - Curso de Web Acappella Grid</title>
 </head>
 
-<body>
+<body >
     <div id="root">
         <div class="MuiBox-root jss23 jss22">
             <?php require_once('../menu/horizontal.php'); ?>
@@ -109,9 +109,9 @@ $modulos = json_encode($mdls);
                                                 <div class="MuiBox-root jss176 jss174 jss175 undefined" size="32" style="width:32px; height:32">
                                                     <svg  viewBox="0 0 36 36" class="chart-circle">
                                                         <path class="chart-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                                        <path class="chart-circle-fill is-active false" stroke-dasharray="14.285714285714285 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"> </path>
+                                                        <path class="chart-circle-fill is-active false" stroke-dasharray="0 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"> </path>
                                                     </svg>
-                                                    <span class="chart-text false">1</span>
+                                                    <span class="chart-text false">0</span>
                                                 </div>
                                             </div>
                                             <div class="MuiBox-root jss177 text-wrapper">
@@ -126,7 +126,7 @@ $modulos = json_encode($mdls);
                                             <div class="MuiCollapse-wrapperInner">
                                                 <div role="region">
                                                     <div class="MuiAccordionDetails-root content-children" >
-                                                        <a @click="pular(licao.tag)" v-for="licao, ident of aulas[modulo.id]" :class="concluidos['<?php echo $curso_at['id']; ?>'+licao.tag] == null? 'MuiButtonBase-root jss205 jss218 resting' : 'Muia+okse-root jss205 jss218 completed' " :id="+id_aula == licao.tag? 'destaque':'' " tabindex="0" role="button" aria-disabled="false">
+                                                        <a @click="pular(licao.tag)" v-for="licao, ident of aulas[modulo.id]" :class="concluidos['<?php echo $id_curso; ?>'+licao.tag] == null? 'MuiButtonBase-root jss205 jss218 resting' : 'Muia+okse-root jss205 jss218 completed' " :id="+id_aula == licao.tag? 'destaque':'' " tabindex="0" role="button" aria-disabled="false">
                                                             <div class="MuiBox-root jss219 marker">
                                                                 <div class="MuiBox-root jss220 marker-circle"></div>
                                                                 <div class="MuiBox-root jss221 marker-line" ></div>
@@ -135,7 +135,7 @@ $modulos = json_encode($mdls);
                                                                 <span class="MuiTypography-root title-text MuiTypography-caption">AULA {{ident+1}} - {{licao.nome}}</span>
                                                             </div>
                                                             <div class="MuiBox-root jss223 icon">
-                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"  aria-hidden="true">{{concluidos['<?php echo $curso_at['id']; ?>'+licao.tag] == null? '': 'checked'}}</span>
+                                                                <span class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"  aria-hidden="true">{{concluidos['<?php echo $id_curso; ?>'+licao.tag] == null? '': 'checked'}}</span>
                                                             </div>
                                                             <span class="MuiTouchRipple-root"></span>
                                                         </a>
@@ -150,7 +150,7 @@ $modulos = json_encode($mdls);
                                 <div class="MuiBox-root jss203 course-progress-bar">
                                     <div class="MuiBox-root jss204 course-progress-bar-fill"></div>
                                 </div>
-                                <span class="MuiTypography-root course-progress-text MuiTypography-overline">4% Concluído</span>
+                                <span class="MuiTypography-root course-progress-text MuiTypography-overline"></span>
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@ $modulos = json_encode($mdls);
                                     <div class="MuiBox-root jss252 jss249 ">
                                         <div class="MuiFormControl-root MuiTextField-root notes-new-input">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss250 MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;" :key="id_aula">{{notas[['<?php echo $curso_at['id']; ?>'+id_aula]]}}</textarea>
+                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;" :key="id_aula">{{notas[['<?php echo $id_curso; ?>'+id_aula]]}}</textarea>
                                                 <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;"></textarea>
                                                 <fieldset aria-hidden="true" class="jss253 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;">
                                                     <legend class="jss254" style="width: 0.01px;">
@@ -209,6 +209,8 @@ $modulos = json_encode($mdls);
 </body>
 <script>
     const origin = '<?php echo ConfigPainel('base_url'); ?>';
+    const id_curso = '<?php echo $id_curso; ?>';
+    const id_aluno = '<?php echo $id ?>';
     const val = new Vue({
         el:"#root",
         data: {
@@ -257,41 +259,6 @@ $modulos = json_encode($mdls);
     });
     val.notas = JSON.parse(<?php if(empty($valida['notas'])){echo "'[]'";}else{ echo $valida['notas'];} ?>);
     val.concluidos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
-    document.getElementById('salvar').addEventListener('click', ()=>{ 
-        let valor = document.getElementById('notes-new-input').value;
-        val.notas['<?php echo $curso_at['id']; ?>'+val.id_aula]  = valor;
-        let save = new FormData;
-        save.append('0', JSON.stringify(val.notas))
-        let post = new XMLHttpRequest;
-        post.open('POST',origin+'wa/ead/apis/notacoes.php?salvarnotas&id=<?php echo $id ?>');
-        post.send(save)
-        post.onload = function(){
-        swal("Salvo!", "Anotação salva com sucesso!", "success");                              
-    } 
-    })
-    document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', ()=>{
-        val.concluidos['<?php echo $curso_at['id']; ?>'+val.id_aula]  = '1';
-        let concluido = new FormData;
-        concluido.append('0', JSON.stringify(val.concluidos))
-        fetch(origin+'wa/ead/apis/concluido.php?id=<?php echo $id ?>',{
-            method: 'POST',
-            body: concluido
-        }).then(dt => dt.text()).then(data =>{
-            if(data == 1){
-                alert('foi')
-            }else{
-                alert(data)
-            }
-        })
-        
-    })
-    /*  
-        Cauculo do total de concluidos
-        contar = 0;
-        for(i=0; i<val.aulas[1].length;++i){
-            if(val.concluidos['6'+val.aulas[1][i].tag] != null){ ++contar}
-        }console.log(contar)
-*/
 </script>
 <script src="../menu/src/script/main.js"></script>
 <script src="src/script/main.js"></script>
