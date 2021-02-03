@@ -2441,7 +2441,12 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
         height: 100%;
     }
 }
-
+@media(max-width:500px){
+    .jss71 .btn-conclusion {
+        order: 5;
+        width: 100px !important;
+    }
+}
 @media (max-width:959.95px) {
     .jss71:not(.with-certificate) {
         flex-wrap: wrap;
@@ -3206,7 +3211,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     flex-direction: column;
 }
 #jss78{
-    height:63px;
+    height:75px;
 }
 
 .marker-line{
@@ -3218,4 +3223,19 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 }
 .jss69{
     z-index:1 !important;
+}
+.concluir_teste{
+    display: flex;
+    margin-top: 8px;
+    justify-content: flex-end;
+}
+.alternativas{
+    display: grid;
+    margin: 10px;
+}
+.alternativas label{
+cursor: pointer;
+}
+.questoes{
+    font-size:100%;
 }

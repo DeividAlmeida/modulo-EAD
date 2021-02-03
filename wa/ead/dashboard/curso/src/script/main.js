@@ -5,9 +5,35 @@ let concluidas = document.getElementsByClassName('chart-text');
 let circulo = document.getElementsByClassName('chart-circle-fill');
 let texto = document.getElementsByClassName('course-progress-text');
 let barra = document.getElementsByClassName('jss204');
+let color = document.getElementsByClassName('jss170');
+let stroker = document.getElementsByClassName('chart-circle-fill');
 let t_c = 0 ;
 let t_t = 0;
 let nav = false;
+function efeitos(){
+    for(z=0;z< val.modulos.length; z++){
+        let contar = 0;
+        for(i=0; i<val.aulas[val.modulos[z].id].length;i++){
+            ++t_t
+            if(val.concluidos[id_curso+val.aulas[val.modulos[z].id][i].tag] != null){ 
+                ++t_c
+                ++contar
+                concluidas[z].innerText = contar;
+                if(contar == val.aulas[val.modulos[z].id].length){
+                    color[z].style.color = '#00C268'
+                    stroker[z].style.stroke = '#00C268'
+                    concluidas[z].innerText = 'check'
+                    concluidas[z].setAttribute('class', 'chart-text material-icons')
+                }
+                let cento = (contar/val.aulas[val.modulos[z].id].length)*100;
+                circulo[z].setAttribute('stroke-dasharray', cento+' 100')
+            }
+            
+        }
+    }
+    barra[0].style.width = (t_c/t_t)*100+'%'
+    texto[0].innerText = (t_c/t_t)*100+'% Concluído'
+}
 window.onload = () => {
     document.body.style.height= '800px';
         let count = 0;
@@ -18,7 +44,8 @@ window.onload = () => {
         }
 }
 anterior = () => {
-   val.id_aula > 1 ? val.id_aula = val.id_aula - 1: val.id_aula = val.id_aula ;
+    val.status = ''
+    val.id_aula > 1 ? val.id_aula = val.id_aula - 1: val.id_aula = val.id_aula ;
     for(let i= 0; i < val.modulos.length; i++){
         val.aulas[val.modulos[i].id].forEach((a, b)=>{
              if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
@@ -27,8 +54,9 @@ anterior = () => {
         })
     }
 }; 
-proximo = (a) => {
-   val.id_aula < a ? val.id_aula = val.id_aula + 1: val.id_aula = val.id_aula ;
+function proximo(a){
+    val.status = ''
+    val.id_aula < a ? val.id_aula = val.id_aula + 1: val.id_aula = val.id_aula ;
     for(let i= 0; i < val.modulos.length; i++){
         val.aulas[val.modulos[i].id].forEach((a, b)=>{
              if(val.aulas[val.modulos[i].id][b].tag == val.id_aula){
@@ -57,23 +85,10 @@ navegar = () =>{
         container.style.display = 'none';
         jss78.style.height = '75px';
     }
-    for(z=0;z< val.modulos.length; z++){
-        let contar = 0;
-        for(i=0; i<val.aulas[val.modulos[z].id].length;i++){
-            ++t_t
-            if(val.concluidos[id_curso+val.aulas[val.modulos[z].id][i].tag] != null){ 
-                ++t_c
-                ++contar
-                let cento = (contar/val.aulas[val.modulos[z].id].length)*100;
-                concluidas[z].innerText = contar;
-                circulo[z].setAttribute('stroke-dasharray', cento+' 100')
-            }
-            
-        }
-    }
-    barra[0].style.width = (t_c/t_t)*100+'%'
-    texto[0].innerText = (t_c/t_t)*100+'% Concluído'
+    new efeitos()
+
 }
+
 document.getElementById('salvar').addEventListener('click', ()=>{ 
     let valor = document.getElementById('notes-new-input').value;
     val.notas[id_curso+val.id_aula]  = valor;
@@ -87,7 +102,7 @@ document.getElementById('salvar').addEventListener('click', ()=>{
 } 
 })
 
-document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', ()=>{
+document.getElementsByClassName('btn-conclusion')[1].addEventListener('click', ()=>{
     val.concluidos[id_curso+val.id_aula]  = '1';
     let concluido = new FormData;
     concluido.append('0', JSON.stringify(val.concluidos))
@@ -96,10 +111,21 @@ document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', (
         body: concluido
     }).then(dt => dt.text()).then(data =>{
         if(data == 1){
-            alert('foi')
+            new efeitos()
+            new proximo(key)
         }else{
             alert(data)
         }
     })
     
 })
+document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', ()=>{
+   val.idx.questoes = JSON.parse(val.idx.questoes)
+   val.status = 'teste'
+   if(val.idx.tipo_prova == 'multipla'){
+      val.idx.alternativas = JSON.parse(val.idx.alternativas) 
+   }
+})
+concluir = () =>{
+  new proximo(key) 
+}

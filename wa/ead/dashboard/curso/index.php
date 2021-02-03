@@ -86,11 +86,17 @@ $modulos = json_encode($mdls);
                                 <span  class="MuiTouchRipple-root"></span>
                             </a>
                         </div>
-                        <button class="MuiButtonBase-root btn-conclusion false" tabindex="0" type="button">
+                        <button  class="MuiButtonBase-root btn-conclusion false" tabindex="0" type="button">
+                            <span  class="MuiTypography-root btn-conclusion-text MuiTypography-caption">Teste</span>
+                            <span class="material-icons MuiIcon-root btn-conclusion-icon"  aria-hidden="true">article</span>
+                            <span class="MuiTouchRipple-root"></span>
+                        </button>
+                        <button  class="MuiButtonBase-root btn-conclusion false" tabindex="0" type="button">
                             <span  class="MuiTypography-root btn-conclusion-text MuiTypography-caption">Marcar como concluída</span>
                             <span class="material-icons MuiIcon-root btn-conclusion-icon"  aria-hidden="true">check_circle</span>
                             <span class="MuiTouchRipple-root"></span>
                         </button>
+                        
                     </div>
                     <div  :class="'MuiDrawer-root MuiDrawer-docked jss77 '+nav">
                         <div class="MuiPaper-root MuiDrawer-paper jss78 MuiDrawer-paperAnchorRight MuiDrawer-paperAnchorDockedRight MuiPaper-elevation0" id="jss78" style="transition: all 0.4s ease 0s;">
@@ -111,7 +117,7 @@ $modulos = json_encode($mdls);
                                                         <path class="chart-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                                                         <path class="chart-circle-fill is-active false" stroke-dasharray="0 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"> </path>
                                                     </svg>
-                                                    <span class="chart-text false">0</span>
+                                                    <span class="chart-text ">0</span>
                                                 </div>
                                             </div>
                                             <div class="MuiBox-root jss177 text-wrapper">
@@ -158,14 +164,40 @@ $modulos = json_encode($mdls);
                         <div class="MuiBox-root jss80 content-scrollable ">
                             <div class="MuiBox-root jss83 jss82 container-section" id="content">
                                 <div class="MuiBox-root jss159 jss81 light">
-                                    <div>{{idx.descricao}}
+                                    <div v-if="status != 'teste'">{{idx.descricao}}
                                         <video v-if="idx.tipo == 'local'" :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+idx.video" controls>  
                                             Your browser does not support the video tag.
                                         </video>
-                                        <div  v-html="idx.video" v-else>
-                                            
+                                        <div  v-html="idx.video" v-else></div>
+                                    </div>
+                                    <div v-else>
+                                        <div v-for="questoes, num of idx.questoes" >
+                                           <span class="questoes MuiTypography-root section-title MuiTypography-overline">{{num+1}}° {{questoes}}</span>
+                                           <div class="alternativas" v-if="idx.tipo_prova == 'multipla'">
+                                               <label :for="'resposta'+numb" v-for="alters, numb of idx.alternativas[num]">
+                                                    <input type="radio" :id="'resposta'+numb" :name="num" :value="numb">{{alters}}
+                                               </label>
+                                           </div>
+                                           <div v-else class="MuiFormControl-root MuiTextField-root notes-new-input" style="width:100%">
+                                                <div class="MuiInputBase-root MuiOutlinedInput-root jss250 MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
+                                                    <textarea  :key="questoes" :id="'resposta'+num" rows="1" aria-invalid="false"   placeholder="Escreva sua resposta" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;"></textarea>
+                                                    <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;"></textarea>
+                                                    <fieldset aria-hidden="true" class="jss253 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;">
+                                                        <legend class="jss254" style="width: 0.01px;">
+                                                            <span>&#8203;</span>
+                                                        </legend>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="MuiBox-root jss257 jss249 notes-new-actions concluir_teste">
+                                            <button class="MuiButtonBase-root MuiButton-root jss251 MuiButton-text MuiButton-textPrimary" onclick="concluir()" tabindex="0" type="button">
+                                                <span class="MuiButton-label">Concluir</span>
+                                                <span  class="MuiTouchRipple-root"></span>
+                                            </button>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="MuiBox-root jss103 jss82 container-section" >
@@ -208,12 +240,14 @@ $modulos = json_encode($mdls);
     </div>
 </body>
 <script>
+    const key = <?php echo $id ?>+1
     const origin = '<?php echo ConfigPainel('base_url'); ?>';
     const id_curso = '<?php echo $id_curso; ?>';
     const id_aluno = '<?php echo $id ?>';
     const val = new Vue({
         el:"#root",
         data: {
+            status:'',
             notas:'',
             concluidos:'',
             id_aula: 1,
