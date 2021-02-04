@@ -27,6 +27,7 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
         <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/login/src/style/main.css">
         <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
+        <script src="https://cdn.jsdelivr.net/npm/vue-swal@1/dist/vue-swal.min.js"></script>
     </head>
 
     <body style="height:400px !important">

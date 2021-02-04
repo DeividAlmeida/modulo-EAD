@@ -20,9 +20,21 @@ $cursos = json_decode($valida['cursos'], true);
 
 if(is_array($cursos)){
     foreach($cursos as $chave => $valor){
-      $curso_valida[$chave] =  DBRead('ead_curso','*',"WHERE nome = '{$valor}'");
+        $curso_valida[$chave] =  DBRead('ead_curso','*',"WHERE nome = '{$valor}'");
+        $modulos[$chave] = DBRead('ead_modulo','*',"WHERE curso = '{$curso_valida[$chave][0]['id']}'");
+        if(is_array($modulos[$chave])){
+            foreach($modulos[$chave] as $key => $value){
+                $aulas[$curso_valida[$chave][0]['id']][$key] = DBRead('ead_aula','*',"WHERE modulo = '{$value['id']}'");
+                if(is_array($aulas[$curso_valida[$chave][0]['id']][$key])){
+                    foreach($aulas[$curso_valida[$chave][0]['id']][$key] as $idx => $nome){
+                        $aula[$curso_valida[$chave][0]['id']][$nome['id']] = $nome['nome'];
+                    }
+                }
+            } 
+        }
     }
     $curso = json_encode($curso_valida);
+    $aula = json_encode($aula, true);
 }else{$curso = 'null';}
 ?>
 <html lang="pt-br">
@@ -191,7 +203,9 @@ if(is_array($cursos)){
         const val = new Vue({
             el:"#root",
             data: {
+                aula: <?php echo $aula ?>,
                 status: '<?php echo $_GET['status']?>',
+                progressos: '',
                 lista: 'grid',
                 config:<?php echo $config ?>,
                 cursos:<?php echo  $curso ?>
@@ -215,6 +229,17 @@ if(is_array($cursos)){
                 }
             }
         });
+        val.progressos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
+        for(let i = 0; i< val.cursos.length; i++){
+            let contar = 0;
+            for(let ii = 0; ii < val.progressos.length; ii++ ){
+                if(val.progressos[val.cursos[i][0].id+ii] != null){
+                    contar++
+                }
+            }
+            let cento = (contar/(Object.getOwnPropertyNames(val.aula[val.cursos[i][0].id]).length -1))*100
+            document.getElementsByClassName('jss66')[i].style.width = cento+"%";
+        } 
     </script>
     <script src="src/script/main.js"></script>
     <script src="../menu/src/script/main.js"></script>

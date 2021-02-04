@@ -8,7 +8,7 @@ $email = $_POST['email'];
 $senha = md5($_POST['senha']);
 $valida = DBRead('ead_usuario','*',"WHERE email = '{$email}' AND  senha = '{$senha}' ", "LIMIT 1")[0];
 if(empty($valida)){
-   echo 'ERRO';
+   echo 'E-mail ou senha inválido!';
 }else{
     session_start();
     $id = $valida['id'];

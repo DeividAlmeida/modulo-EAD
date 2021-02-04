@@ -30,7 +30,7 @@ valida = () =>{
         if(data == 1){
             window.location.href = origin+'wa/ead/dashboard/inicio/?status=curso&posicao=avancar'
         }else{
-            alert(data)
+            swal("ERRO!", data, "error"); 
         }
     });
 }

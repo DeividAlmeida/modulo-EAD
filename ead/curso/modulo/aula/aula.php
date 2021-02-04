@@ -1,5 +1,5 @@
 <?php
-$status = $_GET['routeModu'];
+$status = $_GET['routeAula'];
 $modulo =  $_GET['modulo']; 
 $default = '{"nome":"","descricao":"","tipo":"","video":"","arquivo":"", "professor":"","tipo_prova":"", "questoes":"[]","gabarito":"[]","qtd_alternativas":"0","alternativas":"[]", "modulo":"'.$modulo.'" }';
 $query = json_encode(DBRead("ead_aula","*","WHERE modulo = '{$modulo}'"));

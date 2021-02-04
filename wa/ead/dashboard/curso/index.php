@@ -178,7 +178,7 @@ $modulos = json_encode($mdls);
                                                     <input type="radio" :id="'resposta'+numb" :name="num" :value="numb">{{alters}}
                                                </label>
                                            </div>
-                                           <div v-else class="MuiFormControl-root MuiTextField-root notes-new-input" style="width:100%">
+                                           <div v-else class="MuiFormControl-root MuiTextField-root notes-new-input alternativas" style="width:100%">
                                                 <div class="MuiInputBase-root MuiOutlinedInput-root jss250 MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
                                                     <textarea  :key="questoes" :id="'resposta'+num" rows="1" aria-invalid="false"   placeholder="Escreva sua resposta" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;"></textarea>
                                                     <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;"></textarea>
