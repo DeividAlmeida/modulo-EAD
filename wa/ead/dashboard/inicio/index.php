@@ -20,6 +20,7 @@ $cursos = json_decode($valida['cursos'], true);
 
 if(is_array($cursos)){
     foreach($cursos as $chave => $valor){
+        $tag = 0;
         $curso_valida[$chave] =  DBRead('ead_curso','*',"WHERE nome = '{$valor}'");
         $modulos[$chave] = DBRead('ead_modulo','*',"WHERE curso = '{$curso_valida[$chave][0]['id']}'");
         if(is_array($modulos[$chave])){
@@ -27,7 +28,8 @@ if(is_array($cursos)){
                 $aulas[$curso_valida[$chave][0]['id']][$key] = DBRead('ead_aula','*',"WHERE modulo = '{$value['id']}'");
                 if(is_array($aulas[$curso_valida[$chave][0]['id']][$key])){
                     foreach($aulas[$curso_valida[$chave][0]['id']][$key] as $idx => $nome){
-                        $aula[$curso_valida[$chave][0]['id']][$nome['id']] = $nome['nome'];
+                        $tag++;
+                        $aula[$curso_valida[$chave][0]['id']][$tag] = $nome['nome'];
                     }
                 }
             } 
@@ -91,7 +93,7 @@ if(is_array($cursos)){
                 </div>
             </div>
             <div v-if="status == 'geral' && cursos != null">
-                <div class="MuiBox-root jss85 jss83">
+                <div class="MuiBox-root jss85 jss83" style="display:block!important">
                     <div  class="MuiBox-root jss97 jss86 section progress-container">
                         <span class="MuiTypography-root section-title MuiTypography-overline">Progresso</span>
                         <div v-for="curso, index of cursos"  class="MuiBox-root jss88 ">
@@ -104,7 +106,7 @@ if(is_array($cursos)){
                                                     <path class="chart-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                                                     <path class="chart-circle-fill is-active false" stroke-dasharray="4 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831">   </path>
                                                 </svg>
-                                                <span class="chart-text false">4%</span>
+                                                <span class="chart-text false"></span>
                                             </div>
                                             <div class="MuiBox-root jss126 course-header-text-container">
                                                 <h6 class="MuiTypography-root course-header-text-title  MuiTypography-subtitle2">{{curso[0].nome}}</h6>
@@ -112,7 +114,7 @@ if(is_array($cursos)){
                                                     <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">{{prof}}</i><br>
                                                 </span>
                                             </div>
-                                            <span :id="'arrow'+index" class="material-icons MuiIcon-root course-header-icon-expand" aria-hidden="true">expand_more</span>
+                                            <span :id="'arrow'+index" class="material-icons MuiIcon-root course-header-icon-expand" aria-hidden="true">expand_less</span>
                                             <span class="MuiTouchRipple-root"></span>
                                         </div>
                                     </div>
@@ -129,7 +131,7 @@ if(is_array($cursos)){
                                                                 <div class="MuiBox-root jss134 lesson-content">
                                                                     <span class="material-icons MuiIcon-root lesson-icon MuiIcon-fontSizeSmall" aria-hidden="true">radio_button_unchecked</span>
                                                                     <div class="MuiBox-root jss135 lesson-text-container">
-                                                                        <span class="MuiTypography-root lesson-text-title MuiTypography-caption MuiTypography-noWrap">AULA 2 - TRABALHANDO COM AS BOXES</span>
+                                                                        <span class="MuiTypography-root lesson-text-title MuiTypography-caption MuiTypography-noWrap"></span>
                                                                     </div>
                                                                     <span class="material-icons MuiIcon-root lesson-infos-icon-go" aria-hidden="true">chevron_right</span>
                                                                 </div>
@@ -144,6 +146,7 @@ if(is_array($cursos)){
                             </div>
                         </div>
                     </div>
+                    <!-- Atonações 
                     <div class="MuiBox-root jss97 jss86 section tabs-container">
                         <div class="MuiTabs-root">
                             <div class="MuiTabs-scroller MuiTabs-fixed" style="overflow: hidden;">
@@ -170,6 +173,7 @@ if(is_array($cursos)){
                             </div>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
         </div>
@@ -210,6 +214,15 @@ if(is_array($cursos)){
                 config:<?php echo $config ?>,
                 cursos:<?php echo  $curso ?>
             },
+            updated: function () {
+              this.$nextTick(function () {
+                    if(this.status == 'curso'){
+                        new progresso_barra("document.getElementsByClassName('jss66')[i].style.width = cento+'%'")
+                    }else{
+                        new progresso_barra('circulo[i].setAttribute("stroke-dasharray", cento+" 100"); if(cento == 100){bxl[i].style.background="rgba(0, 194, 104, 0.16)";licao[i].style.color="#00C268";licao[i].innerText="check_circle";prox_texto[i].innerText ="AULA "+contar+" - "+val.aula[val.cursos[i][0].id][contar]; concluidas[i].setAttribute("class", "chart-text material-icons"); stroker[i].style.stroke = "#00C268"; concluidas[i].innerText = "check"}else{concluidas[i].innerText = cento+"%";  prox_texto[i].innerText ="AULA "+(contar+1)+" - "+val.aula[val.cursos[i][0].id][contar+1]}')
+                    }
+                })
+            },
             methods:{
                 acessar: function (a) {
                     window.location.href=origin+'wa/ead/dashboard/curso/?posicao=voltar&id='+a
@@ -229,17 +242,9 @@ if(is_array($cursos)){
                 }
             }
         });
-        val.progressos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
-        for(let i = 0; i< val.cursos.length; i++){
-            let contar = 0;
-            for(let ii = 0; ii < val.progressos.length; ii++ ){
-                if(val.progressos[val.cursos[i][0].id+ii] != null){
-                    contar++
-                }
-            }
-            let cento = (contar/(Object.getOwnPropertyNames(val.aula[val.cursos[i][0].id]).length -1))*100
-            document.getElementsByClassName('jss66')[i].style.width = cento+"%";
-        } 
+    val.progressos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
+        
+  
     </script>
     <script src="src/script/main.js"></script>
     <script src="../menu/src/script/main.js"></script>

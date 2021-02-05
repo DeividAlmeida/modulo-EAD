@@ -8,6 +8,7 @@ window.onload = () => {
     for(let i = 0 ; i < val.cursos.length; i++){
         val.cursos[i][0].professor = JSON.parse(val.cursos[i][0].professor);
     }
+    
 }
 
 view = (a) =>{ 
@@ -20,5 +21,4 @@ view = (a) =>{
         icone.innerHTML = 'view_module'
     }
 }
-    
     

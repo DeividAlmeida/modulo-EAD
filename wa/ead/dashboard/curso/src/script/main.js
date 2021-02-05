@@ -1,12 +1,9 @@
 let jss78 = document.getElementById('jss78');
 let container = document.getElementById('container');
 let progresso = document.getElementById('progresso');
-let concluidas = document.getElementsByClassName('chart-text');
-let circulo = document.getElementsByClassName('chart-circle-fill');
 let texto = document.getElementsByClassName('course-progress-text');
 let barra = document.getElementsByClassName('jss204');
 let color = document.getElementsByClassName('jss170');
-let stroker = document.getElementsByClassName('chart-circle-fill');
 let t_c = 0 ;
 let t_t = 0;
 let nav = false;
