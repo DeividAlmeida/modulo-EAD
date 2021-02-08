@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `ead_usuario` (
     `notas` text DEFAULT NULL,
     `cursos` text DEFAULT NULL,
     `imagem` text DEFAULT NULL,
-    `concluidos` text DEFAULT NULL,    
+    `concluidos` text DEFAULT NULL,
+    `expira` text DEFAULT NULL,   
     `data`  date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

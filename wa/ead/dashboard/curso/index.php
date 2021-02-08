@@ -34,7 +34,13 @@ if(is_array($mdls)){
     $key = count($aula);
     $aulas = json_encode($aula);
 }
-
+if(isset($_GET['direto'])){
+    $indice = json_encode(DBRead('ead_aula','id,modulo,campos,nome,descricao,tipo,video,arquivo,professor,tipo_prova,qtd_alternativas,questoes,alternativas',"WHERE nome = '{$_GET['direto']}'")[0]);
+    $numeroindex = $_GET['idxs'];
+}else{
+    $indice = json_encode($aula[$mdls[0]['id']][0]);
+    $numeroindex = 1;
+}
 $modulos = json_encode($mdls);
 ?>
 <html lang="pt-br">
@@ -250,9 +256,9 @@ $modulos = json_encode($mdls);
             status:'',
             notas:'',
             concluidos:'',
-            id_aula: 1,
+            id_aula: <?php echo $numeroindex ?>,
             idx_nota:'',
-            idx: <?php echo json_encode($aula[$mdls[0]['id']][0]) ?>,
+            idx: <?php echo $indice ?>,
             nav: 'close', 
             main_width:'without-sidemenu',
             icon: '',

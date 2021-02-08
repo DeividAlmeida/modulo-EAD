@@ -8,6 +8,8 @@ let prox_texto = document.getElementsByClassName('lesson-text-title');
 let stroker = document.getElementsByClassName('chart-circle-fill');
 let licao = document.getElementsByClassName('lesson-icon');
 let bxl = document.getElementsByClassName('lesson-content');
+let border = document.getElementsByClassName('jss129');
+let info = document.getElementsByClassName('lesson-infos-icon-go');
 function progresso_barra(a){
     for(let i = 0; i< val.cursos.length; i++){
         let contar = 0;

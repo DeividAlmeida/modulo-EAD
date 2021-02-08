@@ -49,7 +49,6 @@ if(is_array($cursos)){
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
-
 </head>
 
 <body >
@@ -70,7 +69,7 @@ if(is_array($cursos)){
                 </div>
                 <div class="MuiBox-root jss50 jss41" >
                     <div :class="'MuiBox-root content '+lista" >
-                        <div :class="'MuiBox-root jss92 jss87  jss64 jss59 curso '+lista"  @click="acessar(curso[0].id)" v-for="curso, index of cursos">
+                        <div :class="'MuiBox-root jss92 jss87  jss64 jss59 curso '+lista"  @click="acessar(curso[0].id,index)" v-for="curso, index of cursos">
                             <a  class="MuiTypography-root MuiLink-root MuiLink-underlineNone img MuiTypography-colorInherit" id="59383" >
                                 <img :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+curso[0].capa" alt="">
                             </a>
@@ -127,7 +126,7 @@ if(is_array($cursos)){
                                                     <div class="MuiBox-root jss127 course-body-content">
                                                         <label class="MuiTypography-root course-body-list-title MuiTypography-overline">Próxima  aula:</label>
                                                         <div class="MuiBox-root jss133 course-body-list-content next">
-                                                            <a class="jss129 next">
+                                                            <a class="jss129 next" prox="1" tag="0" :curso="curso[0].id" onclick="nextle(this.getAttribute('prox'),this.getAttribute('curso'), this.getAttribute('tag'))">
                                                                 <div class="MuiBox-root jss134 lesson-content">
                                                                     <span class="material-icons MuiIcon-root lesson-icon MuiIcon-fontSizeSmall" aria-hidden="true">radio_button_unchecked</span>
                                                                     <div class="MuiBox-root jss135 lesson-text-container">
@@ -182,8 +181,8 @@ if(is_array($cursos)){
             <div class="MuiPaper-root MuiPopover-paper MuiPaper-elevation8 MuiPaper-rounded" tabindex="-1" style="opacity: 0; transform: scale(0.75, 0.5625); visibility: hidden;">
                 <div class="MuiBox-root jss55 help-email-container">
                     <span class="MuiTypography-root help-email-label MuiTypography-overline">E-mail para ajuda:</span>
-                    <a class="MuiTypography-root MuiLink-root MuiLink-underlineHover help-email-link MuiTypography-colorPrimary" href="mailto:contato@wacontrol.com.br">
-                        <p class="MuiTypography-root help-email-text MuiTypography-body2">contato@wacontrol.com.br</p>
+                    <a class="MuiTypography-root MuiLink-root MuiLink-underlineHover help-email-link MuiTypography-colorPrimary" >
+                        <p class="MuiTypography-root help-email-text MuiTypography-body2"></p>
                     </a>
                 </div>
                 <hr class="MuiDivider-root">
@@ -202,7 +201,9 @@ if(is_array($cursos)){
         <?php require_once('../menu/vertical.php'); ?>
     </div>
     <script>
+        
         const origin = '<?php echo ConfigPainel('base_url'); ?>';
+        const id_aluno = '<?php echo $id ?>';
         let inter = true;
         const val = new Vue({
             el:"#root",
@@ -219,13 +220,19 @@ if(is_array($cursos)){
                     if(this.status == 'curso'){
                         new progresso_barra("document.getElementsByClassName('jss66')[i].style.width = cento+'%'")
                     }else{
-                        new progresso_barra('circulo[i].setAttribute("stroke-dasharray", cento+" 100"); if(cento == 100){bxl[i].style.background="rgba(0, 194, 104, 0.16)";licao[i].style.color="#00C268";licao[i].innerText="check_circle";prox_texto[i].innerText ="AULA "+contar+" - "+val.aula[val.cursos[i][0].id][contar]; concluidas[i].setAttribute("class", "chart-text material-icons"); stroker[i].style.stroke = "#00C268"; concluidas[i].innerText = "check"}else{concluidas[i].innerText = cento+"%";  prox_texto[i].innerText ="AULA "+(contar+1)+" - "+val.aula[val.cursos[i][0].id][contar+1]}')
+                        new progresso_barra('circulo[i].setAttribute("stroke-dasharray", cento+" 100"); if(cento == 100){border[i].style.border = "#00C268";info[i].style.color = "#00C268"; prox_texto[i].style.color = "#00C268"; bxl[i].style.background="rgba(0, 194, 104, 0.16)";licao[i].style.color="#00C268";licao[i].innerText="check_circle";prox_texto[i].innerText ="AULA "+contar+" - "+val.aula[val.cursos[i][0].id][contar]; concluidas[i].setAttribute("class", "chart-text material-icons"); stroker[i].style.stroke = "#00C268"; concluidas[i].innerText = "check"; border[i].setAttribute("prox", val.aula[val.cursos[i][0].id][contar]);border[i].setAttribute("tag", contar)}else{concluidas[i].innerText = cento+"%";border[i].setAttribute("prox", val.aula[val.cursos[i][0].id][contar+1]);border[i].setAttribute("tag", contar+1);  prox_texto[i].innerText ="AULA "+(contar+1)+" - "+val.aula[val.cursos[i][0].id][contar+1]}')
                     }
                 })
             },
             methods:{
-                acessar: function (a) {
-                    window.location.href=origin+'wa/ead/dashboard/curso/?posicao=voltar&id='+a
+                
+                acessar: function (a,b) {
+                    let data = new Date()
+                    if(data.setDate(data.getDate() - time[b])>= val.expira[b]){
+                        alert("Curso expirou")
+                    }else{ 
+                        window.location.href=origin+'wa/ead/dashboard/curso/?posicao=voltar&id='+a
+                    }
                 }, 
                 progresso: function(a){
                     let arrow = document.getElementById('arrow'+a);
@@ -242,9 +249,24 @@ if(is_array($cursos)){
                 }
             }
         });
-    val.progressos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
-        
-  
+        val.progressos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
+        val.expira = val.progressos = JSON.parse(<?php if(empty($valida['expira'])){echo "'[]'";}else{ echo $valida['expira'];} ?>);
+        for(let i= 0 ; i< val.cursos.length; i++){
+            if(val.expira[i] == null){
+                val.expira[i] = (new Date()*1)
+                if(val.cursos.length == i+1){
+                    let expiraform = new FormData();
+                    expiraform.append('0',JSON.stringify(val.expira))
+                    fetch(origin+'wa/ead/apis/expira.php?id='+id_aluno,{
+                        method: 'POST',
+                        body: expiraform
+                    }).then(restp => restp.text()).then(res => {
+                        
+                        
+                    })
+                }
+            }
+        }
     </script>
     <script src="src/script/main.js"></script>
     <script src="../menu/src/script/main.js"></script>
