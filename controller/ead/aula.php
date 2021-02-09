@@ -48,6 +48,7 @@ if(isset($_GET['aula']) && $id == "0"){
         'alternativas'      => $alternativas,
         'professor'         => post('professor'),
         'tipo_prova'        => post('tipo_prova'),
+        'ordem'             => post('ordem'),
         'qtd_alternativas'  => post('qtd_alternativas')
       );
       $query = DBCreate('ead_aula', $data, true);
@@ -73,6 +74,7 @@ if(isset($_GET['aula']) && $id == "0"){
         'alternativas'      => $alternativas,
         'professor'         => post('professor'),
         'tipo_prova'        => post('tipo_prova'),
+        'ordem'             => post('ordem'),
         'qtd_alternativas'  => post('qtd_alternativas')
       );
       $query =  DBUpdate('ead_aula', $data, "id = '{$id}'");

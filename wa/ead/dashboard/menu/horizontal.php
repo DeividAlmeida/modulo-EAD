@@ -6,8 +6,8 @@
         </span>
         <span class="MuiTouchRipple-root"></span>
     </button>
-    <a class="logo-toolbar" href="/">
-        <img  src="https://llbr.blob.core.windows.net/machine-user-images/Logotipo-Curso-de-Web-Acappella-vermelho.png"  alt="">
+    <a class="logo-toolbar" >
+        
     </a>
     <button class="MuiButtonBase-root MuiIconButton-root icon-toolbar MuiIconButton-sizeSmall" tabindex="0" type="button">
         <span class="MuiIconButton-label">

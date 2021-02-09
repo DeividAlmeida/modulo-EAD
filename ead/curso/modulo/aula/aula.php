@@ -125,6 +125,15 @@ $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
                     </div>
                 </div>
             </div>
+            <div class="row"  >
+                <div class="col-md-6" >
+                    <div class="form-group">
+                        <label>Ordem: </label>
+                        <input type='number'  class='form-control' min="0" v-model="idx.ordem" name='ordem'> 
+                            
+                    </div>
+                </div>
+            </div>
             
             <input type="hidden" name="modulo" v-model="idx.modulo" required>
             <hr>

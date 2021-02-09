@@ -25,7 +25,7 @@
     			<a class="btn btn-sm btn-primary" href="?">Inicio</a>
     			<span class="dropdown">
     			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
-    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Professor</a>
+    			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Professores</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item " href="?Prof">Professores</a>
@@ -65,7 +65,6 @@
 					<a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Configuração</a>
 					<div class="dropdown-menu dropdown-menu-left" x-placement="bottom">
 						<a class="dropdown-item" href="?configGeral">Configurações Gerais</a>
-						<a class="dropdown-item" href="?configPagamento">Configurações de Pagamento</a>
 						<a class="dropdown-item" href="?configEmail">Configurações de Email</a>
 					</div>					
 				<?php } ?>
@@ -88,8 +87,6 @@
         			    require_once('ead/curso/modulo/aula/aula.php');
         			elseif (isset($_GET['configGeral'])) :
         			    require_once('ead/configuracao/geral.php');
-        			elseif (isset($_GET['configPagamento'])) :
-        			    require_once('ead/configuracao/pagamentos.php'); 
         			elseif (isset($_GET['configEmail'])) :
         			    require_once('ead/configuracao/email.php'); 
         			endif;

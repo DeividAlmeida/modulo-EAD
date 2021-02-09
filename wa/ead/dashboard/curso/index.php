@@ -29,7 +29,7 @@ if(is_array($cursos)){
 $mdls = DBRead('ead_modulo','*',"WHERE curso = '{$id_curso}'");
 if(is_array($mdls)){
     foreach($mdls as $ky => $vls){
-       $aula[$vls['id']] =  DBRead('ead_aula','id,modulo,campos,nome,descricao,tipo,video,arquivo,professor,tipo_prova,qtd_alternativas,questoes,alternativas',"WHERE modulo = '{$vls['id']}'");
+       $aula[$vls['id']] =  DBRead('ead_aula','id,modulo,campos,nome,descricao,tipo,video,arquivo,professor,tipo_prova,qtd_alternativas,questoes,alternativas',"WHERE modulo = '{$vls['id']}'  ORDER BY modulo, ordem ");
     }
     $key = count($aula);
     $aulas = json_encode($aula);

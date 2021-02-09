@@ -8,10 +8,12 @@ $professores = DBRead('ead_prof','*');
 <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
   <script src='https://cdn.jsdelivr.net/npm/vue-mce@1.5.2/dist/vue-mce.web.js'></script>
-  <script src='ead/src/tinymce/tinymce.min.js'></script>
 <style>
     .multiselect__tag, .multiselect__option--highlight, .multiselect__tag-icon, .multiselect__tag-icon:after{ background: #86939e !important}
     .mce-notification {display: none !important;}
+    .text-center img{
+        max-width:50% !important;
+    }
 </style>
 <div class="card"  >
     <div id="control" v-if="!status">

@@ -1,20 +1,9 @@
 <?php 
     $query = json_encode(DBRead('ead_config_geral','*'));
     
-    $cod_carrinho  = '<div id="EADCarrinho" ></div>'."\n";
-    $cod_carrinho .= '<script type="text/javascript">EADCarrinho();</script>';
+    $cod = '<iframe onload="frame(this)"  src="'.ConfigPainel('base_url').'/wa/ead/login/" ></iframe>';
+
     
-    $cod_btn_carrinho  = '<div id="EADBtnCarrinho" ></div>'."\n";
-    $cod_btn_carrinho .= '<script type="text/javascript">EADBtnCarrinho();</script>';
-    
-    $cod_checkout  = '<div id="EADCheckout" ></div>'."\n";
-    $cod_checkout .= '<script type="text/javascript">EADCheckout();</script>';
-    
-    $cod_busca_buscador  = '<div id="EADBuscador" ></div>'."\n";
-    $cod_busca_buscador .= '<script type="text/javascript">EADBuscador();</script>';
-    
-    $cod_busca_resultado  = '<div id="EADBuscaResultado" ></div>'."\n";
-    $cod_busca_resultado .= '<script type="text/javascript">EADBuscaResultado();</script>';
 ?>
 <div class="card"  >
     <div class="card-header white" >
@@ -22,58 +11,12 @@
     </div>
     <div class="card-body">
         <form method="post" action="?editaGeral" >
-            <button id="btnCopiarCodSite1" class="btn btn-primary btn-xs m-1" onclick="CopiadoCodSite(1)" data-clipboard-text='<?php echo $cod_carrinho; ?>' type="button">
-                <i class="icon icon-code"></i> Copiar Código Página Carrinho
+            <button id="btnCopiarCodSite1" class="btn btn-primary btn-xs m-1" onclick="CopiadoCodSite(1)" data-clipboard-text='<?php echo $cod; ?>' type="button">
+                <i class="icon icon-code"></i> Copiar Código de Implementação
             </button>
-            
-            <button id="btnCopiarCodSite2" class="btn btn-primary btn-xs m-1" onclick="CopiadoCodSite(2)" data-clipboard-text='<?php echo $cod_btn_carrinho; ?>' type="button">
-                <i class="icon icon-code"></i> Copiar Código Botão Carrinho
-            </button>
-            
-            <button id="btnCopiarCodSite3" class="btn btn-primary btn-xs m-1" onclick="CopiadoCodSite(3)" data-clipboard-text='<?php echo $cod_checkout; ?>' type="button">
-                <i class="icon icon-code"></i> Copiar Código Página Checkout
-            </button>
-            
-            
-            <button id="btnCopiarCodSite4" class="btn btn-primary btn-xs m-1" onclick="CopiadoCodSite(4)" data-clipboard-text='<?php echo $cod_busca_buscador; ?>' type="button">
-                <i class="icon icon-code"></i> Copiar Código Campo de Busca
-            </button>
-            
-            <button id="btnCopiarCodSite5" class="btn btn-primary btn-xs m-1" onclick="CopiadoCodSite(5)" data-clipboard-text='<?php echo $cod_busca_resultado; ?>' type="button">
-                <i class="icon icon-code"></i> Copiar Código Página Resultado Busca
-            </button>
-            
+    
             <hr/>
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="pagina_carrinho">Página do Carrinho:</label>
-                        <input v-model="idx[0].link_carrinho"  name="link_carrinho" class="form-control" >
-                  </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="pagina_carrinho">Página do Resultado da Busca:</label>
-                        <input v-model="idx[0].link_busca" name="link_busca" class="form-control" >
-                    </div>
-                </div>
-            </div>
-      
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="pagina_carrinho"> Página do Checkout:</label>
-                        <input v-model="idx[0].link_checkout" name="link_checkout" class="form-control" >
-                    </div>
-                </div>
-            </div>
-            
-            <hr/>
-                
             <h4>Configuração Carrinho</h4>
             <div class="row">
                 <div class="col-md-6">

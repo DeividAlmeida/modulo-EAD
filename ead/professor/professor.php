@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label>Cargo: </label>
-                        <input class="form-control" v-model="ctrl.cargo" name="cargo" required>
+                        <textarea rows="3" class="form-control" v-model="ctrl.cargo" name="cargo" required>{{ctrl.cargo}}</textarea>
                     </div>
                     <div class="form-group" >
                         <label>Rede Social: <i class="icon icon-question-circle" data-toggle="tooltip" data-placement="right" ></i></label>
@@ -85,7 +85,7 @@ new Vue({
       
     data: {
         
-        fields: [<?php foreach($icons as $icon){echo '{ "link":"'.$icon['link'].'", "icon":"'.$icon['icon_social'].'" },';} ?>],
+        fields: [<?php if(is_array($icons)){foreach($icons as $icon){echo '{ "link":"'.$icon['link'].'", "icon":"'.$icon['icon_social'].'" },';} }?>],
         ctrls: [<?php echo $parametro ?>]
     },
     methods: {

@@ -12,7 +12,7 @@
                     <span class="MuiTouchRipple-root"></span>
                 </button>
                 <div class="MuiBox-root jss145 header-logo-container">
-                    <img  src="https://llbr.blob.core.windows.net/machine-user-images/Logotipo-Curso-de-Web-Acappella-vermelho.png" alt="" class="header-logo-img">
+                    
                 </div>
             </div>
             <ul class="MuiList-root list-channels-container MuiList-padding">

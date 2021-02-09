@@ -13,11 +13,14 @@ if(isset($_GET['prof'])){
         $handle->Process($upload_folder);
         $path = $handle->file_dst_name;
     }
-
-    $resources = array_combine(array_keys($_POST['link']), array_map(function ($icon_social, $link) {
-        return compact('icon_social', 'link');
-    },$_POST['icon_social'], $_POST['link']));
-    $_POST['social'] = json_encode($resources, JSON_FORCE_OBJECT);
+    if($_POST['link'] != null){
+        $resources = array_combine(array_keys($_POST['link']), array_map(function ($icon_social, $link) {
+            return compact('icon_social', 'link');
+        },$_POST['icon_social'], $_POST['link']));
+        $_POST['social'] = json_encode($resources, JSON_FORCE_OBJECT);
+    }else{
+        $_POST['social'] = "";
+    }
 }
 if(isset($_GET['prof']) && $id == "0"){   
       $data = array(
@@ -27,7 +30,7 @@ if(isset($_GET['prof']) && $id == "0"){
         'img'             => $path
       );
       $query = DBCreate('ead_prof', $data, true);
-      
+
         if ($query != 0) {
             Redireciona('?Prof&sucesso');
         } else {
@@ -44,6 +47,7 @@ if(isset($_GET['prof']) && $id == "0"){
         'img'             => $path
       );
       $query =  DBUpdate('ead_prof', $data, "id = '{$id}'");
+      
       
         if ($query != 0) {
             Redireciona('?Prof&sucesso');
