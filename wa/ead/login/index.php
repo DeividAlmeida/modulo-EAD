@@ -16,6 +16,7 @@ else if(isset($_COOKIE['Wacontroltoken'])){
 
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
 if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboard/inicio/index.php?status=curso&posicao=avancar');}
+$wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 
 ?>
 <html lang="pt-br">
@@ -28,6 +29,7 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
         <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/login/src/style/main.css">
         <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
         <script src="https://cdn.jsdelivr.net/npm/vue-swal@1/dist/vue-swal.min.js"></script>
+       <?php require_once('src/style/wacr.php') ?>
     </head>
 
     <body style="height:400px !important">
@@ -35,7 +37,9 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
             <div class="MuiBox-root jss21 jss20">
                 <div class="MuiBox-root jss23 jss22">
                     <div class="MuiBox-root jss24 logo-container">
-                        <img src="https://llbr.blob.core.windows.net/machine-user-images/Logotipo-Curso-de-Web-Acappella-vermelho.png" alt="" class="logo-img">
+                    <?php if($wacr['logo'] == 'Sim'){ ?>
+                        <img src="<?php echo ConfigPainel('base_url')."wa/ead/uploads/".$wacr['img']; ?>" alt="" class="logo-img">
+                    <?php }?>
                     </div>
                     <form class="MuiFormControl-root">
                         <div v-if="status == 'login'">
@@ -66,12 +70,12 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
                             <br>
                             <div class="MuiBox-root jss31 btn-login-container">
                                 <button onclick="valida()" class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge" tabindex="0" type="button">
-                                    <span class="MuiButton-label">Entrar</span>
+                                    <span class="MuiButton-label bt_txt">Entrar</span>
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
                             <label class="MuiFormControlLabel-root "  for="manter" onclick="box(document.getElementById('manter').checked)" style="right:35%; position: relative">
-                                <span class="MuiButtonBase-root MuiIconButton-root jss32 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
+                                <span class=" text2 MuiButtonBase-root MuiIconButton-root jss32 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
                                     <span class="MuiIconButton-label" id="switch_board">
                                         <input class="jss35" id="manter" type="checkbox" data-indeterminate="false" value="true">
                                         <span class="material-icons MuiIcon-root" id="switch" aria-hidden="true"></span>
@@ -79,13 +83,13 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
                                     <span class="MuiTouchRipple-root"></span>
                                 </span>
                                 <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">
-                                    <span class="MuiTypography-root keep-connected MuiTypography-caption"> Mantenha-me conectado</span>
+                                    <span class=" text2 MuiTypography-root keep-connected MuiTypography-caption"> Mantenha-me conectado</span>
                                 </span>
                             </label>
                         </div>
                         <div v-if="status == 'reset'">
                             <div class="MuiBox-root jss41 input-container email">
-                                <p class="MuiTypography-root sign-up MuiTypography-body2">Informe seu e-mail de acesso para recuperar a senha:</p>
+                                <p class="MuiTypography-root sign-up MuiTypography-body2"></p>
                             </div>
                             <div class="MuiBox-root jss41 input-container email">
                                 <div class="MuiFormControl-root MuiTextField-root input">
@@ -97,7 +101,7 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
                             </div>
                             <div class="MuiBox-root jss31 btn-login-container">
                                 <button class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge" tabindex="0" type="submit">
-                                    <span class="MuiButton-label">Recuperar senha</span>
+                                    <span class="MuiButton-label"></span>
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
@@ -107,7 +111,7 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
                     <div class="MuiBox-root jss36 sign-up-container" >
                         <span class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeLarge MuiButton-sizeLarge" tabindex="0" aria-disabled="false"  >
                             <span class="MuiButton-label">
-                                <a class="sign-up" style="text-decoration:none ">Ainda não é aluno?</a>
+                                <a  class="sign-up text2" style="text-decoration:none ">Ainda não é aluno?</a>
                             </span>
                             <span class="MuiTouchRipple-root"></span>
                         </span>

@@ -28,7 +28,7 @@ if(empty($valida['imagem'])){
 }else{
    $avatar = ConfigPainel('base_url').'wa/ead/uploads/'.$valida['imagem'];
 }
-
+$wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 ?>
 <html lang="pt-br">
 <head>
@@ -39,11 +39,8 @@ if(empty($valida['imagem'])){
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/cadastro/src/style/main.css">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
-    <style>
-        .jss26{
-            width: auto !important;
-        }
-    </style>
+    <?php #require_once('src/style/wacr.php');?>
+
 </head>
 
 <body style="margin:0 !important">
@@ -67,7 +64,6 @@ if(empty($valida['imagem'])){
                                      <input onchange="readURL(this)" id="avatar-input" type="file" class="perfil" multiple accept='image/*' name="imagem">
                                     </div>
                                 </lable >
-                                <small class="MuiTypography-root section-title MuiTypography-overline" style="color: rgba(0, 0, 0, .38)">150x100</small>
                             </div>
                             <div class="MuiBox-root jss94 account-area account-data-inputs-container">
                                 <div class="MuiBox-root jss95 input-container name">

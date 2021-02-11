@@ -18,7 +18,7 @@ INSERT INTO `ead` (`id`, `modo`) VALUES (
 CREATE TABLE IF NOT EXISTS `ead_prof` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `nome` varchar(255) DEFAULT NULL,
-    `cargo` VARCHAR(255) DEFAULT NULL,
+    `cargo` text DEFAULT NULL,
     `redes` varchar(255) DEFAULT NULL,
     `img` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -150,70 +150,43 @@ CREATE TABLE IF NOT EXISTS `ead_config_deposito` (
 CREATE TABLE IF NOT EXISTS `ead_config_geral` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-        #CARRINHO
-    `carrinho_cor_btn` varchar(255) DEFAULT NULL,
-    `carrinho_cor_btn_finalizar` varchar(255) DEFAULT NULL,
-
-        #ICONE CARINHO  MENU
-    `icon_carrinho_cor_icon` varchar(255) DEFAULT NULL,
-    `icon_carrinho_cor_fundo` varchar(255) DEFAULT NULL,
-    `icon_carrinho_cor_texto` varchar(255) DEFAULT NULL,
-    `icon_carrinho_cor_btn_ver` varchar(255) DEFAULT NULL,
-    `icon_carrinho_cor_btn_ver_texto` varchar(255) DEFAULT NULL,
-    `icon_carrinho_cor_btn_ver_hover` varchar(255) DEFAULT NULL,
-
-        #LINK DO CARRINHO
-    `link_carrinho` text DEFAULT NULL,
-
-        #BUSCA
-    `busca_limite_resultado` varchar(255) DEFAULT NULL,
-    `busca_tipo_btn` varchar(255) DEFAULT NULL,
-    `busca_tamanho_btn` varchar(255) DEFAULT NULL,
-    `busca_cor_btn` varchar(255) DEFAULT NULL,
-    `busca_cor_btn_hover` varchar(255) DEFAULT NULL,
-    `busca_cor_btn_texto` varchar(255) DEFAULT NULL,
-
-        #LINK DO RESULTADO DA BUSCA
-    `link_busca` text DEFAULT NULL,
-
-        #LINK DO _LOGIN
-    `link_login` text DEFAULT NULL,
-
-        #LINK DO CADASTRO
-    `link_cadastro` text DEFAULT NULL,
-
-        #LINK CHECKOUT
-    `link_checkout` text DEFAULT NULL
+        #LOGIN_pAG
+    `lg_cor_fundo` varchar(255) DEFAULT NULL,
+    `lg_cor_texto` varchar(255) DEFAULT NULL,
+    `lg_cor_texto_bt` varchar(255) DEFAULT NULL,
+    `lg_cor_texto_hover_bt` varchar(255) DEFAULT NULL,
+    `lg_cor_fundo_bt` varchar(255) DEFAULT NULL,
+    `logo` varchar(255) DEFAULT NULL,
+    `img` varchar(255) DEFAULT NULL
+    `lg_cor_fundo_hover_bt` varchar(255) DEFAULT NULL,
+        #DASHBOARD
+    `ds_cor_fundo` varchar(255) DEFAULT NULL,
+    `ds_cor_titulo` varchar(255) DEFAULT NULL,
+    `ds_descricao` varchar(255) DEFAULT NULL,
+    `cor_primaria` varchar(255) DEFAULT NULL,
+    `cor_secundaria` varchar(255) DEFAULT NULL
     
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
     INSERT INTO `ead_config_geral` (
         `id`, 
 
-            #CARRINHO
-        `carrinho_cor_btn`, 
-        `carrinho_cor_btn_finalizar`, 
+        #LOGIN_pAG
+        `lg_cor_fundo`, 
+        `lg_cor_texto`, 
+        `lg_cor_texto_bt`, 
+        `lg_cor_texto_hover_bt`, 
+        `lg_cor_fundo_bt`,
+        `logo`, 
+        `img`,  
+        `lg_cor_fundo_hover_bt`,
+        #DASHBOARD
+        `ds_cor_fundo`, 
+        `ds_cor_titulo`,
+        `ds_descricao`, 
+        `cor_primaria`,  
+        `cor_secundaria`
 
-            #ICONE CARINHO  MENU
-        `icon_carrinho_cor_icon`, 
-        `icon_carrinho_cor_fundo`, 
-        `icon_carrinho_cor_texto`, 
-        `icon_carrinho_cor_btn_ver`, 
-        `icon_carrinho_cor_btn_ver_texto`, 
-        `icon_carrinho_cor_btn_ver_hover`,
-
-            #LINK DO CARRINHO
-        `link_carrinho`,
-
-            #BUSCA
-        `busca_limite_resultado`, 
-        `busca_tipo_btn`, 
-        `busca_tamanho_btn`, 
-        `busca_cor_btn`, 
-        `busca_cor_btn_hover`, 
-        `busca_cor_btn_texto`,
-        
-            #LINK CHECKOUT
-        `link_checkout`
+            
 
     ) VALUES
-    (1,'','','','','','','','','','','','','','','','');
+    (1,'','','','','','','','','','','','','');

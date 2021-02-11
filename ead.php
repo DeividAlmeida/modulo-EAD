@@ -68,7 +68,8 @@
 						<a class="dropdown-item" href="?configEmail">Configurações de Email</a>
 					</div>					
 				<?php } ?>
-			</span>
+			    </span>
+			    <button class="btn btn-sm behance text-white" data-toggle="modal" data-target="#Ajuda"><i class="icon-question-circle"></i></button>
     		</div>
                 <?php 		
                     if (isset($_GET['Prof'])) :
@@ -95,6 +96,24 @@
         </div>
     </body>
 </div>
+<div class="modal fade" id="Ajuda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content b-0">
+				<div class="modal-header r-0 bg-primary">
+					<h6 class="modal-title text-white" id="exampleModalLabel">Informações de Sobre o Módulo</h6>
+					<a href="#" data-dismiss="modal" aria-label="Close" class="paper-nav-toggle paper-nav-white active"><i></i></a>
+				</div>
+
+				<div class="modal-body">
+					<h5><b>Videoaulas direto do Vimeo ou Youtube:</b></h5>
+					<p>
+					    Para obter mais informações sobre esse tipo de integração acesse as documentações abaixo <br>
+					    <a target="_blank" href="https://vimeo.zendesk.com/hc/pt/articles/360001494447-Usando-os-par%C3%A2metros-do-player"><i class="icon icon-vimeo-square" aria-hidden="true"></i> Vimeo</a><br>
+					    <a target="_blank" href="https://developers.google.com/youtube/player_parameters?hl=pt-br"><i class="icon icon-youtube-square" aria-hidden="true"></i> YouTube</a>
+					</p>
+				</div>
+			</div>
+		</div>
 <?php require_once('includes/footer.php'); ?>
 
 

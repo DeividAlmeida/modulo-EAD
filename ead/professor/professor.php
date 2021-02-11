@@ -27,8 +27,8 @@
                         <input class="form-control" v-model="ctrl.nome" name="nome" required>
                     </div>
                     <div class="form-group">
-                        <label>Cargo: </label>
-                        <textarea rows="3" class="form-control" v-model="ctrl.cargo" name="cargo" required>{{ctrl.cargo}}</textarea>
+                        <label>Descrição: </label>
+                        <textarea rows="7" class="form-control" v-model="ctrl.cargo" name="cargo" required>{{ctrl.cargo}}</textarea>
                     </div>
                     <div class="form-group" >
                         <label>Rede Social: <i class="icon icon-question-circle" data-toggle="tooltip" data-placement="right" ></i></label>
@@ -107,7 +107,7 @@ new Vue({
 
 let decide = document.getElementById('preview');
 <?php if($status != 0 && !empty($conect['img'])){ ?>
-    decide.innerHTML = '<img id="blah"  src="<?php echo ConfigPainel('base_url')."wa/ead/uploads/".$conect['img']; ?>" />'
+    decide.innerHTML = '<img id="blah" style="max-height:350px;" src="<?php echo ConfigPainel('base_url')."wa/ead/uploads/".$conect['img']; ?>" />'
 <?php }else{ ?>
     decide.innerHTML = "Sua foto deve ter as mesmas dimensões de largura e altura";
 <?php } ?>

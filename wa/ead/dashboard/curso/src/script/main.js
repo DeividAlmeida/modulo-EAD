@@ -28,8 +28,9 @@ function efeitos(){
             
         }
     }
-    barra[0].style.width = (t_c/t_t)*100+'%'
-    texto[0].innerText = (t_c/t_t)*100+'% Concluído'
+    let countpro = (t_c/t_t)*100;
+    barra[0].style.width = countpro+'%'
+    texto[0].innerText = parseInt(countpro)+'% Concluído'
 }
 window.onload = () => {
     document.body.style.height= '800px';
@@ -39,6 +40,7 @@ window.onload = () => {
                 val.aulas[val.modulos[i].id][b].tag = count +=1;
             })
         }
+        new efeitos()
 }
 anterior = () => {
     val.status = ''
@@ -63,8 +65,8 @@ function proximo(a){
     }
 }
 navegar = () =>{
-    nav ?  nav = false : nav = true
-    if(nav){  
+    if(nav){
+        nav = false
         val.nav = 'open'; 
         val.main_width = 'false'; 
         val.icon = 'opened'; 
@@ -74,6 +76,7 @@ navegar = () =>{
         jss78.style.height = '100%';
         
     }else{ 
+        nav = true
         val.nav = 'close'; 
         val.main_width = 'without-sidemenu'; 
         val.icon = ''; 
@@ -82,7 +85,6 @@ navegar = () =>{
         container.style.display = 'none';
         jss78.style.height = '75px';
     }
-    new efeitos()
 
 }
 

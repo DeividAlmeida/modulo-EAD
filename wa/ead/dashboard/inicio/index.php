@@ -38,17 +38,18 @@ if(is_array($cursos)){
     $curso = json_encode($curso_valida);
     $aula = json_encode($aula, true);
 }else{$curso = 'null';}
+$wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 ?>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,minimal-ui">
-    <base target="_blank">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,600,700,900">
     <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/inicio/src/style/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
+    <?php require_once('src/style/wacr.php');?>
 </head>
 
 <body >
@@ -250,7 +251,7 @@ if(is_array($cursos)){
             }
         });
         val.progressos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
-        val.expira = val.progressos = JSON.parse(<?php if(empty($valida['expira'])){echo "'[]'";}else{ echo $valida['expira'];} ?>);
+        val.expira = val.expira = JSON.parse(<?php if(empty($valida['expira'])){echo "'[]'";}else{ echo $valida['expira'];} ?>);
         for(let i= 0 ; i< val.cursos.length; i++){
             if(val.expira[i] == null){
                 val.expira[i] = (new Date()*1)

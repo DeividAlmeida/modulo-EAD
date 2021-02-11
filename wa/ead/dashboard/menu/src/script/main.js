@@ -18,7 +18,8 @@ function progresso_barra(a){
                 contar++
             }
         }
-        let cento = (contar/(Object.getOwnPropertyNames(val.aula[val.cursos[i][0].id]).length -1))*100
+        let centos = (contar/(Object.getOwnPropertyNames(val.aula[val.cursos[i][0].id]).length -1))*100
+        let cento = parseInt(centos)
         eval(a)
     }
 }

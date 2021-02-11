@@ -1,35 +1,35 @@
 <?php
 if(isset($_GET['editaGeral'])){
+    if($_FILES['img']['name'] == null){
+       $keep = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
+       $path = $keep['img'];
+    }else{
+        $upload_folder = 'wa/ead/uploads/';
+        $handle = new Upload($_FILES['img']);
+        $handle->file_new_name_body = md5(uniqid(rand(), true));
+        $handle->Process($upload_folder);
+        $path = $handle->file_dst_name;
+    }
   $data = array(
       
-        #CARRINHO
-    'carrinho_cor_btn'                  => post('carrinho_cor_btn'),
-    'carrinho_cor_btn_finalizar'        => post('carrinho_cor_btn_finalizar'),
+        #LOGIN
+    'lg_cor_fundo'              => post('lg_cor_fundo'),
+    'lg_cor_texto'              => post('lg_cor_texto'),
+    'lg_cor_texto_bt'           => post('lg_cor_texto_bt'),
+    'lg_cor_texto_hover_bt'     => post('lg_cor_texto_hover_bt'),
+    'lg_cor_fundo_bt'           => post('lg_cor_fundo_bt'),
+    'logo'                      => post('logo'),
+    'img'                       => $path,
+    'lg_cor_fundo_hover_bt'     => post('lg_cor_fundo_hover_bt'),
+        #DASHBOARD
+    'ds_cor_fundo'              => post('ds_cor_fundo'),
+    'ds_cor_titulo'             => post('ds_cor_titulo'),
+    'ds_descricao'              => post('ds_descricao'),
+    'cor_primaria'              => post('cor_primaria'),
+    'cor_secundaria'            => post('cor_secundaria')
+        
     
-        #ICON CARINHO  MENU
-    'icon_carrinho_cor_icon'            => post('icon_carrinho_cor_icon'),
-    'icon_carrinho_cor_fundo'           => post('icon_carrinho_cor_fundo'),
-    'icon_carrinho_cor_texto'           => post('icon_carrinho_cor_texto'),
-    'icon_carrinho_cor_btn_ver'         => post('icon_carrinho_cor_btn_ver'),
-    'icon_carrinho_cor_btn_ver_texto'   => post('icon_carrinho_cor_btn_ver_texto'),
-    'icon_carrinho_cor_btn_ver_hover'   => post('icon_carrinho_cor_btn_ver_hover'),
-    
-        #LINK DO CARRINHO
-    'link_carrinho'                     => post('link_carrinho'),
-    
-        #BUSCA
-    'busca_limite_resultado'            => post('busca_limite_resultado'),
-    'busca_tipo_btn'                    => post('busca_tipo_btn'),
-    'busca_tamanho_btn'                 => post('busca_tamanho_btn'),
-    'busca_cor_btn'                     => post('busca_cor_btn'),
-    'busca_cor_btn_hover'               => post('busca_cor_btn_hover'),
-    'busca_cor_btn_texto'               => post('busca_cor_btn_texto'),
-    
-        #LINK DO RESULTADO DA BUSCA
-    'link_busca'                        => post('link_busca'),
-    
-        #LINK CHECKOUT
-    'link_checkout'                     => post('link_checkout')
+
 );
   $query  = DBUpdate('ead_config_geral', $data, "id = '1'");
     if ($query != 0) {

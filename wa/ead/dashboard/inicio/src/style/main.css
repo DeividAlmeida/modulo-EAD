@@ -984,13 +984,11 @@ body::backdrop {
 }
 
 .jss43 {
-    border: solid rgba(0, 0, 0, 0.12);
     display: flex;
     padding: 0px 16px 0px 24px;
     overflow: hidden;
     min-height: 48px;
     align-items: center;
-    border-width: 1px 0;
     background-color: #FFFFFF;
 }
 
@@ -1400,7 +1398,7 @@ body::backdrop {
     height: 100vh;
     display: flex;
     flex-grow: 1;
-    background: #F2F2F2;
+    background: transparent;
     flex-direction: column;
 }
 
@@ -2617,7 +2615,7 @@ background-color: #fa9c00 !important;
         }
 
         .jss129.next .lesson-text-title {
-            color: #fa9c00;
+            color: #fa9c00 !important;
         }
 
         @media (max-width:959.95px) {
@@ -3196,7 +3194,7 @@ background-color: #fa9c00 !important;
             height: 100vh;
             display: flex;
             flex-grow: 1;
-            background: #F2F2F2;
+            background: transparent;
             flex-direction: column;
         }
 

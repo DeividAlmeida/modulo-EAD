@@ -27,7 +27,12 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
         <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/cadastro/src/style/main.css">
         <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
     </head>
-
+<style>
+    .jss92 img{
+            width:150px;
+            height:70px;
+        }
+</style>
 <body style="margin:0 !important">
     <div id="root">
         <div class="MuiBox-root jss23 jss22">

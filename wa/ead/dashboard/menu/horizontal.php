@@ -21,7 +21,7 @@
                 <?php if(empty($valida['imagem'])){?>
                     <span  class="material-icons MuiIcon-root avatar-icon" aria-hidden="true">person</span>
                 <?php  }else{?>
-                    <img src="<?php echo ConfigPainel('base_url').'wa/ead/uploads/'.$valida['imagem'];?>">
+                    <img style="width:150px; height:70px" src="<?php echo ConfigPainel('base_url').'wa/ead/uploads/'.$valida['imagem'];?>">
                 <?php } ?>
             </div>
         </span>

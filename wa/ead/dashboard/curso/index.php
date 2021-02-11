@@ -42,6 +42,7 @@ if(isset($_GET['direto'])){
     $numeroindex = 1;
 }
 $modulos = json_encode($mdls);
+$wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 ?>
 <html lang="pt-br">
 
@@ -55,7 +56,7 @@ $modulos = json_encode($mdls);
     <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/curso/src/style/main.css">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
     <script src="https://cdn.jsdelivr.net/npm/vue-swal@1/dist/vue-swal.min.js"></script>
-    <title>AULA 2 - TRABALHANDO COM AS BOXES - Curso de Web Acappella Grid</title>
+    <?php #require_once('src/style/wacr.php') ?>
 </head>
 
 <body >
@@ -171,7 +172,7 @@ $modulos = json_encode($mdls);
                             <div class="MuiBox-root jss83 jss82 container-section" id="content">
                                 <div class="MuiBox-root jss159 jss81 light">
                                     <div v-if="status != 'teste'">{{idx.descricao}}
-                                        <video v-if="idx.tipo == 'local'" :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+idx.video" controls>  
+                                        <video v-if="idx.tipo == 'local'" :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+idx.video" controls oncontextmenu="return false;" controlsList="nodownload">  
                                             Your browser does not support the video tag.
                                         </video>
                                         <div  v-html="idx.video" v-else></div>
@@ -259,10 +260,10 @@ $modulos = json_encode($mdls);
             id_aula: <?php echo $numeroindex ?>,
             idx_nota:'',
             idx: <?php echo $indice ?>,
-            nav: 'close', 
-            main_width:'without-sidemenu',
-            icon: '',
-            texto: "Mostrar navegação",
+            nav: 'open', 
+            main_width:'false',
+            icon: 'opened',
+            texto: "Esconder navegação",
             config:<?php echo $config ?>,
             cursos:<?php echo  $curso; ?>,
             modulos:<?php echo  $modulos ?>, 
