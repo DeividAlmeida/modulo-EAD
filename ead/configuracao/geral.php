@@ -135,7 +135,7 @@
                     </div>
                 </div>
             </div>
-              <hr/>
+              <!--<hr/>
 
             <h4>Configurações Área do Cliente</h4>
             <div class="row">
@@ -210,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="card-footer white">
                 <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="submit"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>

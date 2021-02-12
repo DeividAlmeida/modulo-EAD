@@ -49,7 +49,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
-    <?php require_once('src/style/wacr.php');?>
+    <?php #require_once('src/style/wacr.php');?>
 </head>
 
 <body >
@@ -83,7 +83,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                 <p class="MuiTypography-root title MuiTypography-body2">{{curso[0].nome}}</p>
                                 <span class="MuiTypography-root instructor MuiTypography-caption">
                                     <span v-for="prof of curso[0].professor">
-                                        <i>{{prof}}</i><br>
+                                        <i>Professor: {{prof}}</i><br>
                                     </span>
                                 </span>
                             </a>
@@ -111,7 +111,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                             <div class="MuiBox-root jss126 course-header-text-container">
                                                 <h6 class="MuiTypography-root course-header-text-title  MuiTypography-subtitle2">{{curso[0].nome}}</h6>
                                                 <span v-for="prof of curso[0].professor">
-                                                    <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">{{prof}}</i><br>
+                                                    <i class="MuiTypography-root course-header-text-teacher MuiTypography-caption">Professor: {{prof}}</i><br>
                                                 </span>
                                             </div>
                                             <span :id="'arrow'+index" class="material-icons MuiIcon-root course-header-icon-expand" aria-hidden="true">expand_less</span>

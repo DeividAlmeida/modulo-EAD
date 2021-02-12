@@ -2867,8 +2867,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
 
 .jss81 iframe:not(.no-force-resize) {
     width: 100%;
-    height: 52vw;
-    max-height: 55vh;
+    height: 100%;
 }
 
 .jss87 {

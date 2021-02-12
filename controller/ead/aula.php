@@ -48,6 +48,7 @@ if(isset($_GET['aula']) && $id == "0"){
         'alternativas'      => $alternativas,
         'professor'         => post('professor'),
         'tipo_prova'        => post('tipo_prova'),
+        'tipoA'             => post('tipoA'),
         'ordem'             => post('ordem'),
         'qtd_alternativas'  => post('qtd_alternativas')
       );
@@ -73,6 +74,7 @@ if(isset($_GET['aula']) && $id == "0"){
         'questoes'          => $questoes,
         'alternativas'      => $alternativas,
         'professor'         => post('professor'),
+        'tipoA'             => post('tipoA'),
         'tipo_prova'        => post('tipo_prova'),
         'ordem'             => post('ordem'),
         'qtd_alternativas'  => post('qtd_alternativas')

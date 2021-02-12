@@ -27,11 +27,20 @@ if(is_array($cursos)){
 }else{$curso = 'null';}
 
 $mdls = DBRead('ead_modulo','*',"WHERE curso = '{$id_curso}'");
+$key = 0 ;
 if(is_array($mdls)){
     foreach($mdls as $ky => $vls){
        $aula[$vls['id']] =  DBRead('ead_aula','id,modulo,campos,nome,descricao,tipo,video,arquivo,professor,tipo_prova,qtd_alternativas,questoes,alternativas',"WHERE modulo = '{$vls['id']}'  ORDER BY modulo, ordem ");
+        if(is_array($aula[$vls['id']])){
+            foreach($aula[$vls['id']] as $zezeu){
+                $key++;
+    
+            }
+        }
+        
     }
-    $key = count($aula);
+     
+
     $aulas = json_encode($aula);
 }
 if(isset($_GET['direto'])){
@@ -76,7 +85,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                         </div>
                         <div class="MuiBox-root jss162 text-title-container">
                             <span class="MuiTypography-root text-title-course MuiTypography-caption MuiTypography-noWrap">Curso <?php echo $curso_at['nome'] ?></span>
-                            <h6 class="MuiTypography-root text-title-title MuiTypography-subtitle1 MuiTypography-noWrap">AULA {{idx.tag}} - {{idx.nome}}</h6>
+                            <h6 class="MuiTypography-root text-title-title MuiTypography-subtitle1 MuiTypography-noWrap">AULA {{idx.tag?idx.tag:'1'}} - {{idx.nome}}</h6>
                         </div>
                         <div class="MuiBox-root jss163 pagination">
                             <a onclick="anterior()" class="MuiButtonBase-root MuiIconButton-root pagination-back" tabindex="0" role="button" aria-disabled="false">
@@ -85,19 +94,19 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                 </span>
                                 <span class="MuiTouchRipple-root"></span>
                             </a>
-                            <span  class="MuiTypography-root pagination-text MuiTypography-caption">{{id_aula}}/<?php echo $key+1 ?></span>
-                            <a onclick="proximo(<?php echo $key+1 ?>)" class="MuiButtonBase-root MuiIconButton-root pagination-next" tabindex="0" role="button" aria-disabled="false">
+                            <span  class="MuiTypography-root pagination-text MuiTypography-caption">{{id_aula}}/<?php echo $key ?></span>
+                            <a onclick="proximo(<?php if($key> 1){ echo $key+1;} ?>)" class="MuiButtonBase-root MuiIconButton-root pagination-next" tabindex="0" role="button" aria-disabled="false">
                                 <span class="MuiIconButton-label">
                                     <span class="material-icons MuiIcon-root" aria-hidden="true">chevron_right</span>
                                 </span>
                                 <span  class="MuiTouchRipple-root"></span>
                             </a>
                         </div>
-                        <button  class="MuiButtonBase-root btn-conclusion false" tabindex="0" type="button">
+                        <!--<button  class="MuiButtonBase-root btn-conclusion false" tabindex="0" type="button">
                             <span  class="MuiTypography-root btn-conclusion-text MuiTypography-caption">Teste</span>
                             <span class="material-icons MuiIcon-root btn-conclusion-icon"  aria-hidden="true">article</span>
                             <span class="MuiTouchRipple-root"></span>
-                        </button>
+                        </button>-->
                         <button  class="MuiButtonBase-root btn-conclusion false" tabindex="0" type="button">
                             <span  class="MuiTypography-root btn-conclusion-text MuiTypography-caption">Marcar como concluída</span>
                             <span class="material-icons MuiIcon-root btn-conclusion-icon"  aria-hidden="true">check_circle</span>
@@ -171,7 +180,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                         <div class="MuiBox-root jss80 content-scrollable ">
                             <div class="MuiBox-root jss83 jss82 container-section" id="content">
                                 <div class="MuiBox-root jss159 jss81 light">
-                                    <div v-if="status != 'teste'">{{idx.descricao}}
+                                    <div v-if="status != 'teste'">{{idx.descricao}}<br><br>
                                         <video v-if="idx.tipo == 'local'" :src="'<?php echo ConfigPainel('base_url'); ?>wa/ead/uploads/'+idx.video" controls oncontextmenu="return false;" controlsList="nodownload">  
                                             Your browser does not support the video tag.
                                         </video>
@@ -207,7 +216,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                     
                                 </div>
                             </div>
-                            <div class="MuiBox-root jss103 jss82 container-section" >
+                            <div v-if="idx.arquivo" class="MuiBox-root jss103 jss82 container-section" >
                                 <span class="MuiTypography-root section-title MuiTypography-overline">Material da Aula</span>                                
                                 <div class="MuiBox-root jss248 jss100">
                                     <small class="MuiTypography-root section-title MuiTypography-overline" >baixar</small>

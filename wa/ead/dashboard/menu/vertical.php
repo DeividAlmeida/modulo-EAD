@@ -16,14 +16,14 @@
                 </div>
             </div>
             <ul class="MuiList-root list-channels-container MuiList-padding">
-                <li id="sel"  class=" jss205 MuiListItem-root jss146 MuiListItem-gutters" onclick="geral('<?php echo $_GET['posicao'] ?>')">
+                <!--<li id="sel"  class=" jss205 MuiListItem-root jss146 MuiListItem-gutters" onclick="geral('<?php echo $_GET['posicao'] ?>')">
                     <a  class="MuiTypography-root MuiLink-root MuiLink-underlineNone list-channels-item-link undefined MuiTypography-colorPrimary" >
                         <div class="MuiListItemIcon-root list-channels-item-icon">
                             <span  class="material-icons MuiIcon-root" aria-hidden="true">dashboard</span>
                         </div>
                         <p class="MuiTypography-root list-channels-item-text MuiTypography-body2">Visão geral</p>
                     </a>
-                </li>
+                </li>-->
                 <li id="sel"  class=" jss205 MuiListItem-root jss146 MuiListItem-gutters jss148" onclick="curso('<?php echo $_GET['posicao'] ?>')">
                     <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone list-channels-item-link undefined MuiTypography-colorPrimary" >
                         <div class="MuiListItemIcon-root list-channels-item-icon">

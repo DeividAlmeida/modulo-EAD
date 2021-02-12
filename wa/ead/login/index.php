@@ -108,10 +108,10 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                             
                         </div>
                     </form>
-                    <div class="MuiBox-root jss36 sign-up-container" >
+                    <div class="MuiBox-root jss36 sign-up-container"style="visibility:hidden" >
                         <span class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeLarge MuiButton-sizeLarge" tabindex="0" aria-disabled="false"  >
                             <span class="MuiButton-label">
-                                <a  class="sign-up text2" style="text-decoration:none ">Ainda não é aluno?</a>
+                                <a  class="sign-up text2" style="text-decoration:none;  ">Ainda não é aluno?</a>
                             </span>
                             <span class="MuiTouchRipple-root"></span>
                         </span>

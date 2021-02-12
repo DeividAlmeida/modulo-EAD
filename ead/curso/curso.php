@@ -102,15 +102,7 @@ $professores = DBRead('ead_prof','*');
                         <label>Descrição Curta do Curso: </label>
                         <input class="form-control" v-model="idx.descricao_curta" name="descricao_curta" >
                     </div>
-                    <div class="form-group">
-                        <label>Vender Curso: </label>
-                        <multiselect   :show-labels="false"   v-model="idx.vender"  placeholder=""   :options="exibe"  :taggable="true"  ></multiselect>
-                        <input class="form-control" type="hidden" v-model="idx.vender"  name="vender" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Valor do Curso: </label>
-                        <input class="form-control" v-model="idx.valor"  name="valor" required>
-                    </div>
+                    
                     <div class="form-group">
                         <label>Tempo do curso: </label>
                         <multiselect   :show-labels="false"   v-model="idx.tempo"  placeholder=""   :options="tempo"  :taggable="true"  ></multiselect>
@@ -133,7 +125,7 @@ $professores = DBRead('ead_prof','*');
                             <div>
                                 <input  @change="capa(this);"  style="width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; z-index: -1;" type="file" multiple accept='image/*' name="capa" id="capa">
                                 <label multiple accept='image/*' class="btn btn-primary" for="capa">
-                                    <i class="icon icon-cloud-upload" aria-hidden="true"></i>Upload Foto de Capa
+                                    <i class="icon icon-cloud-upload" aria-hidden="true"></i>Upload Foto de Capa 420x300
                                 </lable>
                             </div>
                             <img  :src="[idx.capa ? folder+idx.capa : preview]"  />

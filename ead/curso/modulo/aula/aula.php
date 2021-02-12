@@ -97,9 +97,16 @@ $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
                             <option value='html'>Tag HTML</option>
                             <option value='local'>Arquivo Local</option></option>
                         </select>
-                    </div> 
+                    </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" >
+                    <div class="form-group">
+                        <label>Ordem: </label>
+                        <input type='number'  class='form-control' min="0" v-model="idx.ordem" name='ordem'>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-md-6">
                     <div class="form-group">
                         <label>Prova: </label>
                         <select  required name='tipo_prova' class='form-control'  v-bind:value="idx.tipo_prova" v-model='idx.tipo_prova'> 
@@ -107,8 +114,7 @@ $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
                             <option value='multipla'>Múltipla Escolha</option></option>
                         </select>
                     </div> 
-                </div>
-            </div>
+                </div> -->
             <div class="row"  >
                 <div class="col-md-6" v-if="idx.tipo">
                     <div class="form-group">
@@ -118,25 +124,17 @@ $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
                             <small v-if='idx.tipo == "local"'>{{idx.video}}</small>
                     </div>
                 </div>
-                <div class="col-md-6" v-if="idx.tipo_prova == 'multipla'">
+                
+                <!--<div class="col-md-6" v-if="idx.tipo_prova == 'multipla'">
                     <div class="form-group">
                         <label>Quantidade de Alternativas: </label>
                         <input  type='number' min="1" class='form-control'  name='qtd_alternativas' v-model='idx.qtd_alternativas'> 
                     </div>
-                </div>
+                </div>-->
             </div>
-            <div class="row"  >
-                <div class="col-md-6" >
-                    <div class="form-group">
-                        <label>Ordem: </label>
-                        <input type='number'  class='form-control' min="0" v-model="idx.ordem" name='ordem'> 
-                            
-                    </div>
-                </div>
-            </div>
-            
+
             <input type="hidden" name="modulo" v-model="idx.modulo" required>
-            <hr>
+            <!--<hr>
             <div class="row justify-content-md-center">
                 <div class="col col-md-1">
                     <strong>PROVA</strong> 
@@ -175,7 +173,7 @@ $a = DBRead("ead_curso","*","WHERE id = '{$b['curso']}'")[0];
                         </div>
                     </div>  
                 </div>
-            </div>
+            </div>-->
             
             <div class="card-footer white">
                 <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="submit"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>

@@ -24,7 +24,7 @@
         .jss59.grid .content{
             background-color: <?php echo $wacr['ds_cor_fundo'];?> !important;
         }
-        .jss86>.section-title, .jss85{
+        .jss86>.section-title, .jss85, .jss41{
             background-color: <?php echo $wacr['ds_cor_fundo'];?> !important;
         }
         .jss83>.section{
@@ -45,5 +45,11 @@
         b{
             color: <?php echo $wacr['cor_secundaria'];?> !important;
         }
-        
+        .jss26{
+            width: auto !important;
+        }
+        .jss92 img{
+            width:150px;
+            height:70px;
+        }
     </style>

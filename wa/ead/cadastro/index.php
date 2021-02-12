@@ -16,6 +16,7 @@ else if(isset($_COOKIE['Wacontroltoken'])){
 
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
 if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboard/inicio/index.php?status=curso&posicao=avancar');}
+$wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 ?>
 <html lang="pt-br">
 <head>
@@ -26,19 +27,15 @@ if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboar
         <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/cadastro/src/style/main.css">
         <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
+        <?php require_once('src/style/wacr.php');?>
     </head>
-<style>
-    .jss92 img{
-            width:150px;
-            height:70px;
-        }
-</style>
+
 <body style="margin:0 !important">
     <div id="root">
         <div class="MuiBox-root jss23 jss22">
             <div class="MuiBox-root jss42 jss41 app-toolbar">
                 <a class="logo-toolbar" href="/">
-                    <img src="https://llbr.blob.core.windows.net/machine-user-images/Logotipo-Curso-de-Web-Acappella-vermelho.png" alt="">
+                    
                 </a>
                 <button  class="MuiButtonBase-root MuiIconButton-root icon-toolbar MuiIconButton-sizeSmall" tabindex="0"  type="button">
                     <span class="MuiIconButton-label">

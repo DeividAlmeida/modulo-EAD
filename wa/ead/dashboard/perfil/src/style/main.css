@@ -2075,3 +2075,10 @@ label[data-shrink=false]+.MuiInputBase-formControl .MuiInputBase-input:focus::-m
     background: transparent;
     flex-direction: column;
 }
+.jss26{
+    width: auto !important;
+}
+.jss92 img{
+    width:150px;
+    height:70px;
+}
