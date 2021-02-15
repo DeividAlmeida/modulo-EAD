@@ -1,7 +1,21 @@
 val.ver = (a) =>{ val.status = a};
-document.getElementsByClassName('sign-up')[0].addEventListener('click', ()=>{
+document.getElementsByClassName('text2')[2].addEventListener('click', ()=>{
+    val.status = 'reset'
+})
+/*document.getElementsByClassName('text2')[3].addEventListener('click', ()=>{
 window.location.href = origin+'wa/ead/cadastro'
 })
+document.getElementsByClassName('ds')[0].addEventListener('click', ()=>{
+    let senha = document.getElementsByClassName('das')[0].value;
+    let a  = senha.match(/[0-9]/);
+    let b  = senha.match(/[A-Z]/);
+    let c = senha.length > 5;
+    if(a && b && c){
+
+        }else{
+            alert(a,b,c)
+        }
+    })*/
 visivel = (a) =>{
     const icon = document.getElementById('olho');
     const campo = document.getElementById('login-password');
@@ -33,4 +47,18 @@ valida = () =>{
             swal("ERRO!", data, "error"); 
         }
     });
+}
+recupera = ()=>{
+    var a = new FormData();
+    a.append('email',document.getElementsByClassName('recupera')[0].value)
+    fetch(origin+'wa/ead/apis/recupera.php',{
+        method:'post',
+        body: a
+    }).then(dt => dt.text()).then(data=>{
+        if(data == 1){
+            
+        }else{
+            swal("ERRO!", data, "error"); 
+        }
+    })
 }

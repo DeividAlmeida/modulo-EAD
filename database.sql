@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `ead_config_email` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `nome` varchar(255) NOT NULL,
     `email_usuario` varchar(255) DEFAULT NULL,
+    `remetente` varchar(255) DEFAULT NULL,
     `email_senha` varchar(255) DEFAULT NULL,
     `email_porta` varchar(255) DEFAULT NULL,
     `email_servidor` varchar(255) DEFAULT NULL,
@@ -156,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `ead_config_geral` (
     `lg_cor_texto_hover_bt` varchar(255) DEFAULT NULL,
     `lg_cor_fundo_bt` varchar(255) DEFAULT NULL,
     `logo` varchar(255) DEFAULT NULL,
-    `img` varchar(255) DEFAULT NULL
+    `img` varchar(255) DEFAULT NULL,
     `lg_cor_fundo_hover_bt` varchar(255) DEFAULT NULL,
         #DASHBOARD
     `ds_cor_fundo` varchar(255) DEFAULT NULL,

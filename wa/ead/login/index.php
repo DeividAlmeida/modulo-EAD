@@ -13,8 +13,7 @@ else if(isset($_COOKIE['Wacontroltoken'])){
     $id =  $_COOKIE['Wacontrolid'];
     $senha =  $_COOKIE['Wacontroltoken'];
 }
-
-$valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
+if(!empty($senha)){$valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];}
 if(!empty($valida)){header('Location:'.ConfigPainel('base_url').'wa/ead/dashboard/inicio/index.php?status=curso&posicao=avancar');}
 $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 
@@ -94,24 +93,25 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                             <div class="MuiBox-root jss41 input-container email">
                                 <div class="MuiFormControl-root MuiTextField-root input">
                                     <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl">
-                                        <input aria-invalid="false" placeholder="E-mail" id="login-email" name="email" type="email" class="MuiInputBase-input MuiOutlinedInput-input" value="">
+                                        <input aria-invalid="false" placeholder="E-mail" id="login-email" name="email" type="email" class="MuiInputBase-input MuiOutlinedInput-input recupera" value="">
                                         <fieldset aria-hidden="true" class="jss26 MuiOutlinedInput-notchedOutline"></fieldset>
                                     </div>
                                 </div>
                             </div>
                             <div class="MuiBox-root jss31 btn-login-container">
-                                <button class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge" tabindex="0" type="submit">
-                                    <span class="MuiButton-label"></span>
+                                <button onclick="recupera()" class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge enviar" tabindex="0" type="button">
+                                    <span class="MuiButton-label bt_txt">Enviar</span>
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
                             
                         </div>
                     </form>
-                    <div class="MuiBox-root jss36 sign-up-container"style="visibility:hidden" >
+                    <div  v-if="status == 'login'" class="MuiBox-root jss36 sign-up-container" >
                         <span class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeLarge MuiButton-sizeLarge" tabindex="0" aria-disabled="false"  >
                             <span class="MuiButton-label">
-                                <a  class="sign-up text2" style="text-decoration:none;  ">Ainda não é aluno?</a>
+                                <a  class="sign-up text2" style="text-decoration:none" >Esqueci minha senha</a>
+                                <!--<a  class="sign-up text2" style="text-decoration:none; visibility:hidden " >Ainda não é aluno?</a>-->
                             </span>
                             <span class="MuiTouchRipple-root"></span>
                         </span>

@@ -38,6 +38,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/perfil/src/style/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue-swal@1/dist/vue-swal.min.js"></script>
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
     <?php #require_once('src/style/wacr.php');?>
 
@@ -143,7 +144,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                         </div>
                     </div>
                     <div class="MuiBox-root jss102 jss85 account-password-container">
-                        <span class="MuiTypography-root section-title MuiTypography-overline">Alterar senha</span>
+                        <span class="MuiTypography-root section-title MuiTypography-overline">Alterar senha </span>
                         <div class="MuiBox-root jss103 account-password-content">
                             <div class="MuiBox-root jss104 account-password-current-container">
                                 <div class="MuiBox-root jss105 input-container current-password">

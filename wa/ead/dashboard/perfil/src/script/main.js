@@ -38,10 +38,15 @@ document.getElementsByClassName('MuiButtonBase-root')[5].addEventListener('click
     })
 })
 document.getElementsByClassName('MuiButton-textPrimary')[1].addEventListener('click', ()=>{
-        let senha = document.getElementsByClassName('MuiOutlinedInput-inputAdornedEnd');
-        let form = new FormData();
+    let senha = document.getElementsByClassName('MuiOutlinedInput-inputAdornedEnd');
+    let a  = senha[1].value.match(/[0-9]/);
+    let b  = senha[1].value.match(/[A-Z]/);
+    let c = senha[1].value.length > 5;
+    let form = new FormData();
     if(senha[1].value != senha[2].value || senha[2].value == ''){
         val.erro = '*senha inválida'
+    }else if(!a || !b || !c){
+        swal({title:"Senha muito fraca!",html:true, text:"Critérios mínimos: \n 1° Uma letra maiúscula \n 2° Um número \n 3° mais de 5 dígitos.", icon:"error"});
     }else{
         val.erro = ''
             for(let i = 0; i < 2; i++){
@@ -52,7 +57,7 @@ document.getElementsByClassName('MuiButton-textPrimary')[1].addEventListener('cl
             body: form
         }).then(dt => dt.text()).then(data =>{
             if(data != 1){
-                alert(data)
+                swal("ERRO",data,"error")
             }else{
                 document.location.reload(true);
             }

@@ -5,6 +5,7 @@ $query = json_encode(DBRead('ead_usuario','*'));
 $cursos = DBRead('ead_curso','*');
 ?>
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+<script src="https://cdn.jsdelivr.net/npm/vue-swal@1/dist/vue-swal.min.js"></script>
 <style>
     .multiselect__tag, .multiselect__option--highlight, .multiselect__tag-icon, .multiselect__tag-icon:after{ background: #86939e !important}
 </style>
@@ -99,8 +100,8 @@ $cursos = DBRead('ead_curso','*');
                 </div>
                 <div class="col-md-6">    
                     <div class="form-group">
-                        <label>Senha: </label>
-                        <input class="form-control" v-model="idx.senha" type="text" name="senha" required>
+                        <label >Senha: <i data-bs-toggle="tooltip" data-bs-placement="top" title="Critérios: Uma letra maiúscula, um número, mais de 5 dígitos." style="cursor:pointer" class="icon icon-info-circle" aria-hidden="true"></i></label>
+                        <input onchange="senha_forte()" class="form-control" v-model="idx.senha" type="text" name="senha" required>
                         <small> <i class="icon icon-lock" aria-hidden="true"></i> Senha criptografada</small> 
                     </div>
                 </div>
@@ -115,7 +116,7 @@ $cursos = DBRead('ead_curso','*');
                 </div>
             </div>
             <div class="card-footer white">
-                <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="submit"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>
+                <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="button"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>
             </div>
         </form>
     </div>
@@ -134,8 +135,23 @@ $cursos = DBRead('ead_curso','*');
             move: function(a, b){
                 this.status = a;
                 this.idx = b;
-                this.idx.cursos =JSON.parse(this.idx.cursos);
+                if(this.status != 0){
+                    this.idx.cursos =JSON.parse(this.idx.cursos);
+                }
             }
         }
     })
+    senha_forte = ()=>{
+        
+        let senha = document.getElementsByName('senha')[0].value;
+        let a  = senha.match(/[0-9]/);
+        let b  = senha.match(/[A-Z]/);
+        let c = senha.length > 5;
+        if(a && b && c){
+            document.getElementsByClassName('float-right')[0].type='submit'
+            }else{
+                document.getElementsByClassName('float-right')[0].type='button'
+                swal({title:"Senha muito fraca!",html:true, text:"Critérios mínimos: \n 1° Uma letra maiúscula \n 2° Um número \n 3° mais de 5 dígitos.", icon:"error"});
+            }
+    }
 </script>
