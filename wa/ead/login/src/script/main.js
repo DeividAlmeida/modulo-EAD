@@ -1,4 +1,8 @@
+let url = document.referrer
+let insp = new URL(url)
+let reset = insp.searchParams.get('Z')
 val.ver = (a) =>{ val.status = a};
+var form = new FormData();
 document.getElementsByClassName('text2')[2].addEventListener('click', ()=>{
     val.status = 'reset'
 })
@@ -36,9 +40,9 @@ box = (a) => {
     }
 }
 valida = () =>{
-   var form = new FormData();
-   form.append("email", document.getElementById('login-email').value);
-   form.append("senha", document.getElementById('login-password').value);
+
+    form.append("email", document.getElementById('login-email').value);
+    form.append("senha", document.getElementById('login-password').value);
     form.append("manter", document.getElementById('manter').checked);
     fetch (origin+'wa/ead/apis/autentica.php',{method: "POST", body: form}).then(x => x.text()).then(data =>{
         if(data == 1){
@@ -49,16 +53,42 @@ valida = () =>{
     });
 }
 recupera = ()=>{
-    var a = new FormData();
-    a.append('email',document.getElementsByClassName('recupera')[0].value)
+    form.append('email',document.getElementsByClassName('recupera')[0].value)
+    form.append('origin',url)
     fetch(origin+'wa/ead/apis/recupera.php',{
         method:'post',
-        body: a
+        body: form
     }).then(dt => dt.text()).then(data=>{
         if(data == 1){
-            
+            swal("E-mail Enviado!", "E-mail de recuperação enviado com sucesso", "success").then((isConfirm)=>{if(isConfirm){document.location.reload(true);}})
         }else{
             swal("ERRO!", data, "error"); 
         }
     })
+}
+if(reset){
+    val.status = 'altera'
+}
+altera = () =>{
+    let senha = document.getElementsByName('new_password')
+    let a  = senha[0].value.match(/[0-9]/)
+    let b  = senha[0].value.match(/[A-Z]/)
+    let c = senha[0].value.length > 5
+    if(!a || !b || !c){
+        swal({title:"Senha muito fraca!",html:true, text:"Critérios mínimos: \n 1° Uma letra maiúscula \n 2° Um número \n 3° mais de 5 dígitos.", icon:"error"});
+    }else if(senha[0].value != senha[1].value){
+        swal("ERRO","Senha incorreta","error")
+    }else{
+       form.append('senha',senha[0].value)
+       form.append('Z',reset) 
+       fetch(origin+'wa/ead/apis/altera.php',{
+           method:"post",
+           body:form
+       }).then(a => a.text()).then(data=>{
+           if(data == 1){
+               swal("Salvo!", "Senha alterada com sucesso", "success").then((isConfirm)=>{if(isConfirm){document.location.reload(true);}})
+           }else{
+               swal("ERRO",data,"error")}
+       })
+    }
 }

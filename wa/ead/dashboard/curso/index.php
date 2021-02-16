@@ -108,7 +108,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                             <span class="MuiTouchRipple-root"></span>
                         </button>-->
                         <button  class="MuiButtonBase-root btn-conclusion false" tabindex="0" type="button">
-                            <span  class="MuiTypography-root btn-conclusion-text MuiTypography-caption">Marcar como concluída</span>
+                            <span  class="MuiTypography-root btn-conclusion-text MuiTypography-caption">{{md}} como concluída</span>
                             <span class="material-icons MuiIcon-root btn-conclusion-icon"  aria-hidden="true">check_circle</span>
                             <span class="MuiTouchRipple-root"></span>
                         </button>
@@ -256,7 +256,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     </div>
 </body>
 <script>
-    const key = <?php echo $id ?>+1
+    const key = <?php echo $key ?>;
     const origin = '<?php echo ConfigPainel('base_url'); ?>';
     const id_curso = '<?php echo $id_curso; ?>';
     const id_aluno = '<?php echo $id ?>';
@@ -276,6 +276,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
             config:<?php echo $config ?>,
             cursos:<?php echo  $curso; ?>,
             modulos:<?php echo  $modulos ?>, 
+            md:'',
             aulas:<?php echo  $aulas ?>
         },
         methods:{
@@ -302,7 +303,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                         }
                     })
                 }
-                
+               new marcar() 
             }
             
         }

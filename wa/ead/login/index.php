@@ -106,6 +106,44 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                             </div>
                             
                         </div>
+                        <div v-if="status == 'altera'">
+                            <div class="MuiBox-root jss41 input-container email">
+                                <p style="text-align: center" class="MuiTypography-root sign-up MuiTypography-body2">Alterar Senha</p>
+                            </div>
+                            <div class="MuiBox-root jss30 input-container password">
+                                <div class="MuiFormControl-root MuiTextField-root input">
+                                    <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
+                                        <input aria-invalid="false" placeholder=" Nova Senha" autocomplete="on" id="login-password" name="new_password" type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
+                                        <div class="MuiInputAdornment-root MuiInputAdornment-positionEnd">
+                                            <button onclick="visivel(document.getElementById('olho').innerHTML)" class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd" tabindex="0" type="button" aria-label="toggle password visibility">
+                                                <span class="MuiIconButton-label">
+                                                    <span class="material-icons MuiIcon-root" id="olho" aria-hidden="true">visibility</span>
+                                                </span>
+                                                <span class="MuiTouchRipple-root"></span>                                        
+                                            </button>
+                                        </div>
+                                        <fieldset  aria-hidden="true" class="jss26 MuiOutlinedInput-notchedOutline"></fieldset>                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="MuiBox-root jss30 input-container password">
+                                <div class="MuiFormControl-root MuiTextField-root input">
+                                    <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
+                                        <input aria-invalid="false" placeholder="Confirme a Senha" autocomplete="on" id="login-password" name="new_password" type="password" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd" value="">
+                                        <div class="MuiInputAdornment-root MuiInputAdornment-positionEnd">
+                                        </div>
+                                        <fieldset  aria-hidden="true" class="jss26 MuiOutlinedInput-notchedOutline"></fieldset>                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="MuiBox-root jss31 btn-login-container">
+                                <button onclick="altera()" class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge enviar" tabindex="0" type="button">
+                                    <span class="MuiButton-label bt_txt">Salvar</span>
+                                    <span class="MuiTouchRipple-root"></span>
+                                </button>
+                            </div>
+                            
+                        </div>
                     </form>
                     <div  v-if="status == 'login'" class="MuiBox-root jss36 sign-up-container" >
                         <span class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeLarge MuiButton-sizeLarge" tabindex="0" aria-disabled="false"  >
@@ -119,6 +157,9 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                 </div>
             </div>
         </div>
+        <?php if(isset($_GET['FD'])){
+           echo "Iuoigoiuoiuyoigofouyr76reo" ;
+        }?>
         <script>
             const origin = '<?php echo ConfigPainel('base_url'); ?>';
             const val = new Vue({

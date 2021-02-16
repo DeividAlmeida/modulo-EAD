@@ -16,26 +16,32 @@ $query = json_encode(DBRead('ead_config_email','*'));
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Servidor SMTP: </label>
-                        <input class="form-control" v-model="idx[0].email_servidor" name="email_servidor" placeholder="Informe o Servidor SMTP" required>
+                        <label>E-mail da Escola: </label>
+                        <input class="form-control" v-model="idx[0].remetente" name="remetente" placeholder="Informe o e-mail da escola" required>
                     </div>
                 </div>
             </div>
             <div class="row" >
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Servidor SMTP: </label>
+                        <input class="form-control" v-model="idx[0].email_servidor" name="email_servidor" placeholder="Informe o Servidor SMTP" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label>Usuário SMTP: </label>
                         <input class="form-control" v-model="idx[0].email_usuario" name="email_usuario" placeholder="Informe o Usuário SMTP"  required>
                     </div>
                 </div>
+            </div>
+            <div class="row" >
                 <div class="col-md-6">    
                     <div class="form-group">
                         <label>Senha SMTP: </label>
                         <input class="form-control" v-model="idx[0].email_senha" name="email_senha" placeholder="Informe o Senha SMTP" required>
                     </div>
                 </div>
-            </div>
-            <div class="row" >
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Porta SMTP: </label>

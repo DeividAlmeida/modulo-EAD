@@ -2,6 +2,7 @@
 if(isset($_GET['editaEmail'])){
   $data = array(
     'nome'                  => post('nome'),
+    'remetente'             => post('remetente'),
     'email_usuario'         => post('email_usuario'),
     'email_senha'           => post('email_senha'),
     'email_porta'           => post('email_porta'),

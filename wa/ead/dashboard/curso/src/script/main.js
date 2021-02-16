@@ -4,17 +4,29 @@ let progresso = document.getElementById('progresso');
 let texto = document.getElementsByClassName('course-progress-text');
 let barra = document.getElementsByClassName('jss204');
 let color = document.getElementsByClassName('jss170');
-let t_c = 0 ;
-let t_t = 0;
 let nav = false;
+function marcar(){
+    if(val.concluidos[id_curso+val.id_aula]==null){
+        val.md = 'Marcar'
+    }else{
+        val.md = 'Desmarcar'
+        
+    }
+}
 function efeitos(){
+let t_t = 0;
+    
+    let t_c = 0 ;
     for(z=0;z< val.modulos.length; z++){
         let contar = 0;
+        
+
         for(i=0; i<val.aulas[val.modulos[z].id].length;i++){
             ++t_t
             if(val.concluidos[id_curso+val.aulas[val.modulos[z].id][i].tag] != null){ 
                 ++t_c
                 ++contar
+                circulo[z].setAttribute('stroke-dasharray', (contar/val.aulas[val.modulos[z].id].length)*100+' 100')
                 concluidas[z].innerText = contar;
                 if(contar == val.aulas[val.modulos[z].id].length){
                     color[z].style.color = '#00C268'
@@ -22,8 +34,12 @@ function efeitos(){
                     concluidas[z].innerText = 'check'
                     concluidas[z].setAttribute('class', 'chart-text material-icons')
                 }
-                let cento = (contar/val.aulas[val.modulos[z].id].length)*100;
-                circulo[z].setAttribute('stroke-dasharray', cento+' 100')
+            }else{
+                circulo[z].setAttribute('stroke-dasharray', (contar/val.aulas[val.modulos[z].id].length)*100+' 100')
+                color[z].style.color = '#000'
+                stroker[z].style.stroke = '#fa9c00'
+                concluidas[z].innerText = contar;
+                concluidas[z].setAttribute('class', 'chart-text')
             }
             
         }
@@ -31,6 +47,7 @@ function efeitos(){
     let countpro = (t_c/t_t)*100;
     barra[0].style.width = countpro+'%'
     texto[0].innerText = parseInt(countpro)+'% Concluído'
+     new marcar()
 }
 window.onload = () => {
     document.body.style.height= '800px';
@@ -52,6 +69,7 @@ anterior = () => {
             }
         })
     }
+    new marcar()
 }; 
 function proximo(a){
     val.status = ''
@@ -63,6 +81,7 @@ function proximo(a){
             }
         })
     }
+    new marcar()
 }
 navegar = () =>{
     if(nav){
@@ -101,8 +120,9 @@ document.getElementById('salvar').addEventListener('click', ()=>{
 } 
 })
 
-document.getElementsByClassName('btn-conclusion')[1].addEventListener('click', ()=>{
-    val.concluidos[id_curso+val.id_aula]  = '1';
+document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', ()=>{
+    let oq = val.concluidos[id_curso+val.id_aula];
+    if(oq == '1'){val.concluidos[id_curso+val.id_aula]= null;}else{val.concluidos[id_curso+val.id_aula] = '1'}
     let concluido = new FormData;
     concluido.append('0', JSON.stringify(val.concluidos))
     fetch(origin+'wa/ead/apis/concluido.php?id='+id_aluno,{
@@ -118,13 +138,13 @@ document.getElementsByClassName('btn-conclusion')[1].addEventListener('click', (
     })
     
 })
-document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', ()=>{
+/*document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', ()=>{
    val.idx.questoes = JSON.parse(val.idx.questoes)
    val.status = 'teste'
    if(val.idx.tipo_prova == 'multipla'){
       val.idx.alternativas = JSON.parse(val.idx.alternativas) 
    }
-})
+})*/
 concluir = () =>{
   new proximo(key) 
 }
