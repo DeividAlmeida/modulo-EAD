@@ -89,7 +89,41 @@
         			elseif (isset($_GET['configGeral'])) :
         			    require_once('ead/configuracao/geral.php');
         			elseif (isset($_GET['configEmail'])) :
-        			    require_once('ead/configuracao/email.php'); 
+        			    require_once('ead/configuracao/email.php');
+        			else:
+        			$cursos = count(DBRead("ead_curso","*"));
+        			$aulas = count(DBRead("ead_aula","*"));
+        			$alunos = count(DBRead("ead_usuario","*"));
+        			$prof = count(DBRead("ead_prof","*"));
+        			?>
+        			<div class="animated fadeInUpShort mb-3">
+                        <div class="card">
+                            <div class="card-header white">
+                                <strong> Estatisticas </strong>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="lightSlider" data-item="6" data-item-xl="4" data-item-md="2" data-item-sm="1" data-pause="7000" data-pager="false" data-auto="true" data-loop="true">
+                                    <div class="p-5">
+                                        <h5 class="font-weight-normal s-14">Alunos</h5>
+                                        <span class="s-48 font-weight-lighter light-green-text"><?php echo $alunos ?></span>
+                                    </div>
+                                    <div class="p-5 light">
+                                        <h5 class="font-weight-normal s-14">Professores</h5>
+                                        <span class="s-48 font-weight-lighter text-primary"><?php echo $prof ?></span>
+                                    </div>
+                                    <div class="p-5 ">
+                                        <h5 class="font-weight-normal s-14">Cursos</h5>
+                                        <span class="s-48 font-weight-lighter text-primary"><?php echo $cursos ?></span>
+                                    </div>
+                                    <div class="p-5 light">
+                                        <h5 class="font-weight-normal s-14">Aulas</h5>
+                                        <span class="s-48 font-weight-lighter text-primary"><?php echo $aulas ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        		<?php	    
         			endif;
         		?>
 

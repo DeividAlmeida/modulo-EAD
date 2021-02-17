@@ -59,14 +59,14 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
             <div v-if="status == 'curso'">
                 <div class="MuiBox-root jss44 jss43" >
                     <h6 class="MuiTypography-root title MuiTypography-subtitle2">Cursos</h6>
-                    <div class="MuiBox-root jss45 jss42">
+                    <!--<div class="MuiBox-root jss45 jss42">
                         <button class="MuiButtonBase-root MuiIconButton-root view-mode-toggle" tabindex="0" type="button"  onclick="view(document.getElementById('iview').innerHTML)" title="Visualização em lista">
                             <span class="MuiIconButton-label">
                                 <span class="material-icons MuiIcon-root" id="iview"aria-hidden="true">view_list</span>
                             </span>
                             <span class="MuiTouchRipple-root"> </span>
                         </button>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="MuiBox-root jss50 jss41" >
                     <div :class="'MuiBox-root content '+lista" >

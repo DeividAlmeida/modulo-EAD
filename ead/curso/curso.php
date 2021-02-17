@@ -6,7 +6,7 @@ $categorias = DBRead('ead_categoria','*');
 $professores = DBRead('ead_prof','*');
 ?>
 <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
-<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">  <script src='https://cdn.jsdelivr.net/npm/vue-mce@1.5.2/dist/vue-mce.web.js'></script>
   <script src='https://cdn.jsdelivr.net/npm/vue-mce@1.5.2/dist/vue-mce.web.js'></script>
 <style>
     .multiselect__tag, .multiselect__option--highlight, .multiselect__tag-icon, .multiselect__tag-icon:after{ background: #86939e !important}
@@ -201,9 +201,6 @@ $professores = DBRead('ead_prof','*');
                 this.idx.exibi_professor = a;
             }
         }
-    })
-    tinymce.init({
-        selector:'textarea',
-        language: 'pt_BR',
     });
+
 </script>

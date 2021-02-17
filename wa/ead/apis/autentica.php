@@ -12,13 +12,12 @@ if(empty($valida)){
 }else{
     session_start();
     $id = $valida['id'];
-    if($manter == true){
-        setcookie('Wacontrolid', $id, time() + (86400 * 30), "/");
-        setcookie('Wacontroltoken', $senha, time() + (86400 * 30), "/");
-        echo 1;
-    }else{
+    if($manter == 'false'){
         $_SESSION['Wacontrol'] = [$id, $senha];
-        echo 1;
+    }else{
+        setcookie('Wacontrolid', $id, time() + (86400 * 30), "/");
+        setcookie('Wacontroltoken', $senha, time() + (86400 * 30), "/"); 
     }
+        echo 1;
 }
 

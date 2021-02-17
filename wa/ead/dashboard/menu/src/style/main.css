@@ -344,3 +344,7 @@ object-fit: cover;
 #sel:hover{
     background-color: rgba(0, 0, 0, .04) !important;
 }
+.jss39 img{
+    width:150px;
+    height:70px;
+}

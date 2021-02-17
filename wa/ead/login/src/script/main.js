@@ -3,9 +3,7 @@ let insp = new URL(url)
 let reset = insp.searchParams.get('Z')
 val.ver = (a) =>{ val.status = a};
 var form = new FormData();
-document.getElementsByClassName('text2')[2].addEventListener('click', ()=>{
-    val.status = 'reset'
-})
+
 /*document.getElementsByClassName('text2')[3].addEventListener('click', ()=>{
 window.location.href = origin+'wa/ead/cadastro'
 })

@@ -8,7 +8,7 @@ $valida = DBRead('ead_usuario','*',"WHERE email = '{$email}'", "LIMIT 1")[0];
 if(empty($valida)){
    echo 'E-mail inválido!';
 }else{
-    //echo 1;
+    echo 1;
 
  $readm = DBRead('ead_config_email','*',"WHERE id = '1'")[0];
 // Inclui o arquivo class.phpmailer.php localizado na mesma pasta do arquivo php 

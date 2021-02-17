@@ -21,7 +21,7 @@ if(isset($_GET['curs']) && $id == "0"){
       $data = array(
         'nome'                  => post('nome'),
         'descricao_curta'       => post('descricao_curta'),
-        'descricao_longa'       => post('descricao_longa'),
+        'descricao_longa'       => post('mce_0'),
         'tempo'                 => post('tempo'),
         'exibi_professor'       => post('exibi_professor'),
         'palavras_chave'        => post('palavras_chave'),
@@ -29,6 +29,7 @@ if(isset($_GET['curs']) && $id == "0"){
         'categoria'             => $categoria,
         'capa'                  => $path
       );
+
       $query = DBCreate('ead_curso', $data, true);
       
         if ($query != 0) {
@@ -43,7 +44,7 @@ if(isset($_GET['curs']) && $id != "0"){
 $data = array(
     'nome'                  => post('nome'),
     'descricao_curta'       => post('descricao_curta'),
-    'descricao_longa'       => post('descricao_longa'),
+    'descricao_longa'       => post('mce_0'),
     'tempo'                 => post('tempo'),
     'exibi_professor'       => post('exibi_professor'),
     'palavras_chave'        => post('palavras_chave'),

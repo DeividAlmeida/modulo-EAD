@@ -82,13 +82,13 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                     <span class="MuiTouchRipple-root"></span>
                                 </span>
                                 <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">
-                                    <span class=" text2 MuiTypography-root keep-connected MuiTypography-caption"> Mantenha-me conectado</span>
+                                    <span class=" text2 MuiTypography-root keep-connected MuiTypography-caption" id="text2" > Mantenha-me conectado</span>
                                 </span>
                             </label>
                         </div>
                         <div v-if="status == 'reset'">
                             <div class="MuiBox-root jss41 input-container email">
-                                <p class="MuiTypography-root sign-up MuiTypography-body2"></p>
+                                <p style="text-align: center" class="MuiTypography-root sign-up MuiTypography-body2 text2">Digite seu e-mail de cadastro</p>
                             </div>
                             <div class="MuiBox-root jss41 input-container email">
                                 <div class="MuiFormControl-root MuiTextField-root input">
@@ -104,11 +104,16 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
-                            
+                            <div class="MuiBox-root jss31 btn-login-container">
+                                <button onclick="val.status='login'" class="MuiButtonBase-root MuiButton-root MuiButton-contained btn-login MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge enviar" tabindex="0" type="button">
+                                    <span class="MuiButton-label bt_txt">Sair</span>
+                                    <span class="MuiTouchRipple-root"></span>
+                                </button>
+                            </div>
                         </div>
                         <div v-if="status == 'altera'">
                             <div class="MuiBox-root jss41 input-container email">
-                                <p style="text-align: center" class="MuiTypography-root sign-up MuiTypography-body2">Alterar Senha</p>
+                                <p style="text-align: center" class="MuiTypography-root sign-up MuiTypography-body2 text2">Alterar Senha</p>
                             </div>
                             <div class="MuiBox-root jss30 input-container password">
                                 <div class="MuiFormControl-root MuiTextField-root input">
@@ -145,7 +150,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                             
                         </div>
                     </form>
-                    <div  v-if="status == 'login'" class="MuiBox-root jss36 sign-up-container" >
+                    <div  v-if="status == 'login'" class="MuiBox-root jss36 sign-up-container" onclick="val.status='reset'" >
                         <span class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-textSizeLarge MuiButton-sizeLarge" tabindex="0" aria-disabled="false"  >
                             <span class="MuiButton-label">
                                 <a  class="sign-up text2" style="text-decoration:none" >Esqueci minha senha</a>
@@ -157,9 +162,6 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                 </div>
             </div>
         </div>
-        <?php if(isset($_GET['FD'])){
-           echo "Iuoigoiuoiuyoigofouyr76reo" ;
-        }?>
         <script>
             const origin = '<?php echo ConfigPainel('base_url'); ?>';
             const val = new Vue({

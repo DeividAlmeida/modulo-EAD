@@ -8,7 +8,7 @@
     .btn-login .bt_txt:hover{
         color:<?php echo $wacr['lg_cor_texto_hover_bt']?> !important;
     }
-    .text2{
+    .text2, .material-icons{
         color:<?php echo $wacr['lg_cor_texto']?> !important;
     }
     .btn-login{
