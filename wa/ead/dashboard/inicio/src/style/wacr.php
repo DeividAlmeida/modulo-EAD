@@ -1,5 +1,5 @@
     <style>
-        b{
+        /*b{
             color: <?php echo $wacr['cor_secundaria'];?> !important;
         }
         .jss43{ 
@@ -41,6 +41,8 @@
         }
         .jss89 .course-header-text-teacher{
             color: <?php echo $wacr['ds_descricao'];?> !important;
+        }*/
+        .jss59 .progress-bar-fill{
+            background:<?php echo $wacr['destaque'];?>;
         }
-        
     </style>

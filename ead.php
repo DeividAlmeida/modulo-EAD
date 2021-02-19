@@ -24,44 +24,44 @@
 
     			<a class="btn btn-sm btn-primary" href="?">Inicio</a>
     			<span class="dropdown">
-    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'professor')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Professores</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item " href="?Prof">Professores</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'professor', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeProf=0">Cadastrar Professor</a>
     					<?php } ?>
     				</div>
     			</span>
     			<span class="dropdown">
-    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'aluno')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Usuários</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item" href="?routeUsua">Usuários</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'aluno', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeUsua=0">Cadastrar Usuário</a>
     					<?php } ?>
     				</div>
     			</span>
     			<span class="dropdown">
-    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'curso')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Cursos</a>
     			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item" href="?routeCate">Categorias</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'categorias', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeCate=0">Cadastrar Categoria</a>
     					<?php } ?>
     					<a class="dropdown-item" href="?routeCurs">Cursos</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item', 'adicionar')) { ?>
+    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'curso', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeCurs=0">Cadastrar Curso</a>
     					<?php } ?>
     				</div>
     			</span>
     			<span class="dropdown">
-				<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'item')) { ?>
+				<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'configuracao')) { ?>
 					<a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Configuração</a>
 					<div class="dropdown-menu dropdown-menu-left" x-placement="bottom">
 						<a class="dropdown-item" href="?configGeral">Configurações Gerais</a>

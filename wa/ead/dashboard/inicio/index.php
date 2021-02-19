@@ -49,7 +49,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
-    <?php #require_once('src/style/wacr.php');?>
+    <?php require_once('src/style/wacr.php');?>
 </head>
 
 <body >

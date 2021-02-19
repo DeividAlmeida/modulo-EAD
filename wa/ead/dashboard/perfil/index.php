@@ -40,7 +40,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/perfil/src/style/main.css">
     <script src="https://cdn.jsdelivr.net/npm/vue-swal@1/dist/vue-swal.min.js"></script>
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
-    <?php #require_once('src/style/wacr.php');?>
+    <?php require_once('src/style/wacr.php');?>
 
 </head>
 

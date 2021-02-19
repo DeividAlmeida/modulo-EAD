@@ -1,5 +1,5 @@
     <style>
-        .jss43{ 
+        /*.jss43{ 
             border: solid <?php echo $wacr['cor_primaria'];?> 1px  !important;
             background-color: <?php echo $wacr['ds_cor_fundo'];?> !important;
         }
@@ -41,9 +41,10 @@
         }
         .MuiButton-textPrimary{
             color: <?php echo $wacr['cor_secundaria'];?> !important;
+        }*/
+        .MuiButton-textPrimary{
+            color:<?php echo $wacr['destaque'];?> !important;
         }
-        b{
-            color: <?php echo $wacr['cor_secundaria'];?> !important;
-        }
+        
         
     </style>

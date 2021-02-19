@@ -9,12 +9,12 @@
     <a class="logo-toolbar" >
         
     </a>
-    <button class="MuiButtonBase-root MuiIconButton-root icon-toolbar MuiIconButton-sizeSmall" tabindex="0" type="button">
+    <!--<button class="MuiButtonBase-root MuiIconButton-root icon-toolbar MuiIconButton-sizeSmall" tabindex="0" type="button">
         <span class="MuiIconButton-label">
             <span class="material-icons MuiIcon-root"  aria-hidden="true">help_outline</span>
         </span>
         <span class="MuiTouchRipple-root"></span>
-    </button>
+    </button>-->
     <button class="MuiButtonBase-root MuiIconButton-root jss32" tabindex="0" type="button"  aria-controls="profile" aria-haspopup="true" onclick="perfil()">
         <span class="MuiIconButton-label">
             <div class="MuiBox-root jss37 undefined jss35 jss36" avatar="" >
@@ -41,7 +41,7 @@
                 <?php } ?>
             </div>
             <p class="MuiTypography-root profile-infos-name MuiTypography-body2">
-                <b><?php echo $valida['nome'] ?></b>
+                <b style="color:<?php echo $wacr['destaque'];?> !important"><?php echo $valida['nome'] ?></b>
             </p>
             <span  class="MuiTypography-root profile-infos-email MuiTypography-caption"><?php echo $valida['email'] ?></span>
         </div>

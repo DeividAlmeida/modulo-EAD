@@ -21,6 +21,7 @@ if(isset($_GET['editaGeral'])){
     'logo'                      => post('logo'),
     'img'                       => $path,
     'lg_cor_fundo_hover_bt'     => post('lg_cor_fundo_hover_bt'),
+    'destaque'                  => post('destaque'),
         #DASHBOARD
     'ds_cor_fundo'              => post('ds_cor_fundo'),
     'ds_cor_titulo'             => post('ds_cor_titulo'),

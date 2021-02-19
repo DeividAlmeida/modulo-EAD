@@ -101,7 +101,7 @@ $cursos = DBRead('ead_curso','*');
                 <div class="col-md-6">    
                     <div class="form-group">
                         <label >Senha: <i data-bs-toggle="tooltip" data-bs-placement="top" title="Critérios: Uma letra maiúscula, um número, mais de 5 dígitos." style="cursor:pointer" class="icon icon-info-circle" aria-hidden="true"></i></label>
-                        <input onchange="senha_forte()" class="form-control" v-model="idx.senha" type="text" name="senha" required>
+                        <input  class="form-control" :value="idx.senha" type="text" name="senha" required>
                         <small> <i class="icon icon-lock" aria-hidden="true"></i> Senha criptografada</small> 
                     </div>
                 </div>
@@ -116,13 +116,13 @@ $cursos = DBRead('ead_curso','*');
                 </div>
             </div>
             <div class="card-footer white">
-                <button style="margin-bottom: 7px;" class="btn btn-primary float-right" type="button"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>
+                <button style="margin-bottom: 7px;" onclick="senha_forte()" class="btn btn-primary float-right" type="submit"><i class="icon icon-save" aria-hidden="true"></i> Salvar</button>
             </div>
         </form>
     </div>
 </div>
 <script>
-    new Vue({
+   const val = new Vue({
         el:".card",
         components: { Multiselect: window.VueMultiselect.default },
         data: {
@@ -142,16 +142,17 @@ $cursos = DBRead('ead_curso','*');
         }
     })
     senha_forte = ()=>{
-        
         let senha = document.getElementsByName('senha')[0].value;
-        let a  = senha.match(/[0-9]/);
-        let b  = senha.match(/[A-Z]/);
-        let c = senha.length > 5;
-        if(a && b && c){
-            document.getElementsByClassName('float-right')[0].type='submit'
+        if(senha != val.idx.senha){
+            let a  = senha.match(/[0-9]/);
+            let b  = senha.match(/[A-Z]/);
+            let c = senha.length > 5;
+            if(a && b && c){
+                document.getElementsByClassName('float-right')[0].type='submit'
             }else{
                 document.getElementsByClassName('float-right')[0].type='button'
                 swal({title:"Senha muito fraca!",html:true, text:"Critérios mínimos: \n 1° Uma letra maiúscula \n 2° Um número \n 3° mais de 5 dígitos.", icon:"error"});
             }
+        }
     }
 </script>

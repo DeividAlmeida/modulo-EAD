@@ -37,7 +37,7 @@ let t_t = 0;
             }else{
                 circulo[z].setAttribute('stroke-dasharray', (contar/val.aulas[val.modulos[z].id].length)*100+' 100')
                 color[z].style.color = '#000'
-                stroker[z].style.stroke = '#fa9c00'
+                stroker[z].style.stroke = destaque
                 concluidas[z].innerText = contar;
                 concluidas[z].setAttribute('class', 'chart-text')
             }
@@ -106,18 +106,27 @@ navegar = () =>{
     }
 
 }
-
-document.getElementById('salvar').addEventListener('click', ()=>{ 
-    let valor = document.getElementById('notes-new-input').value;
-    val.notas[id_curso+val.id_aula]  = valor;
+function salvar(){
     let save = new FormData;
     save.append('0', JSON.stringify(val.notas))
     let post = new XMLHttpRequest;
     post.open('POST',origin+'wa/ead/apis/notacoes.php?salvarnotas&id='+id_aluno);
     post.send(save)
     post.onload = function(){
-    swal("Salvo!", "Anotação salva com sucesso!", "success");                              
-} 
+        swal("Salvo!", "Alterações salvas com sucesso!", "success"); 
+        sessionStorage.removeItem('edita')
+    } 
+}
+document.getElementById('salvar').addEventListener('click', ()=>{ 
+    let data = new Date();
+    let dia = ((data.getDate() )+ "-" + ((data.getMonth() + 1)) + "-" + data.getFullYear() + " " + data.getHours()+ "h" +data.getMinutes()+ "m");
+    let valor = document.getElementById('notes-new-input').value;
+    let edita = sessionStorage.getItem('edita')
+    var resultado = null
+    if(val.notas[id_curso+val.id_aula] == undefined){ val.notas[id_curso+val.id_aula] = []}
+    edita == null?  resultado = '{'+'"'+dia+'"'+':"'+valor+'"}': resultado = '{'+'"'+edita+'"'+':"'+valor+'"}'
+    val.notas[id_curso+val.id_aula].push(JSON.parse(resultado));
+    new salvar()
 })
 
 document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', ()=>{

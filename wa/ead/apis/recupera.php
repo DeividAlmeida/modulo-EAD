@@ -69,7 +69,7 @@ $mail->CharSet = 'UTF-8';
 // Assunto da mensagem 
 $mail->Subject = "Recuperação de Senha"; 
 
-$info = "Clique aqui para <a href='".$_POST['origin']."?Z=".base64_encode($valida['id'])."'>aqui</a> para recuperar a sua senha";
+$info = "Olá, esse é um e-mail para recuperar sua senha de acesso.Para recuperar sua senha basta clicar <a href='".$_POST['origin']."?Z=".base64_encode($valida['id'])."'>aqui</a>";
  
 // Corpo do email 
 $mail->Body = $info; 

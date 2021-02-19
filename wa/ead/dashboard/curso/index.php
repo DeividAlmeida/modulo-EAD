@@ -65,7 +65,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     <link rel="stylesheet" href="<?php echo ConfigPainel('base_url'); ?>wa/ead/dashboard/curso/src/style/main.css">
     <?php echo DBRead('ead','*',"WHERE id = '1'")[0]['modo']; ?>
     <script src="https://cdn.jsdelivr.net/npm/vue-swal@1/dist/vue-swal.min.js"></script>
-    <?php #require_once('src/style/wacr.php') ?>
+    <?php require_once('src/style/wacr.php') ?>
 </head>
 
 <body >
@@ -229,7 +229,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                     <div class="MuiBox-root jss252 jss249 ">
                                         <div class="MuiFormControl-root MuiTextField-root notes-new-input">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss250 MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;" :key="id_aula">{{notas[['<?php echo $id_curso; ?>'+id_aula]]}}</textarea>
+                                                <textarea rows="1" aria-invalid="false" id="notes-new-input" name="annotation"  placeholder="Escreva sua anotação sobre o conteúdo..." class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" style="height: 20px; overflow: hidden;" :key="id_aula"></textarea>
                                                 <textarea aria-hidden="true" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"  readonly="" tabindex="-1" style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0px); width: 892px;"></textarea>
                                                 <fieldset aria-hidden="true" class="jss253 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;">
                                                     <legend class="jss254" style="width: 0.01px;">
@@ -245,6 +245,41 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                             </button>
                                         </div>
                                     </div>
+                                    <div class="MuiBox-root jss309 jss273 jss308" v-for="nota, ni of notas['<?php echo $id_curso; ?>'+id_aula] " :key="ni">
+                                        <div aria-hidden="true" class="closebx" @click="close_bx(ni)" style="cursor:pointer;display:none; z-index: 10000; position: fixed; inset: 0px; background-color: transparent; -webkit-tap-highlight-color: transparent;"></div>
+                                        <div class="MuiBox-root jss310 comment-avatar">
+                                            <span  class="material-icons MuiIcon-root comment-avatar-icon MuiIcon-fontSizeSmall" aria-hidden="true">subject</span>
+                                        </div>
+                                        <div class="MuiBox-root jss311 comment-content" v-for="notai, nii of notas['<?php echo $id_curso; ?>'+id_aula][ni] " :key="nii">
+                                            <div class="MuiBox-root jss312 comment-ballon">
+                                                <span class="MuiTypography-root comment-ballon-title not-link MuiTypography-caption">{{nii}}</span>
+                                                <p class="MuiTypography-root comment-ballon-msg null MuiTypography-body2">
+                                                    <span>{{notai}}</span>
+                                                </p>
+                                                <div class="MuiBox-root jss313 comment-actions-container">
+                                                    <button class="MuiButtonBase-root MuiIconButton-root comment-actions-button" tabindex="0" type="button">
+                                                        <span class="MuiIconButton-label">
+                                                            <span   class="material-icons MuiIcon-root comment-actions-button-icon MuiIcon-fontSizeSmall" @click="notas_alt(ni)"   aria-hidden="true">more_vert</span>
+                                                        </span>
+                                                        <span class="MuiTouchRipple-root"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="box MuiPaper-root MuiMenu-paper MuiPopover-paper MuiPaper-elevation8 MuiPaper-rounded" tabindex="-1"  style="z-index: 10001;display:none;opacity: 1; transform: none; transition: opacity 228ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 152ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; right: 6%; transform-origin: 0px 79.1875px;">
+                                                <ul class="MuiList-root MuiMenu-list MuiList-padding" role="menu" tabindex="-1">
+                                                    <li class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+                                                        tabindex="-1" role="menuitem" aria-disabled="false">
+                                                        <p @click="edita_nota(ni,nii,notai)" class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary">Editar</p>
+                                                        <span  class="MuiTouchRipple-root"></span>
+                                                    </li>
+                                                    <li @click="remove(ni)" class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button" tabindex="-1" role="menuitem" aria-disabled="false">
+                                                        <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary">Remover</p>
+                                                        <span  class="MuiTouchRipple-root"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -256,10 +291,12 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     </div>
 </body>
 <script>
+    const destaque = '<?php echo $wacr['destaque'];?>';
     const key = <?php echo $key ?>;
     const origin = '<?php echo ConfigPainel('base_url'); ?>';
     const id_curso = '<?php echo $id_curso; ?>';
     const id_aluno = '<?php echo $id ?>';
+    let bd1 = false;
     const val = new Vue({
         el:"#root",
         data: {
@@ -304,8 +341,30 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                     })
                 }
                new marcar() 
-            }
-            
+            },
+            notas_alt: function(a){
+                let box = document.getElementsByClassName('box')[a]
+                let close = document.getElementsByClassName('closebx')[a];
+                    bd1=true
+                    box.style.display = 'block'
+                    close.style.display = 'block'
+            },
+            close_bx: function(a){
+                let box = document.getElementsByClassName('box')[a]
+                let close = document.getElementsByClassName('closebx')[a];
+                    bd1=false
+                    box.style.display = 'none'
+                    close.style.display = 'none'
+            },
+            edita_nota: function(a,b,c){
+                this.notas['<?php echo $id_curso; ?>'+this.id_aula].splice(a,1);
+                sessionStorage.setItem('edita', b)
+                document.getElementById('notes-new-input').value = c;
+            },
+            remove: function(a){
+               this.notas['<?php echo $id_curso; ?>'+this.id_aula].splice(a,1);
+                new salvar()
+            },
         }
     });
     val.notas = JSON.parse(<?php if(empty($valida['notas'])){echo "'[]'";}else{ echo $valida['notas'];} ?>);

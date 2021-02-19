@@ -3,7 +3,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET @@time_zone = `+03:00`;
 
 INSERT INTO `modulos` (`nome`, `url`, `icone`, `status`, `ordem`, `tabela`, `cod_head`, `data_atualizacao`, `chave`, `acao`)
-SELECT "EAD", "ead.php", "icon-shopping-bag", 1, 0, "ead", "ead/ead.js", "2019-05-07", "72b4b1d7ce2b514a981a49b1db5790a7", "{\"pedidos\":[\"notificar\",\"editar\",\"deletar\"],\"listagem\":[\"adicionar\",\"editar\",\"deletar\"],\"categoria\":[\"adicionar\",\"editar\",\"deletar\"],\"marca\":[\"adicionar\",\"editar\",\"deletar\"],\"atributo\":[\"adicionar\",\"editar\",\"deletar\"],\"termo\":[\"adicionar\",\"editar\",\"deletar\"],\"produto\":[\"adicionar\",\"editar\",\"deletar\"],\"codigo\":[\"acessar\"],\"configuracao\":[\"acessar\"]}";
+SELECT "EAD", "ead.php", "icon-shopping-bag", 1, 0, "ead", "ead/ead.js", "2019-05-07", "72b4b1d7ce2b514a981a49b1db5790a7", "{\"professor\":[\"adicionar\",\"editar\",\"deletar\"],\"aluno\":[\"adicionar\",\"editar\",\"deletar\"],\"curso\":[\"adicionar\",\"editar\",\"deletar\"],\"modulo\":[\"adicionar\",\"editar\",\"deletar\"],\"aula\":[\"adicionar\",\"editar\",\"deletar\"],\"categoria\":[\"adicionar\",\"editar\",\"deletar\"],\"codigo\":[\"acessar\"],\"configuracao\":[\"acessar\"]}";
 
 -- CONFIGURAÇÃO
 CREATE TABLE IF NOT EXISTS `ead` (
@@ -159,6 +159,7 @@ CREATE TABLE IF NOT EXISTS `ead_config_geral` (
     `logo` varchar(255) DEFAULT NULL,
     `img` varchar(255) DEFAULT NULL,
     `lg_cor_fundo_hover_bt` varchar(255) DEFAULT NULL,
+    `destaque` varchar(255) DEFAULT NULL,
         #DASHBOARD
     `ds_cor_fundo` varchar(255) DEFAULT NULL,
     `ds_cor_titulo` varchar(255) DEFAULT NULL,
@@ -179,6 +180,7 @@ CREATE TABLE IF NOT EXISTS `ead_config_geral` (
         `logo`, 
         `img`,  
         `lg_cor_fundo_hover_bt`,
+        `destaque`,
         #DASHBOARD
         `ds_cor_fundo`, 
         `ds_cor_titulo`,
@@ -189,4 +191,4 @@ CREATE TABLE IF NOT EXISTS `ead_config_geral` (
             
 
     ) VALUES
-    (1,'','','','','','','','','','','','','');
+    (1,'','','','','','','','','','','','','','');

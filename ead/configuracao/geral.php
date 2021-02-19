@@ -23,7 +23,7 @@
     
             <hr/>
 
-            <h4>Configuração Login</h4>
+            <!--<h4>Configuração Login</h4>-->
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -120,7 +120,21 @@
                         </select>
                     </div>
                 </div>
-                
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>Cor Destaque:</label>
+                        <div class="color-picker input-group colorpicker-element focused">
+                            <input v-model="idx.destaque" class="form-control" name="destaque" >
+                            <span class="input-group-append">
+                                <span class="input-group-text add-on white">
+                                    <i class="circle"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6 ">
                     <div class="row justify-content-md-center" >
                         <div class="form-group ">

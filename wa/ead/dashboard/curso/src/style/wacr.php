@@ -1,5 +1,5 @@
     <style>
-        .jss43{ 
+        /*.jss43{ 
             border: solid <?php echo $wacr['cor_primaria'];?> 1px  !important;
             background-color: <?php echo $wacr['ds_cor_fundo'];?> !important;
         }
@@ -44,5 +44,16 @@
         }
         b{
             color: <?php echo $wacr['cor_secundaria'];?> !important;
+        }*/
+        .jss71 .btn-conclusion:not(.completed) .btn-conclusion-icon, .jss71 .btn-conclusion:not(.completed) .btn-conclusion-text, .MuiButton-textPrimary, .jss77 .course-progress-text {
+            color:<?php echo $wacr['destaque'];?> !important;
+        }
+        @media (min-width: 960px){
+            .jss67>.content>.content-wrapper>.content-scrollable::-webkit-scrollbar-thumb {
+                background-color: <?php echo $wacr['destaque'];?> !important;
+            }
+        }
+        .jss77 .course-progress-bar-fill{
+            background-color: <?php echo $wacr['destaque'];?> !important;
         }
     </style>
