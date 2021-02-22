@@ -229,6 +229,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     <?php require_once('../menu/vertical.php'); ?>
     </div>
     <script>
+        const sessao = '?token=<?php echo md5(session_id()) ?>&'
         const origin = '<?php echo ConfigPainel('base_url'); ?>';
         const val = new Vue({
             el:'#root',

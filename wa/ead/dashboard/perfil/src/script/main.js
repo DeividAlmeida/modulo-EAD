@@ -19,14 +19,14 @@ readURL = (a) =>{
     }
     url.readAsDataURL(a.files[0]);
 }
-document.getElementsByClassName('MuiButtonBase-root')[5].addEventListener('click', ()=>{
+document.getElementsByClassName('MuiButtonBase-root')[4].addEventListener('click', ()=>{
     let inputs =  document.getElementsByClassName('perfil')
     let form = new FormData()
     for(let i = 1; i < 6; i++){
     form.append(inputs[i].name,inputs[i].value)
     }
     form.append('imagem',inputs[0].files[0])
-    fetch(origin+'wa/ead/apis/perfil.php',{
+    fetch(origin+'wa/ead/apis/perfil.php'+sessao,{
         method: 'POST',
         body: form
     }).then(dt => dt.text()).then(data =>{
@@ -52,7 +52,7 @@ document.getElementsByClassName('MuiButton-textPrimary')[1].addEventListener('cl
             for(let i = 0; i < 2; i++){
                 form.append(senha[i].name, senha[i].value)
             }
-            fetch(origin+'wa/ead/apis/senha.php',{
+            fetch(origin+'wa/ead/apis/senha.php'+sessao,{
             method: 'POST',
             body: form
         }).then(dt => dt.text()).then(data =>{

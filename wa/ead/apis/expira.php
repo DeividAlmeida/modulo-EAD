@@ -5,7 +5,7 @@ require_once('../../../database/config.database.php');
 require_once('../../../database/config.php');
 $expira = json_encode($_POST);
 $id = $_GET['id'];
-if(isset($_GET['id'])){
+if(isset($_GET['id']) && isset($_GET['token']) && $_GET['token'] === $token){
     $query =  DBUpdate('ead_usuario', ['expira'   => $expira], "id = '{$id}'");
     if ($query != 0) {
         echo 1;

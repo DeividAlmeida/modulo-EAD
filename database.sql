@@ -3,7 +3,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET @@time_zone = `+03:00`;
 
 INSERT INTO `modulos` (`nome`, `url`, `icone`, `status`, `ordem`, `tabela`, `cod_head`, `data_atualizacao`, `chave`, `acao`)
-SELECT "EAD", "ead.php", "icon-shopping-bag", 1, 0, "ead", "ead/ead.js", "2019-05-07", "72b4b1d7ce2b514a981a49b1db5790a7", "{\"professor\":[\"adicionar\",\"editar\",\"deletar\"],\"aluno\":[\"adicionar\",\"editar\",\"deletar\"],\"curso\":[\"adicionar\",\"editar\",\"deletar\"],\"modulo\":[\"adicionar\",\"editar\",\"deletar\"],\"aula\":[\"adicionar\",\"editar\",\"deletar\"],\"categoria\":[\"adicionar\",\"editar\",\"deletar\"],\"codigo\":[\"acessar\"],\"configuracao\":[\"acessar\"]}";
+SELECT "EAD", "ead.php", "icon-graduation-cap", 1, 0, "ead", "ead/ead.js", "2019-05-07", "72b4b1d7ce2b514a981a49b1db5790a7", "{\"professor\":[\"adicionar\",\"editar\",\"deletar\"],\"aluno\":[\"adicionar\",\"editar\",\"deletar\"],\"curso\":[\"adicionar\",\"editar\",\"deletar\"],\"modulo\":[\"adicionar\",\"editar\",\"deletar\"],\"aula\":[\"adicionar\",\"editar\",\"deletar\"],\"categoria\":[\"adicionar\",\"editar\",\"deletar\"],\"codigo\":[\"acessar\"],\"configuracao\":[\"acessar\"]}";
 
 -- CONFIGURAÇÃO
 CREATE TABLE IF NOT EXISTS `ead` (

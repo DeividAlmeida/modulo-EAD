@@ -24,71 +24,55 @@
 
     			<a class="btn btn-sm btn-primary" href="?">Inicio</a>
     			<span class="dropdown">
-    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'professor')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Professores</a>
-    			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item " href="?Prof">Professores</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'professor', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeProf=0">Cadastrar Professor</a>
-    					<?php } ?>
     				</div>
     			</span>
     			<span class="dropdown">
-    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'aluno')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Usuários</a>
-    			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item" href="?routeUsua">Usuários</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'aluno', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeUsua=0">Cadastrar Usuário</a>
-    					<?php } ?>
     				</div>
     			</span>
     			<span class="dropdown">
-    			    <?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'curso')) { ?>
     			        <a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Cursos</a>
-    			    <?php } ?>
     				<div class="dropdown-menu dropdown-menu-left" x-placement="bottom-start">
     					<a class="dropdown-item" href="?routeCate">Categorias</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'categorias', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeCate=0">Cadastrar Categoria</a>
-    					<?php } ?>
     					<a class="dropdown-item" href="?routeCurs">Cursos</a>
-    					<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'curso', 'adicionar')) { ?>
     						<a class="dropdown-item" href="?routeCurs=0">Cadastrar Curso</a>
-    					<?php } ?>
     				</div>
     			</span>
     			<span class="dropdown">
-				<?php if (checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'configuracao')) { ?>
 					<a class="btn btn-sm btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Configuração</a>
 					<div class="dropdown-menu dropdown-menu-left" x-placement="bottom">
 						<a class="dropdown-item" href="?configGeral">Configurações Gerais</a>
 						<a class="dropdown-item" href="?configEmail">Configurações de Email</a>
-					</div>					
-				<?php } ?>
+					</div>		
 			    </span>
 			    <button class="btn btn-sm behance text-white" data-toggle="modal" data-target="#Ajuda"><i class="icon-question-circle"></i></button>
     		</div>
-                <?php 		
-                    if (isset($_GET['Prof'])) :
+			<?php 		
+                    if (isset($_GET['Prof']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'professor', 'adicionar')) :
         			    require_once('ead/professor/lista.php'); 
-        			elseif (isset($_GET['routeProf'])) :
+        			elseif (isset($_GET['routeProf']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'professor', 'adicionar')) :
         			    require_once('ead/professor/professor.php');
-        			elseif (isset($_GET['routeCate'])) :
+        			elseif (isset($_GET['routeCate']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'categoria', 'adicionar')) :
         			    require_once('ead/categoria/categoria.php');
-        		    elseif (isset($_GET['routeUsua'])) :
+        		    elseif (isset($_GET['routeUsua']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'usuario', 'adicionar')) :
         			    require_once('ead/usuario/usuario.php');
-        			elseif (isset($_GET['routeCurs'])) :
+        			elseif (isset($_GET['routeCurs']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'curso', 'adicionar')) :
         			    require_once('ead/curso/curso.php');
-        			elseif (isset($_GET['routeModu'])) :
+        			elseif (isset($_GET['routeModu']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'modulo', 'adicionar')) :
         			    require_once('ead/curso/modulo/modulo.php');
-        		    elseif (isset($_GET['routeAula'])) :
+        		    elseif (isset($_GET['routeAula']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'aula', 'adicionar')) :
         			    require_once('ead/curso/modulo/aula/aula.php');
-        			elseif (isset($_GET['configGeral'])) :
+        			elseif (isset($_GET['configGeral']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'configuracao', 'acessar')) :
         			    require_once('ead/configuracao/geral.php');
-        			elseif (isset($_GET['configEmail'])) :
+        			elseif (isset($_GET['configEmail']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'configuracao', 'acessar')) :
         			    require_once('ead/configuracao/email.php');
         			else:
         			$cursos = count(DBRead("ead_curso","*"));

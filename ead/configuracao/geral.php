@@ -1,9 +1,8 @@
 <?php 
+
     $query = json_encode(DBRead('ead_config_geral','*')[0]);
-    
     $cod = '<iframe onload="frame(this)"  src="'.ConfigPainel('base_url').'wa/ead/login/" ></iframe>';
 
-    
 ?>
 <style>
     .text-center img{
@@ -17,12 +16,12 @@
     </div>
     <div class="card-body">
         <form method="post" action="?editaGeral" enctype="multipart/form-data">
+            <?php if(checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'codigo', 'acessar')):?>
             <button id="btnCopiarCodSite1" class="btn btn-primary btn-xs m-1" onclick="CopiadoCodSite(1)" data-clipboard-text='<?php echo $cod; ?>' type="button">
                 <i class="icon icon-code"></i> Copiar Código de Implementação
             </button>
-    
             <hr/>
-
+            <?php endif ?>
             <!--<h4>Configuração Login</h4>-->
             <div class="row">
                 <div class="col-md-4">

@@ -202,7 +202,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
         <?php require_once('../menu/vertical.php'); ?>
     </div>
     <script>
-        
+        const sessao = '?token=<?php echo md5(session_id()) ?>&'
         const origin = '<?php echo ConfigPainel('base_url'); ?>';
         const id_aluno = '<?php echo $id ?>';
         let inter = true;
@@ -258,7 +258,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                 if(val.cursos.length == i+1){
                     let expiraform = new FormData();
                     expiraform.append('0',JSON.stringify(val.expira))
-                    fetch(origin+'wa/ead/apis/expira.php?id='+id_aluno,{
+                    fetch(origin+'wa/ead/apis/expira.php'+sessao+'id='+id_aluno,{
                         method: 'POST',
                         body: expiraform
                     }).then(restp => restp.text()).then(res => {

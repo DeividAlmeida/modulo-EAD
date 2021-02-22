@@ -110,7 +110,7 @@ function salvar(){
     let save = new FormData;
     save.append('0', JSON.stringify(val.notas))
     let post = new XMLHttpRequest;
-    post.open('POST',origin+'wa/ead/apis/notacoes.php?salvarnotas&id='+id_aluno);
+    post.open('POST',origin+'wa/ead/apis/notacoes.php'+sessao+'salvarnotas&id='+id_aluno);
     post.send(save)
     post.onload = function(){
         swal("Salvo!", "Alterações salvas com sucesso!", "success"); 
@@ -134,7 +134,7 @@ document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', (
     if(oq == '1'){val.concluidos[id_curso+val.id_aula]= null;}else{val.concluidos[id_curso+val.id_aula] = '1'}
     let concluido = new FormData;
     concluido.append('0', JSON.stringify(val.concluidos))
-    fetch(origin+'wa/ead/apis/concluido.php?id='+id_aluno,{
+    fetch(origin+'wa/ead/apis/concluido.php'+sessao+'id='+id_aluno,{
         method: 'POST',
         body: concluido
     }).then(dt => dt.text()).then(data =>{
@@ -142,7 +142,7 @@ document.getElementsByClassName('btn-conclusion')[0].addEventListener('click', (
             new efeitos()
             new proximo(key)
         }else{
-            alert(data)
+            swal("ERRO!", data, "error")
         }
     })
     

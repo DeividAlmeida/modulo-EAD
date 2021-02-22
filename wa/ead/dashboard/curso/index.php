@@ -13,7 +13,7 @@ else if(isset($_COOKIE['Wacontroltoken'])){
     $senha =  $_COOKIE['Wacontroltoken'];
 }
 $valida = DBRead('ead_usuario','*',"WHERE id = '{$id}' AND  senha = '{$senha}' ")[0];
- if($valida['senha'] == $senha){
+ if($senha!= null && $valida['senha'] == $senha){
 
 $id_curso = $_GET['id'];
 $config = json_encode(DBRead('ead_config_geral','*'));
@@ -291,6 +291,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     </div>
 </body>
 <script>
+    const sessao = '?token=<?php echo md5(session_id()) ?>&'
     const destaque = '<?php echo $wacr['destaque'];?>';
     const key = <?php echo $key ?>;
     const origin = '<?php echo ConfigPainel('base_url'); ?>';
@@ -373,5 +374,5 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 <script src="../menu/src/script/main.js"></script>
 <script src="src/script/main.js"></script>
 </html>
-<?php } ?>
+<?php }else{ header('location:'.ConfigPainel('base_url').'wa/ead/login/index.php'); } ?>
 
