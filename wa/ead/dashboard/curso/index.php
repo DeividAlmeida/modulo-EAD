@@ -245,12 +245,12 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="MuiBox-root jss309 jss273 jss308" v-for="nota, ni of notas['<?php echo $id_curso; ?>'+id_aula] " :key="ni">
+                                    <div class="MuiBox-root jss309 jss273 jss308" v-for="nota, ni of idx_notas" :key="ni">
                                         <div aria-hidden="true" class="closebx" @click="close_bx(ni)" style="cursor:pointer;display:none; z-index: 10000; position: fixed; inset: 0px; background-color: transparent; -webkit-tap-highlight-color: transparent;"></div>
                                         <div class="MuiBox-root jss310 comment-avatar">
                                             <span  class="material-icons MuiIcon-root comment-avatar-icon MuiIcon-fontSizeSmall" aria-hidden="true">subject</span>
                                         </div>
-                                        <div class="MuiBox-root jss311 comment-content" v-for="notai, nii of notas['<?php echo $id_curso; ?>'+id_aula][ni] " :key="nii">
+                                        <div class="MuiBox-root jss311 comment-content" v-for="notai, nii of idx_notas[ni] " :key="nii">
                                             <div class="MuiBox-root jss312 comment-ballon">
                                                 <span class="MuiTypography-root comment-ballon-title not-link MuiTypography-caption">{{nii}}</span>
                                                 <p class="MuiTypography-root comment-ballon-msg null MuiTypography-body2">
@@ -303,9 +303,9 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
         data: {
             status:'',
             notas:'',
+            idx_notas:'',
             concluidos:'',
             id_aula: <?php echo $numeroindex ?>,
-            idx_nota:'',
             idx: <?php echo $indice ?>,
             nav: 'open', 
             main_width:'false',
@@ -316,6 +316,11 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
             modulos:<?php echo  $modulos ?>, 
             md:'',
             aulas:<?php echo  $aulas ?>
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                 val.idx_notas =val.notas[id_curso+val.id_aula];
+            })
         },
         methods:{
             navaula: function(a,b){
@@ -333,6 +338,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                 }
             },
             pular: function(a){
+                this.notas[id_curso+this.id_aula] == null?this.idx_notas = []: this.idx_notas =this.notas[id_curso+this.id_aula];
                 this.id_aula = a;
                 for(let i= 0; i < val.modulos.length; i++){
                     val.aulas[val.modulos[i].id].forEach((a, b)=>{
@@ -342,6 +348,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                     })
                 }
                new marcar() 
+               
             },
             notas_alt: function(a){
                 let box = document.getElementsByClassName('box')[a]
@@ -370,6 +377,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
     });
     val.notas = JSON.parse(<?php if(empty($valida['notas'])){echo "'[]'";}else{ echo $valida['notas'];} ?>);
     val.concluidos = JSON.parse(<?php if(empty($valida['concluidos'])){echo "'[]'";}else{ echo $valida['concluidos'];} ?>);
+    val.notas[id_curso+val.id_aula] == null?val.idx_notas = []: val.idx_notas =val.notas[id_curso+val.id_aula];
 </script>
 <script src="../menu/src/script/main.js"></script>
 <script src="src/script/main.js"></script>

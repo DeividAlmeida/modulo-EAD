@@ -60,6 +60,7 @@ window.onload = () => {
         new efeitos()
 }
 anterior = () => {
+      
     val.status = ''
     val.id_aula > 1 ? val.id_aula = val.id_aula - 1: val.id_aula = val.id_aula ;
     for(let i= 0; i < val.modulos.length; i++){
@@ -123,8 +124,8 @@ document.getElementById('salvar').addEventListener('click', ()=>{
     let valor = document.getElementById('notes-new-input').value;
     let edita = sessionStorage.getItem('edita')
     var resultado = null
-    if(val.notas[id_curso+val.id_aula] == undefined){ val.notas[id_curso+val.id_aula] = []}
-    edita == null?  resultado = '{'+'"'+dia+'"'+':"'+valor+'"}': resultado = '{'+'"'+edita+'"'+':"'+valor+'"}'
+    if(val.notas[id_curso+val.id_aula] == null){ val.notas[id_curso+val.id_aula] = []; val.idx_notas = []}
+    if(edita == null){  resultado = '{'+'"'+dia+'"'+':"'+valor+'"}'}else{ resultado = '{'+'"'+edita+'"'+':"'+valor+'"}'}
     val.notas[id_curso+val.id_aula].push(JSON.parse(resultado));
     new salvar()
 })

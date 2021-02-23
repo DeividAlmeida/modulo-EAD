@@ -37,7 +37,7 @@ if(is_array($cursos)){
     }
     $curso = json_encode($curso_valida);
     $aula = json_encode($aula, true);
-}else{$curso = 'null';}
+}else{$curso = 'null'; $aula = 'null';}
 $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
 ?>
 <html lang="pt-br">
@@ -82,9 +82,9 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                             <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone content MuiTypography-colorInherit"  id="59383" >
                                 <p class="MuiTypography-root title MuiTypography-body2">{{curso[0].nome}}</p>
                                 <span class="MuiTypography-root instructor MuiTypography-caption">
-                                    <span v-for="prof of curso[0].professor">
-                                        <i>Professor: {{prof}}</i><br>
-                                    </span>
+                                    
+                                        <i>{{curso[0].professor.length>1?"Professores: ":"Professor: "}} <span v-for="prof of curso[0].professor">{{curso[0].professor.length>1?prof+",":prof}} </span></i><br>
+                                   
                                 </span>
                             </a>
                         </div>
@@ -214,7 +214,7 @@ $wacr = DBRead('ead_config_geral','*' ,"WHERE id = '1'")[0];
                 progressos: '',
                 lista: 'grid',
                 config:<?php echo $config ?>,
-                cursos:<?php echo  $curso ?>
+                cursos:<?php echo  $curso ?>,
             },
             updated: function () {
               this.$nextTick(function () {

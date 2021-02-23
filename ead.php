@@ -62,7 +62,7 @@
         			    require_once('ead/professor/professor.php');
         			elseif (isset($_GET['routeCate']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'categoria', 'adicionar')) :
         			    require_once('ead/categoria/categoria.php');
-        		    elseif (isset($_GET['routeUsua']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'usuario', 'adicionar')) :
+        		    elseif (isset($_GET['routeUsua']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'aluno', 'adicionar')) :
         			    require_once('ead/usuario/usuario.php');
         			elseif (isset($_GET['routeCurs']) && checkPermission($PERMISSION, $_SERVER['SCRIPT_NAME'], 'curso', 'adicionar')) :
         			    require_once('ead/curso/curso.php');

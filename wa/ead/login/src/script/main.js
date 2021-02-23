@@ -1,6 +1,5 @@
-let url = document.referrer
-let insp = new URL(url)
-let reset = insp.searchParams.get('Z')
+let url = window.parent.location.href
+let reset = window.parent.location.search.replace('?Z=', "")
 val.ver = (a) =>{ val.status = a};
 var form = new FormData();
 
