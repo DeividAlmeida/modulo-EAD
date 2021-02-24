@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `ead_aula` (
     `tipoA` varchar(255) DEFAULT NULL,
     `qtd_alternativas` int(11) DEFAULT NULL,
     `questoes` text DEFAULT NULL,
+    `ordem` int(11) DEFAULT NULL,
     `alternativas` text DEFAULT NULL,
     `gabarito` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
