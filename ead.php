@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
 	require_once('includes/funcoes.php');
 	require_once('includes/header.php');
 	require_once('includes/menu.php');

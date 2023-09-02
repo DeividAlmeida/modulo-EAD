@@ -10,6 +10,5 @@ frame = (a) => {
     a.setAttributeNode(border);
     a.setAttributeNode(scroll);
     a.setAttributeNode(widths);
-
 }
 
